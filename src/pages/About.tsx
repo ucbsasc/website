@@ -101,7 +101,7 @@ const About = () => {
           Student-founded and student-run since 2000. Every year looks a little different because students turn over
           and the political weather changes — what hasn&apos;t changed is the reason people keep rebuilding SASC:
           Southeast Asian students at Berkeley should have a place to find each other, learn our hxstories, put on
-          culture in public, and push for resources when the university&apos;s defaults leave us out.
+          culture in public, and push for resources the university doesn&apos;t provide on its own.
         </Typography>
 
         <Grid container spacing={{ xs: 4, md: 6 }}>
