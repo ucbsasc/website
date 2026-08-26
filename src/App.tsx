@@ -7,6 +7,7 @@ import AdminGuard from './components/AdminGuard';
 
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
+const Partners = lazy(() => import('./pages/Partners'));
 const Events = lazy(() => import('./pages/Events'));
 const Contact = lazy(() => import('./pages/Contact'));
 const Resources = lazy(() => import('./pages/Resources'));
@@ -76,6 +77,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
+                <Route path="/partners" element={<Partners />} />
                 <Route path="/events" element={<Events />} />
                 <Route path="/lead" element={<Lead />} />
                 <Route path="/contact" element={<Contact />} />

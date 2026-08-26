@@ -7,6 +7,7 @@ const Footer = () => {
   const links = [
     { label: 'About', to: '/about' },
     { label: 'Events', to: '/events' },
+    { label: 'Partners', to: '/partners' },
     { label: 'Lead', to: '/lead' },
     { label: 'Resources', to: '/resources' },
     { label: 'Contact', to: '/contact' },

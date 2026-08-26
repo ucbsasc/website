@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 import { styled, keyframes } from '@mui/material/styles';
 import { useEffect, useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { Instagram } from '@mui/icons-material';
 import MailingListModal from '../components/MailingListModal';
 import Footer from '../components/Footer';
@@ -139,6 +139,13 @@ const Home = () => {
   const [mailingListOpen, setMailingListOpen] = useState(false);
   const [pairIndex, setPairIndex] = useState(0);
   const { mode, nextEvent } = siteSeason;
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash === '#programs') {
+      document.getElementById('programs')?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [location]);
 
   useEffect(() => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -472,7 +479,7 @@ const Home = () => {
         </Box>
       ))}
 
-      <Box sx={{ py: { xs: 8, md: 11 } }}>
+      <Box id="programs" sx={{ py: { xs: 8, md: 11 }, scrollMarginTop: '64px' }}>
         <Container>
           <Typography variant="overline" sx={{ color: 'primary.dark', display: 'block', mb: 1 }}>
             What we run
