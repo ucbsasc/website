@@ -49,4 +49,4 @@ const NightMarket = () => {
     );
 };
 
-export default NightMarket; 
+export default NightMarket;

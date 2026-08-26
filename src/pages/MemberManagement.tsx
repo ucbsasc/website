@@ -32,8 +32,10 @@ import {
 import { Edit, Delete, Email } from '@mui/icons-material';
 import { getMembers, updateMember, deleteMember, Member } from '../firebase/members';
 import Footer from '../components/Footer';
+import { usePageTitle } from '../hooks/usePageTitle';
 
 const MemberManagement: React.FC = () => {
+  usePageTitle('Member Management');
   const [members, setMembers] = useState<Member[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -235,6 +237,7 @@ const MemberManagement: React.FC = () => {
                       <IconButton
                         size="small"
                         onClick={() => handleEditMember(member)}
+                        aria-label="Edit member"
                       >
                         <Edit />
                       </IconButton>
@@ -244,6 +247,7 @@ const MemberManagement: React.FC = () => {
                         size="small"
                         onClick={() => handleDeleteMember(member.id!)}
                         color="error"
+                        aria-label="Delete member"
                       >
                         <Delete />
                       </IconButton>

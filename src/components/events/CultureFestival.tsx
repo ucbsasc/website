@@ -75,6 +75,7 @@ const CultureFestival = () => {
                                         size="small"
                                         onClick={handleNext}
                                         disabled={activeStep === maxSteps - 1}
+                                        aria-label="Next photo"
                                         sx={{ color: 'white' }}
                                     >
                                         <KeyboardArrowRight />
@@ -85,6 +86,7 @@ const CultureFestival = () => {
                                         size="small"
                                         onClick={handleBack}
                                         disabled={activeStep === 0}
+                                        aria-label="Previous photo"
                                         sx={{ color: 'white' }}
                                     >
                                         <KeyboardArrowLeft />

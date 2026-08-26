@@ -16,6 +16,7 @@ import {
     useTheme,
 } from '@mui/material';
 import Footer from '../components/Footer';
+import { usePageTitle } from '../hooks/usePageTitle';
 
 const DEFAULT_TEXT = 'https://ucbsasc.org';
 
@@ -29,6 +30,7 @@ const hexToRgbParam = (hex: string) => {
 };
 
 const QRGenerator = () => {
+    usePageTitle('QR Code Generator');
     const theme = useTheme();
     const [input, setInput] = useState('');
     const [size, setSize] = useState(240);

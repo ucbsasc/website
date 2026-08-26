@@ -83,6 +83,7 @@ const SeasgivingModal = ({ open, onClose }: SeasgivingModalProps) => {
     >
       <IconButton
         onClick={handleClose}
+        aria-label="Close"
         sx={{
           position: 'absolute',
           right: 8,

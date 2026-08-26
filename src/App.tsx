@@ -44,9 +44,34 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
+        <Box
+          component="a"
+          href="#main-content"
+          sx={{
+            position: 'absolute',
+            left: 8,
+            top: -48,
+            zIndex: 2000,
+            bgcolor: 'background.paper',
+            color: 'text.primary',
+            px: 2,
+            py: 1,
+            borderRadius: 1,
+            border: '2px solid',
+            borderColor: 'primary.main',
+            fontWeight: 600,
+            textDecoration: 'none',
+            transition: 'top 0.15s ease-in-out',
+            '&:focus-visible': {
+              top: 8,
+            },
+          }}
+        >
+          Skip to main content
+        </Box>
         <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
           <Navbar />
-          <Box component="main" sx={{ flexGrow: 1 }}>
+          <Box id="main-content" component="main" tabIndex={-1} sx={{ flexGrow: 1 }}>
             <Suspense fallback={<PageFallback />}>
               <Routes>
                 <Route path="/" element={<Home />} />

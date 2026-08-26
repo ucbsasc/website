@@ -6,10 +6,12 @@ import {
 import { findRsvpByEmail, addEventRsvp, checkInStudentWithTransaction, EventRsvp } from '../firebase/rsvps';
 import { auth } from '../firebase/config';
 import { signInAnonymously } from 'firebase/auth';
+import { usePageTitle } from '../hooks/usePageTitle';
 
 const EVENT_KEY = 'professional-headshots-2026-02-06';
 
 const StudentSlate = () => {
+  usePageTitle('Check-In');
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [loading, setLoading] = useState(false);
