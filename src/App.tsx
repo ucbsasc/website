@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { lazy, Suspense, useEffect } from 'react';
 import theme from './theme/theme';
 import Navbar from './components/Navbar';
-import AdminGuard from './components/AdminGuard';
 
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
@@ -14,7 +13,6 @@ const Resources = lazy(() => import('./pages/Resources'));
 const Lead = lazy(() => import('./pages/Lead'));
 const QRGenerator = lazy(() => import('./pages/QRGenerator'));
 const StudentSlate = lazy(() => import('./pages/StudentSlate'));
-const MemberManagement = lazy(() => import('./pages/MemberManagement'));
 
 function ExternalRedirect({ href }: { href: string }) {
   useEffect(() => {
@@ -98,14 +96,6 @@ function App() {
                 <Route path="/seagrad2026" element={<Navigate to="/events" replace />} />
                 <Route path="/tos-vendor" element={<Navigate to="/events" replace />} />
                 <Route path="/tos-performer" element={<Navigate to="/events" replace />} />
-                <Route
-                  path="/admin/members"
-                  element={
-                    <AdminGuard>
-                      <MemberManagement />
-                    </AdminGuard>
-                  }
-                />
               </Routes>
             </Suspense>
           </Box>

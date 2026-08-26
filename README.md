@@ -44,7 +44,6 @@ Copy `.env.example` to `.env.local` (git-ignored) and fill in real values.
 | `VITE_FIREBASE_MESSAGING_SENDER_ID` | Yes | Firebase project config |
 | `VITE_FIREBASE_APP_ID` | Yes | Firebase project config |
 | `VITE_FIREBASE_MEASUREMENT_ID` | No | Firebase Analytics |
-| `VITE_ADMIN_PASS` | No | Passcode gating the hidden `/admin/members` page. Leave unset to keep it locked out. |
 
 Without Firebase configured, the site still runs — RSVP/registration forms will show a "temporarily
 unavailable" message instead of failing silently.
@@ -64,11 +63,11 @@ unavailable" message instead of failing silently.
 src/
 ├── App.tsx              # Router + layout shell (routes are defined here)
 ├── main.tsx              # React entry point
-├── components/           # Shared components (Navbar, Footer, modals, guards)
+├── components/           # Shared components (Navbar, Footer, modals)
 │   ├── events/            # One component per event card/modal + shared EventCard
 │   └── home/              # Homepage-only modals
 ├── data/                  # Editable content — see "Updating Site Content" below
-├── firebase/              # Firestore/Auth helpers (config, members, rsvps)
+├── firebase/              # Firestore/Auth helpers (config, rsvps)
 ├── hooks/                 # Shared React hooks
 ├── pages/                 # Route-level page components
 └── theme/                 # MUI theme + color tokens
@@ -90,7 +89,6 @@ netlify.toml              # Build command + redirects (see "Deployment")
 | `/contact` | Contact | Ways to reach SASC |
 | `/qr` | QR Generator | Hidden — used for tabling, no navbar link |
 | `/checkin` | Student Slate | Hidden — event check-in flow |
-| `/admin/members` | Member Management | Hidden, gated by `VITE_ADMIN_PASS` |
 
 A few short-link routes (`/seaso26`, `/seagrad26`, `/tos-vendor`, etc.) exist both as Netlify redirects
 in `netlify.toml` (which win in production) and as React routes in `App.tsx` (which keep those links

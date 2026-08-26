@@ -348,21 +348,29 @@ const Home = () => {
             )}
 
             <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} alignItems={{ sm: 'center' }}>
-              {primaryCta ? (
+              <Button variant="contained" size="large" onClick={() => setMailingListOpen(true)}>
+                Join the mailing list
+              </Button>
+              {primaryCta && (
                 <Button
-                  variant="contained"
+                  variant="outlined"
                   size="large"
                   component={primaryCta.external ? 'a' : RouterLink}
                   href={primaryCta.external ? primaryCta.href : undefined}
                   to={primaryCta.external ? undefined : primaryCta.href}
                   target={primaryCta.external ? '_blank' : undefined}
                   rel={primaryCta.external ? 'noopener' : undefined}
+                  sx={{
+                    borderColor: 'rgba(255,255,255,0.75)',
+                    color: 'white',
+                    '&:hover': {
+                      borderColor: 'white',
+                      bgcolor: 'rgba(255,255,255,0.08)',
+                      borderWidth: 1.5,
+                    },
+                  }}
                 >
                   {primaryCta.label}
-                </Button>
-              ) : (
-                <Button variant="contained" size="large" onClick={() => setMailingListOpen(true)}>
-                  Join the mailing list
                 </Button>
               )}
               <Button
