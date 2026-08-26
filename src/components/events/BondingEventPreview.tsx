@@ -17,11 +17,10 @@ const BondingEventPreview = () => {
                 February 21, 2026 • Location TBA
             </Typography>
             <Typography variant="body1" sx={{ mb: 2 }}>
-                We cooked up a cozy evening of games, storytelling, and cross-branch connection to recharge before midterms hit. Officers and
-                members expected chill vibes, light bites, and space to dream up collaborations for the rest of the semester.
+                Officers and members from every branch got together for games, storytelling, and food before midterms hit.
             </Typography>
             <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
-                This gathering gave members space to reconnect, trade ideas, and carry momentum into the rest of spring programming.
+                It was a chance to catch up and talk through ideas for the rest of spring.
             </Typography>
             <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1}>
                 <Button

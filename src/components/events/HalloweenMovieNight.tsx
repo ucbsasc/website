@@ -10,7 +10,7 @@ const HalloweenMovieNight = () => {
   const isPast = true;
   const location = 'SOCS 60';
   const dateLine = 'Friday, October 24 • 7:30 PM – 10:00 PM';
-  const details = 'Join us for SASC\'s Halloween movie night & optional costume party! We\'ll be watching the horror comedy "Pee Mak" (not too scary!). Super casual, free snacks, and prizes if you dress up! The event is completely free.';
+  const details = 'SASC\'s Halloween movie night and optional costume party. We watched the horror comedy "Pee Mak" (not too scary), with free snacks and prizes for costumes. Free to attend.';
 
   // Oct 24, 2025 7:30–10 PM PT → 02:30Z–05:00Z on Oct 25
 
@@ -75,10 +75,9 @@ const HalloweenMovieNight = () => {
               <Box sx={{ mb: 1.5 }}>
                 <Typography variant="body2" sx={{ fontWeight: 600, mb: 0.5 }}>What to know</Typography>
                 <Box component="ul" sx={{ pl: 2, m: 0 }}>
-          <li><Typography variant="body2">Watching "Pee Mak," a horror comedy that&apos;s not too scary!</Typography></li>
-                  <li><Typography variant="body2">Costume contest is optional; prizes for those who dress up!</Typography></li>
-                  <li><Typography variant="body2">Free snacks provided; bring friends!</Typography></li>
-                  <li><Typography variant="body2">Super casual vibe. Just come and have fun</Typography></li>
+          <li><Typography variant="body2">Watched "Pee Mak," a horror comedy that&apos;s not too scary</Typography></li>
+                  <li><Typography variant="body2">Costume contest was optional, with prizes for anyone who dressed up</Typography></li>
+                  <li><Typography variant="body2">Free snacks provided</Typography></li>
               </Box>
             </Box>
 

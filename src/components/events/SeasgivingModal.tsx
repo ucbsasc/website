@@ -124,7 +124,7 @@ const SeasgivingModal = ({ open, onClose }: SeasgivingModalProps) => {
             <strong>Location:</strong> {location}
           </Typography>
           <Typography variant="body1" sx={{ mb: 2 }}>
-            Join us for an evening of food, gratitude, and connection with SASC alumni and current members. SEAsgiving includes a can-drive raffle: 1 can = 1 raffle ticket. All canned donations support the SEA Community Center in San Francisco.
+            Join SASC alumni and current members for a SEAsgiving dinner. There's a can-drive raffle (1 can = 1 raffle ticket), and all canned donations go to the SEA Community Center in San Francisco.
           </Typography>
 
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1} sx={{ mb: 2 }}>

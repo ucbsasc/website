@@ -17,12 +17,11 @@ const AnniversaryRecap = () => {
                 November 12, 2025 • Clark Kerr Garden Room
             </Typography>
             <Typography variant="body1" sx={{ mb: 2 }}>
-                Gather with SASC alumni and current members for a night of gratitude, storytelling, and celebration. We honor 25 years
-                of community organizing while sharing a SEAsgiving dinner, raffle, and memories from across the coalition.
+                SASC alumni and current members marked 25 years of the coalition with a SEAsgiving dinner, a raffle, and
+                stories from across generations of members.
             </Typography>
             <Typography variant="body2" color="text.secondary">
-                Look forward to alumni panels, a can drive benefiting the SEA Community Center in San Francisco, and reconnecting with
-                generations of SASCommunity members. Stay tuned for photo galleries and future anniversary gatherings.
+                The night included alumni panels and a can drive for the SEA Community Center in San Francisco.
             </Typography>
         </EventCard>
     );

@@ -21,31 +21,31 @@ const GeneralMeeting = () => {
                                 September 17, 2025 • 8:00 PM - 9:00 PM
                             </Typography>
                             <Typography variant="body1" sx={{ mb: 2, fontSize: '1.1rem' }}>
-                                Join us for our first general meeting of the semester! This is the perfect opportunity to:
+                                Our first general meeting of the semester covered:
                             </Typography>
                             <Box sx={{ mb: 2 }}>
                                 <Stack direction="row" spacing={1} sx={{ mb: 1 }}>
                                     <GroupIcon color="primary" />
                                     <Typography variant="body2">
-                                        <strong>Meet the SASC community</strong> - Get introduced to our club and learn about our mission
+                                        Intros to SASC and what we do
                                     </Typography>
                                 </Stack>
                                 <Stack direction="row" spacing={1} sx={{ mb: 1 }}>
                                     <GroupIcon color="primary" />
                                     <Typography variant="body2">
-                                        <strong>Connect with other orgs</strong> - Meet representatives from other Southeast Asian organizations
+                                        Meeting people from other Southeast Asian organizations
                                     </Typography>
                                 </Stack>
                                 <Stack direction="row" spacing={1} sx={{ mb: 1 }}>
                                     <CelebrationIcon color="primary" />
                                     <Typography variant="body2">
-                                        <strong>Have fun together</strong> - Enjoy games, activities, and community bonding
+                                        Games and community bonding
                                     </Typography>
                                 </Stack>
                                 <Stack direction="row" spacing={1} sx={{ mb: 2 }}>
                                     <RestaurantIcon color="primary" />
                                     <Typography variant="body2">
-                                        <strong>Eat delicious food</strong> - Free food and refreshments will be provided!
+                                        Free food and refreshments
                                     </Typography>
                                 </Stack>
                             </Box>

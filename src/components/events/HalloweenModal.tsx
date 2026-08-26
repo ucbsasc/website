@@ -15,7 +15,7 @@ const HalloweenModal = ({ open, onClose }: HalloweenModalProps) => {
   const title = 'Halloween Movie Night + Costume Party';
   const location = 'SOCS 60';
   const dateLine = 'Friday, October 24 • 7:30 PM – 10:00 PM';
-  const details = 'Join us for SASC\'s Halloween movie night & optional costume party! We\'ll be watching the horror comedy "Pee Mak" (not too scary!). Super casual, free snacks, and prizes if you dress up! The event is completely free.';
+  const details = 'Join us for SASC\'s Halloween movie night and optional costume party. We\'ll watch the horror comedy "Pee Mak" (not too scary), with free snacks and prizes for costumes. Free to attend.';
 
   const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
     title
@@ -147,10 +147,9 @@ const HalloweenModal = ({ open, onClose }: HalloweenModalProps) => {
           <Box sx={{ mb: 2 }}>
             <Typography variant="body2" sx={{ fontWeight: 600, mb: 1 }}>What to know:</Typography>
             <Box component="ul" sx={{ pl: 2, m: 0 }}>
-              <li><Typography variant="body2">Watching "Pee Mak," a horror comedy that's not too scary!</Typography></li>
-              <li><Typography variant="body2">Costume contest is optional; prizes for those who dress up!</Typography></li>
-              <li><Typography variant="body2">Free snacks provided; bring friends!</Typography></li>
-              <li><Typography variant="body2">Super casual vibe. Just come and have fun</Typography></li>
+              <li><Typography variant="body2">Watching "Pee Mak," a horror comedy that's not too scary</Typography></li>
+              <li><Typography variant="body2">Costume contest is optional, with prizes for anyone who dresses up</Typography></li>
+              <li><Typography variant="body2">Free snacks provided</Typography></li>
             </Box>
           </Box>
 
