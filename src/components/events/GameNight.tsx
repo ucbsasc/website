@@ -8,7 +8,7 @@ const GameNight = () => {
             statusLabel="PAST EVENT"
             statusBgColor="text.disabled"
             borderColor="divider"
-            image={{ src: '/jeopardy.png', alt: 'Game Night' }}
+            image={{ src: '/jeopardy.jpg', alt: 'Game Night' }}
         >
             <Typography variant="h4" component="h2" sx={{ mb: 1 }}>
                 Game Night
