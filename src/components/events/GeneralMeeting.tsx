@@ -12,7 +12,7 @@ const GeneralMeeting = () => {
             statusBgColor="text.disabled"
             borderColor="divider"
             cardSx={{ opacity: 0.9 }}
-            image={{ src: '/internal.jpg', alt: 'SASC General Meeting' }}
+            image={{ src: '/internal.webp', alt: 'SASC General Meeting' }}
         >
                             <Typography variant="h4" component="h2" sx={{ mb: 1, color: 'primary.main' }}>
                                 SASC General Meeting

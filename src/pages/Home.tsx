@@ -90,12 +90,12 @@ const MobileStage = styled(Box)(({ theme }) => ({
 }));
 
 const images = [
-  { src: '/grid/cultural-dance.jpg', alt: 'Cultural dance', span: 2, position: 'center 22%' },
-  { src: '/grid/picnic.png', alt: 'SEA Picnic', span: 1, position: 'center 40%' },
-  { src: '/grid/laony-dance.png', alt: 'LaoNY cultural dance', span: 1, position: 'center 45%' },
-  { src: '/grid/lny.png', alt: 'Lunar New Year', span: 2, position: 'center 30%' },
-  { src: '/grid/abby_sydney.png', alt: 'SEA Grad celebration', span: 2, position: 'center 28%' },
-  { src: '/grid/bursa-dance.png', alt: 'BURSA cultural dance at Night Market', span: 1, position: 'center 42%' },
+  { src: '/grid/cultural-dance.webp', alt: 'Cultural dance', span: 2, position: 'center 22%' },
+  { src: '/grid/picnic.webp', alt: 'SEA Picnic', span: 1, position: 'center 40%' },
+  { src: '/grid/laony-dance.webp', alt: 'LaoNY cultural dance', span: 1, position: 'center 45%' },
+  { src: '/grid/lny.webp', alt: 'Lunar New Year', span: 2, position: 'center 30%' },
+  { src: '/grid/abby_sydney.webp', alt: 'SEA Grad celebration', span: 2, position: 'center 28%' },
+  { src: '/grid/bursa-dance.webp', alt: 'BURSA cultural dance at Night Market', span: 1, position: 'center 42%' },
 ];
 
 const mobilePairs = [

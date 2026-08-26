@@ -8,7 +8,7 @@ const AnniversaryRecap = () => {
             statusBgColor="text.disabled"
             borderColor="divider"
             cardSx={{ opacity: 0.95 }}
-            image={{ src: '/seasgivinggroup.jpg', alt: '25th Anniversary & SEAsgiving' }}
+            image={{ src: '/seasgivinggroup.webp', alt: '25th Anniversary & SEAsgiving' }}
         >
             <Typography variant="h4" component="h2" sx={{ mb: 1 }}>
                 25th Anniversary & SEAsgiving Celebration

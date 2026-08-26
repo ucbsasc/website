@@ -8,7 +8,7 @@ const UpcomingGeneralMeeting = () => {
             statusLabel="PAST EVENT"
             statusBgColor="text.disabled"
             borderColor="divider"
-            image={{ src: '/internal.jpg', alt: 'SASC General Meeting' }}
+            image={{ src: '/internal.webp', alt: 'SASC General Meeting' }}
         >
             <Typography variant="h4" component="h2" sx={{ mb: 1 }}>
                 Spring General Meeting

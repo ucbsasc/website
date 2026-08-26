@@ -12,7 +12,7 @@ const ProfessionalHeadshotsFeb2026 = () => {
       statusLabel="PAST EVENT"
       statusBgColor="text.disabled"
       borderColor="divider"
-      image={{ src: '/headshots-feb6.png', alt: 'Free Professional Headshots Flyer' }}
+      image={{ src: '/headshots-feb6.webp', alt: 'Free Professional Headshots Flyer' }}
     >
       <Box>
         <Typography variant="h5" component="h2" sx={{ mb: 0.5 }}>

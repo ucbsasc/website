@@ -15,7 +15,7 @@ export const leadership: LeadershipMember[] = [
         role: 'Internal Director',
         committee: 'Internal',
         email: 'le.april@berkeley.edu',
-        image: '/officers/april.jpg',
+        image: '/officers/april.webp',
         type: 'director',
     },
     {
@@ -23,7 +23,7 @@ export const leadership: LeadershipMember[] = [
         role: 'External Director',
         committee: 'External',
         email: 'lialenguyen@berkeley.edu',
-        image: '/officers/lialenguyen.png',
+        image: '/officers/lialenguyen.webp',
         type: 'director',
     },
     {
@@ -31,7 +31,7 @@ export const leadership: LeadershipMember[] = [
         role: 'Internal Director',
         committee: 'Internal',
         email: 'christine_ly@berkeley.edu',
-        image: '/officers/christine.jpeg',
+        image: '/officers/christine.webp',
         type: 'director',
     },
     {
@@ -39,7 +39,7 @@ export const leadership: LeadershipMember[] = [
         role: 'SEAM Director',
         committee: 'External',
         email: 'nguyen_nvl@berkeley.edu',
-        image: '/officers/lanvy.jpeg',
+        image: '/officers/lanvy.webp',
         type: 'director',
     },
     {
@@ -47,7 +47,7 @@ export const leadership: LeadershipMember[] = [
         role: 'External Director',
         committee: 'External',
         email: 'alidaphuthama@berkeley.edu',
-        image: '/officers/alidaphuthama.png',
+        image: '/officers/alidaphuthama.webp',
         type: 'director',
     },
     {
@@ -55,7 +55,7 @@ export const leadership: LeadershipMember[] = [
         role: 'Operations Director',
         committee: 'Operations',
         email: 'tylerhtut7@berkeley.edu',
-        image: '/officers/tyler.jpeg',
+        image: '/officers/tyler.webp',
         type: 'director',
     },
     {
@@ -63,7 +63,7 @@ export const leadership: LeadershipMember[] = [
         role: 'Operations Director',
         committee: 'Operations',
         email: 'jordanvu@berkeley.edu',
-        image: '/officers/jordanvu.jpeg',
+        image: '/officers/jordanvu.webp',
         type: 'director',
     },
     {
@@ -71,7 +71,7 @@ export const leadership: LeadershipMember[] = [
         role: 'PR Officer',
         committee: 'PR',
         email: 'rinradamaneenop7@berkeley.edu',
-        image: '/officers/rinrada.jpeg',
+        image: '/officers/rinrada.webp',
         type: 'officer',
     },
     {
@@ -87,7 +87,7 @@ export const leadership: LeadershipMember[] = [
         role: 'PR Director',
         committee: 'PR',
         email: 'khoan@berkeley.edu',
-        image: '/officers/khoa.png',
+        image: '/officers/khoa.webp',
         type: 'director',
     },
     {
@@ -95,7 +95,7 @@ export const leadership: LeadershipMember[] = [
         role: 'Operations Officer',
         committee: 'Operations',
         email: 'timothy.kwan.teemo@berkeley.edu',
-        image: '/officers/timothy.jpg',
+        image: '/officers/timothy.webp',
         type: 'officer',
     },
     {
@@ -103,7 +103,7 @@ export const leadership: LeadershipMember[] = [
         role: 'Internal Officer',
         committee: 'Internal',
         email: 'krishnaksam@berkeley.edu',
-        image: '/officers/krishna.jpg',
+        image: '/officers/krishna.webp',
         type: 'officer',
     },
     {
@@ -111,7 +111,7 @@ export const leadership: LeadershipMember[] = [
         role: 'Internal Officer',
         committee: 'Internal',
         email: 'noahtbrand@berkeley.edu',
-        image: '/headshots.jpg',
+        image: '/headshots.webp',
         type: 'officer',
     },
 ];

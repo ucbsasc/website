@@ -57,7 +57,7 @@ const HalloweenMovieNight = () => {
       statusLabel={isPast ? 'PAST EVENT' : 'UPCOMING'}
       statusBgColor="grey.700"
       borderColor="primary.main"
-      image={{ src: '/halloween night.png', alt: 'Halloween Movie Night' }}
+      image={{ src: '/halloween night.webp', alt: 'Halloween Movie Night' }}
     >
               <Typography variant="h5" component="h2" sx={{ mb: 0.5 }}>
                 Halloween Movie Night + Costume Party

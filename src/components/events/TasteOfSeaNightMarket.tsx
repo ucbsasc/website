@@ -12,7 +12,7 @@ const TasteOfSeaNightMarket = () => {
             minMediaHeight={500}
             maxMediaHeight={600}
             image={{ 
-                src: '/nightmarketflyer.png', 
+                src: '/nightmarketflyer.webp', 
                 alt: 'Taste of Sea Night Market', 
                 sx: { objectPosition: 'bottom center' } 
             }}

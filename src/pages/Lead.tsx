@@ -65,7 +65,7 @@ const Lead = () => {
       <PageHeader
         title="Lead with SASC"
         subtitle="SASComm is the student leadership group that runs SASC programs, events, and day-to-day work."
-        image="/sasc-old.jpg"
+        image="/sasc-old.webp"
       >
         <Typography
           variant="body1"
@@ -111,7 +111,7 @@ const Lead = () => {
           <Grid item xs={12} md={6}>
             <Box
               component="img"
-              src="/sascomm.jpg"
+              src="/sascomm.webp"
               alt="SASC community members gathered together"
               sx={{
                 width: '100%',

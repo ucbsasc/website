@@ -44,7 +44,7 @@ export const leadBranches: LeadBranch[] = [
     focus: 'GMs & member life',
     overview:
       'Internal runs general meetings and semester goals. Bonding, wellness, and keeping members looped in also sit here.',
-    image: '/internal.jpg',
+    image: '/internal.webp',
     committee: 'Internal',
     keyFocus: [
       'General meetings',
@@ -58,7 +58,7 @@ export const leadBranches: LeadBranch[] = [
     focus: 'Outreach & events',
     overview:
       'External does outreach and helps plan major events and collaborations with other orgs and campus partners.',
-    image: '/grid/tabling.jpg',
+    image: '/grid/tabling.webp',
     committee: 'External',
     keyFocus: [
       'Campus and Bay Area outreach',
@@ -71,7 +71,7 @@ export const leadBranches: LeadBranch[] = [
     focus: 'Money & venues',
     overview:
       'Ops handles money and logistics: budgets, fundraising, reimbursements, booking venues.',
-    image: '/operations.jpg',
+    image: '/operations.webp',
     committee: 'Operations',
     keyFocus: [
       'Budgets and reimbursements',
@@ -84,7 +84,7 @@ export const leadBranches: LeadBranch[] = [
     focus: 'Web, merch, photo',
     overview:
       'PR does website design and development, merch, photography, graphics, and Instagram.',
-    image: '/pr.jpg',
+    image: '/pr.webp',
     committee: 'PR',
     keyFocus: [
       'Website design and development',

@@ -9,7 +9,7 @@ const ProfessionalHeadshots = () => {
             statusBgColor="text.disabled"
             borderColor="divider"
             cardSx={{ opacity: 0.9 }}
-            image={{ src: '/headshots.jpg', alt: 'Professional Headshots' }}
+            image={{ src: '/headshots.webp', alt: 'Professional Headshots' }}
         >
                             <Typography variant="h5" component="h2" sx={{ mb: 0.5 }}>
                                 Professional Headshots

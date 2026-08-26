@@ -12,7 +12,7 @@ const Resources = () => {
       <PageHeader
         title="Resources"
         subtitle="Start with immigration and legal links if you need them now. Media kit for flyers is further down."
-        image="/grid/workshop.jpg"
+        image="/grid/workshop.webp"
         compact
       />
 

@@ -90,7 +90,7 @@ const About = () => {
       <PageHeader
         title="About SASC"
         subtitle="Student-run at UC Berkeley since 2000. We support Southeast Asian students through mentorship, cultural programming, and community."
-        image="/sascomm.jpg"
+        image="/sascomm.webp"
       />
 
       <Container sx={{ py: 2, mb: 6 }}>

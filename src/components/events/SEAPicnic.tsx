@@ -57,7 +57,7 @@ const SEAPicnic = () => {
       borderColor="primary.main"
       minMediaHeight={500}
       maxMediaHeight={600}
-      image={{ src: '/seapicnic.jpeg', alt: 'SEA Community Picnic', sx: { objectFit: 'contain', objectPosition: 'center', bgcolor: 'black' } }}
+      image={{ src: '/seapicnic.webp', alt: 'SEA Community Picnic', sx: { objectFit: 'contain', objectPosition: 'center', bgcolor: 'black' } }}
     >
       <Typography variant="h5" component="h2" sx={{ mb: 0.5 }}>
         SEA Community Picnic

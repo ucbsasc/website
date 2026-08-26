@@ -106,7 +106,7 @@ const HalloweenModal = ({ open, onClose }: HalloweenModalProps) => {
           }}
         >
           <img
-            src="/halloween night.png"
+            src="/halloween night.webp"
             alt="Halloween Movie Night"
             style={{
               width: '100%',

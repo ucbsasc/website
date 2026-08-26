@@ -104,7 +104,7 @@ const SeasgivingModal = ({ open, onClose }: SeasgivingModalProps) => {
           }}
         >
           <img
-            src="/seasgivinggroup.jpg"
+            src="/seasgivinggroup.webp"
             alt="SEAsgiving Celebration"
             style={{
               width: '100%',

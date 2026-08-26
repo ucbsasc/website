@@ -8,7 +8,7 @@ const SEAGrad = () => {
             statusBgColor="text.disabled"
             borderColor="divider"
             cardSx={{ opacity: 0.9 }}
-            image={{ src: '/seagrad-2024.png', alt: 'Southeast Asian Graduation 2024' }}
+            image={{ src: '/seagrad-2024.webp', alt: 'Southeast Asian Graduation 2024' }}
         >
                             <Typography variant="h5" component="h2" sx={{ mb: 0.5 }}>
                                 Southeast Asian Graduation (SEAGrad)

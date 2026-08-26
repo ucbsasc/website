@@ -21,7 +21,7 @@ const Partners = () => {
       <PageHeader
         title="Community & Partners"
         subtitle="We don't do this alone. SASC runs alongside other Southeast Asian and Asian American student orgs, campus resources built for our communities, and our own subprograms."
-        image="/sascomm.jpg"
+        image="/sascomm.webp"
         compact
       />
 

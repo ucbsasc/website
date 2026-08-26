@@ -21,7 +21,7 @@ const SEASO = () => {
       minMediaHeight={500}
       maxMediaHeight={640}
       image={{
-        src: '/seaso26.jpg',
+        src: '/seaso26.webp',
         alt: 'SEASO 2026 flyer: Southeast Asian Student Orientation on September 3 at the Tilden Room',
         sx: { objectFit: 'contain', objectPosition: 'center', bgcolor: '#F4B6C8' },
       }}

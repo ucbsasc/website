@@ -9,7 +9,7 @@ const SEAGrad26 = () => {
             borderColor="divider"
             minMediaHeight={500}
             maxMediaHeight={600}
-            image={{ src: '/seagrad26.png', alt: 'Southeast Asian Graduation 2026', sx: { objectFit: 'contain', objectPosition: 'center', bgcolor: 'black' } }}
+            image={{ src: '/seagrad26.webp', alt: 'Southeast Asian Graduation 2026', sx: { objectFit: 'contain', objectPosition: 'center', bgcolor: 'black' } }}
         >
             <Typography variant="h5" component="h2" sx={{ mb: 0.5 }}>
                 Class of 2026 - UC Berkeley SEAGrad

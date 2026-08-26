@@ -12,7 +12,7 @@ const ProfessionalHeadshotsOct1Past = () => {
       statusBgColor="text.disabled"
       borderColor="divider"
       cardSx={{ opacity: 0.9 }}
-      image={{ src: '/fhs.png', alt: 'Free Professional Headshots' }}
+      image={{ src: '/fhs.webp', alt: 'Free Professional Headshots' }}
     >
             <Typography variant="h5" component="h2" sx={{ mb: 0.5 }}>
               Free Professional Headshots

@@ -8,7 +8,7 @@ const BondingEventPreview = () => {
             statusLabel="PAST EVENT"
             statusBgColor="text.disabled"
             borderColor="divider"
-            image={{ src: '/seasgivinggroup.jpg', alt: 'SASC Community Bonding' }}
+            image={{ src: '/seasgivinggroup.webp', alt: 'SASC Community Bonding' }}
         >
             <Typography variant="h4" component="h2" sx={{ mb: 1 }}>
                 SASCommunity Bonding Night

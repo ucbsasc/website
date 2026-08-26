@@ -45,7 +45,7 @@ const Contact = () => {
       <PageHeader
         title="Contact"
         subtitle="Email is the most reliable way to reach us. Use the topic list below if you already know who you need."
-        image="/grid/tabling.jpg"
+        image="/grid/tabling.webp"
         compact
       />
 

@@ -16,7 +16,7 @@ const ResumeWorkshop = () => {
       minMediaHeight={520}
       maxMediaHeight={640}
       image={{
-        src: '/resume-workshop.jpeg',
+        src: '/resume-workshop.webp',
         alt: 'Resume Workshop flyer',
         sx: { objectPosition: 'center' },
       }}
