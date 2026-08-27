@@ -105,7 +105,7 @@ const Events = () => {
                 Follow @ucbsasc
               </Button>
               <Button variant="outlined" onClick={() => setMailingListOpen(true)}>
-                Join the mailing list
+                Become a General Member
               </Button>
               <Button variant="text" href="/lead">
                 Lead with SASC

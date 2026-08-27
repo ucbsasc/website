@@ -349,7 +349,7 @@ const Home = () => {
 
             <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} alignItems={{ sm: 'center' }}>
               <Button variant="contained" size="large" onClick={() => setMailingListOpen(true)}>
-                Join the mailing list
+                Become a General Member
               </Button>
               {primaryCta && (
                 <Button
@@ -553,7 +553,7 @@ const Home = () => {
             justifyContent={{ md: 'center' }}
           >
             <Button variant="contained" size="large" onClick={() => setMailingListOpen(true)}>
-              Join the mailing list
+              Become a General Member
             </Button>
             <Button
               variant="outlined"
