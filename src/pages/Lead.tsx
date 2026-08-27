@@ -64,7 +64,7 @@ const Lead = () => {
     <Box>
       <PageHeader
         title="Lead with SASC"
-        subtitle="SASComm is the student leadership group that runs SASC programs, events, and day-to-day work."
+        subtitle="SASC doesn't run itself. SASComm is the student leadership group that plans the programs, books the rooms, and keeps the day-to-day moving."
         image="/sasc-old.webp"
       >
         <Typography
@@ -131,8 +131,8 @@ const Lead = () => {
                 out, pull together teach-ins when something happens, and check in off the agenda to make sure folks are doing okay.
               </Typography>
               <Typography variant="body1" color="text.secondary">
-                Bring your skills and curiosity. Our alumni include educators, organizers, policy advocates, and creatives who still
-                stay involved and mentor us, and we try to offer that same care to new members.
+                Most officers didn&apos;t have experience running an org before this. Our alumni include educators, organizers, policy
+                advocates, and creatives who still stay involved and mentor us, and we try to offer that same care to new members.
               </Typography>
               <Typography variant="body1" color="text.secondary">
                 As a coalition, we host SEAsgiving with alumni, run history workshops, meet with other orgs for shared planning, and
