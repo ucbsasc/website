@@ -19,25 +19,25 @@ const storyMilestones: StoryMilestone[] = [
     year: '2000',
     title: 'A conference becomes a coalition',
     body:
-      'Professor Khatharya Um organized a Southeast Asian conference at UC Berkeley to mark 25 years of the Southeast Asian diaspora after the American wars in the region. Students from Lao, Hmong, Cambodian, and Vietnamese campus communities ran the youth program, then stayed together rather than let the work end with a weekend.',
+      'Professor Khatharya Um organized a Southeast Asian conference at UC Berkeley to mark 25 years of the Southeast Asian diaspora after the American wars in the region. Students from Lao, Hmong, Cambodian, and Vietnamese campus communities ran the youth program. The conference ended and they kept meeting. That is where SASC came from.',
   },
   {
     year: '2000–03',
     title: '“A Dream Denied”',
     body:
-      'A Southeast Asian Youth Summit that December brought together high schoolers, college students, educators, and community workers. The data became A Dream Denied: Educational Experiences of Southeast Asian American Youth (with SEARAC, 2003) — evidence that folding SEA students into aggregate Asian American numbers hides real underrepresentation.',
+      'That December, a Southeast Asian Youth Summit brought together high schoolers, college students, educators, and community workers. What came out of it turned into A Dream Denied: Educational Experiences of Southeast Asian American Youth, published with SEARAC in 2003. The report showed how aggregate Asian American numbers bury the underrepresentation of SEA students.',
   },
   {
     year: '2005',
     title: 'SASComm',
     body:
-      'After years of figuring out how to keep the coalition alive past any one officer board, members organized SASComm, a round-table leadership structure that spreads the work of programs, outreach, and advocacy instead of parking it on a few people.',
+      'Keeping the coalition alive past any one officer board took years to work out. The answer was SASComm, a round-table leadership structure where programs, outreach, and advocacy sit with the whole table. No one class takes the org with it.',
   },
   {
     year: 'Today',
     title: 'SEAM, SEASO, Night Market, SEAgrad',
     body:
-      'The lineup shifts with each cohort, but usually means SEAM (mentorship), SEASO (orientation), SEACF and Night Market (culture, food, a stage for SEA orgs), and SEAgrad (graduation). We still table on Sproul, cook for SEAsgiving, run history workshops, and keep alumni in the loop.',
+      'The lineup shifts with each cohort. Most years that means SEAM (mentorship), SEASO (orientation), SEACF and Night Market (culture, food, a stage for SEA orgs), and SEAgrad (graduation). We still table on Sproul, cook for SEAsgiving, run history workshops, and keep alumni in the loop.',
   },
 ];
 
@@ -89,7 +89,7 @@ const About = () => {
     <Box sx={{ position: 'relative' }}>
       <PageHeader
         title="About SASC"
-        subtitle="Student-run at UC Berkeley since 2000. We support Southeast Asian students through mentorship, cultural programming, and community."
+        subtitle="Student-run at UC Berkeley since 2000. We do mentorship, cultural programming, and advocacy for Southeast Asian students on campus."
         image="/sascomm.webp"
       />
 
@@ -98,10 +98,10 @@ const About = () => {
           Our Story
         </Typography>
         <Typography variant="body1" color="text.secondary" sx={{ mb: 4, maxWidth: 780 }}>
-          Student-founded and student-run since 2000. Every year looks a little different because students turn over
-          and the political weather changes — what hasn&apos;t changed is the reason people keep rebuilding SASC:
-          Southeast Asian students at Berkeley should have a place to find each other, learn our hxstories, put on
-          culture in public, and push for resources the university doesn&apos;t provide on its own.
+          Student-founded and student-run since 2000. Boards turn over every year and the programming turns over
+          with them, but the reason people keep rebuilding SASC has stayed the same: Southeast Asian students at
+          Berkeley need somewhere to find each other, learn our hxstories, put on culture in public, and push the
+          university for resources it doesn&apos;t provide on its own.
         </Typography>
 
         <Grid container spacing={{ xs: 4, md: 6 }}>
@@ -172,8 +172,8 @@ const About = () => {
                   Alumni Tailgate · 2026
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  A 2026 tailgate where current members reconvened with alumni spanning more than 20 years of SASC,
-                  including people who built this coalition long before the current board was on campus.
+                  Current members and alumni from more than twenty years of SASC, including a few people who built
+                  this coalition before anyone on the current board got to Berkeley.
                 </Typography>
               </Box>
             </Box>
@@ -198,15 +198,15 @@ const About = () => {
             {[
               {
                 title: 'Community',
-                body: 'We look out for each other through bonding events, wellness check-ins, and alumni relationships that often last well beyond graduation.',
+                body: 'Bonding events, wellness check-ins, and alumni who still answer the group chat years after graduating. That is most of what holds SASC together.',
               },
               {
                 title: 'Culture',
-                body: 'We treat our languages, food, dance, and histories as sources of knowledge and pride worth sharing on campus.',
+                body: 'Our languages, food, dance, and histories carry real knowledge. We put them in public, loudly, because a campus that only ever meets us in an aggregate statistic does not actually know us.',
               },
               {
                 title: 'Advocacy',
-                body: 'We work for representation, funding, and campus resources so Southeast Asian students are not overlooked.',
+                body: 'Representation and funding do not show up on their own. We push for what SEA students are owed, and we keep pushing after the first no, and the second one.',
               },
             ].map((value) => (
               <Grid item xs={12} md={4} key={value.title}>
@@ -267,7 +267,8 @@ const About = () => {
             variant="body1"
             sx={{ mb: 4, color: 'rgba(255,255,255,0.75)', maxWidth: 560, mx: { md: 'auto' } }}
           >
-            Fall 2026 recruiting is open; dates aren&apos;t set yet. Come to a GM, check the Lead page, or email{' '}
+            Fall 2026 recruiting is open. Dates aren&apos;t locked yet. Come to a GM, read through the Lead page, or
+            email{' '}
             <Box component="strong" sx={{ color: 'white' }}>
               UCB.SASC@gmail.com
             </Box>
