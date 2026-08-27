@@ -3,7 +3,6 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import EventCard from './EventCard';
 
-const rsvpHref = 'https://forms.gle/hJtHBtT5BRexuVgj8';
 const volunteerHref =
   'https://docs.google.com/forms/d/e/1FAIpQLSeWoyN973oVwosgE5Sq15u9V8bCUttuo9gyXe6brqs_AQxRrQ/viewform';
 
@@ -67,17 +66,13 @@ const SEASO = () => {
         Our programming and materials center first-gen and low-income students, and those impacted by the American Wars
         in Southeast Asia. Whatever your background, you’re welcome to apply.
       </Typography>
-      <Typography variant="body2" color="text.secondary" sx={{ mb: 1.5 }}>
-        Space is limited. Priority deadline is August 24; applications after that are reviewed case by case. We’ll email
-        you to confirm if you’re in.
-      </Typography>
       <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
-        You’ll need to be signed in with your Berkeley email to RSVP.
+        RSVPs are now closed. We’ll email accepted applicants to confirm.
       </Typography>
 
       <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1} flexWrap="wrap" useFlexGap>
-        <Button variant="contained" color="primary" href={rsvpHref} target="_blank" rel="noopener">
-          RSVP to SEASO
+        <Button variant="contained" color="primary" disabled>
+          RSVP Closed
         </Button>
         <Button variant="outlined" color="primary" href={volunteerHref} target="_blank" rel="noopener">
           Volunteer details
