@@ -19,25 +19,25 @@ const storyMilestones: StoryMilestone[] = [
     year: '2000',
     title: 'A conference becomes a coalition',
     body:
-      'Professor Khatharya Um organized a Southeast Asian conference at UC Berkeley to mark 25 years of the Southeast Asian diaspora after the American wars in the region. Students from Lao, Hmong, Cambodian, and Vietnamese campus communities ran the youth program. The conference ended and they kept meeting. That is where SASC came from.',
+      'Professor Khatharya Um organized a Southeast Asian conference at UC Berkeley to mark 25 years of the Southeast Asian diaspora after the American wars in the region. Students from the Lao, Hmong, Cambodian, and Vietnamese communities on campus ran the youth program, and they kept meeting after the conference was over, which is how SASC started.',
   },
   {
     year: '2000–03',
     title: '“A Dream Denied”',
     body:
-      'That December, a Southeast Asian Youth Summit brought together high schoolers, college students, educators, and community workers. What came out of it turned into A Dream Denied: Educational Experiences of Southeast Asian American Youth, published with SEARAC in 2003. The report showed how aggregate Asian American numbers bury the underrepresentation of SEA students.',
+      'A Southeast Asian Youth Summit that December brought together high schoolers, college students, educators, and community workers, and the research from it was published a few years later as A Dream Denied: Educational Experiences of Southeast Asian American Youth, put out with SEARAC in 2003. The report argued that counting Southeast Asian students inside aggregate Asian American statistics makes their underrepresentation hard to see.',
   },
   {
     year: '2005',
     title: 'SASComm',
     body:
-      'Keeping the coalition alive past any one officer board took years to work out. The answer was SASComm, a round-table leadership structure where programs, outreach, and advocacy sit with the whole table. No one class takes the org with it.',
+      'By 2005, members had worked out something more durable than an officer board that got rebuilt from scratch every couple of years. SASComm is a round-table leadership structure that spreads programs, outreach, and advocacy across the whole table, which keeps the org from depending on the two or three people who happen to be running it that year.',
   },
   {
     year: 'Today',
     title: 'SEAM, SEASO, Night Market, SEAgrad',
     body:
-      'The lineup shifts with each cohort. Most years that means SEAM (mentorship), SEASO (orientation), SEACF and Night Market (culture, food, a stage for SEA orgs), and SEAgrad (graduation). We still table on Sproul, cook for SEAsgiving, run history workshops, and keep alumni in the loop.',
+      'The lineup shifts with each cohort, but most years it includes SEAM (mentorship), SEASO (orientation), SEACF and Night Market (culture, food, and a stage for SEA orgs), and SEAgrad (graduation). We also table on Sproul, cook for SEAsgiving, run history workshops, and try to keep alumni in the loop.',
   },
 ];
 
@@ -98,10 +98,10 @@ const About = () => {
           Our Story
         </Typography>
         <Typography variant="body1" color="text.secondary" sx={{ mb: 4, maxWidth: 780 }}>
-          Student-founded and student-run since 2000. Boards turn over every year and the programming turns over
-          with them, but the reason people keep rebuilding SASC has stayed the same: Southeast Asian students at
-          Berkeley need somewhere to find each other, learn our hxstories, put on culture in public, and push the
-          university for resources it doesn&apos;t provide on its own.
+          SASC has been student-founded and student-run since 2000. Officer boards change every year and so does a
+          lot of the programming, though the core of it is fairly consistent: a place for Southeast Asian students at
+          Berkeley to find each other, learn our hxstories, put on culture in public, and push the university for
+          resources it doesn&apos;t otherwise provide.
         </Typography>
 
         <Grid container spacing={{ xs: 4, md: 6 }}>
@@ -198,15 +198,15 @@ const About = () => {
             {[
               {
                 title: 'Community',
-                body: 'Bonding events, wellness check-ins, and alumni who still answer the group chat years after graduating. That is most of what holds SASC together.',
+                body: 'A lot of SASC is people looking out for each other, which shows up in bonding events, wellness check-ins, and alumni who stay in touch long after graduating.',
               },
               {
                 title: 'Culture',
-                body: 'Our languages, food, dance, and histories carry real knowledge. We put them in public, loudly, because a campus that only ever meets us in an aggregate statistic does not actually know us.',
+                body: 'Our languages, food, dance, and histories are knowledge worth taking seriously. A good part of what we do is putting them in front of the rest of campus.',
               },
               {
                 title: 'Advocacy',
-                body: 'Representation and funding do not show up on their own. We push for what SEA students are owed, and we keep pushing after the first no, and the second one.',
+                body: 'Representation, funding, and campus resources don\'t arrive on their own, so a lot of this work is asking repeatedly, sitting in meetings, and following up when nothing happens.',
               },
             ].map((value) => (
               <Grid item xs={12} md={4} key={value.title}>
@@ -267,8 +267,8 @@ const About = () => {
             variant="body1"
             sx={{ mb: 4, color: 'rgba(255,255,255,0.75)', maxWidth: 560, mx: { md: 'auto' } }}
           >
-            Fall 2026 recruiting is open. Dates aren&apos;t locked yet. Come to a GM, read through the Lead page, or
-            email{' '}
+            Fall 2026 recruiting is open, though we haven&apos;t set dates yet. Come to a GM, read through the Lead
+            page, or email{' '}
             <Box component="strong" sx={{ color: 'white' }}>
               UCB.SASC@gmail.com
             </Box>
