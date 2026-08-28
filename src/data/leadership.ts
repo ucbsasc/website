@@ -107,6 +107,14 @@ export const leadership: LeadershipMember[] = [
         type: 'officer',
     },
     {
+        name: 'Thu Ta',
+        role: 'Operations Officer',
+        committee: 'Operations',
+        email: 'thu_ta@berkeley.edu',
+        image: '/officers/thuta.webp',
+        type: 'officer',
+    },
+    {
         name: 'Noah Brand',
         role: 'Internal Officer',
         committee: 'Internal',
