@@ -4,9 +4,22 @@ import EmailIcon from '@mui/icons-material/EmailOutlined';
 import Tooltip from '@mui/material/Tooltip';
 import Footer from '../components/Footer';
 import PageHeader from '../components/PageHeader';
-import { directors as leadershipDirectors, officers as leadershipOfficers, LeadershipMember } from '../data/leadership';
+import {
+  directors as leadershipDirectors,
+  officers as leadershipOfficers,
+  LeadershipMember,
+  LeadershipCommittee,
+} from '../data/leadership';
+import { leadBranches } from '../data/lead';
 import { usePageTitle } from '../hooks/usePageTitle';
 import { colors, RADIUS } from '../theme/colors';
+
+const committeeAccent: Record<LeadershipCommittee, string> = {
+  Internal: colors.gold,
+  External: colors.darkPink,
+  Operations: colors.bayNavy,
+  PR: colors.pink,
+};
 
 type StoryMilestone = {
   year: string;
@@ -47,20 +60,31 @@ const TeamCard = ({ member, accent }: { member: LeadershipMember; accent: string
       height: '100%',
       display: 'flex',
       flexDirection: 'column',
-      boxShadow: `4px 4px 0 ${accent}`,
+      overflow: 'hidden',
+      border: '1px solid',
+      borderColor: 'divider',
+      boxShadow: 'none',
+      transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+      '&:hover': {
+        transform: 'translateY(-3px)',
+        boxShadow: (theme) => theme.shadows[6],
+      },
     }}
   >
-    <CardMedia
-      component="img"
-      image={member.image}
-      alt={member.name}
-      sx={{ aspectRatio: '1 / 1', objectFit: 'cover', objectPosition: 'top center' }}
-    />
+    <Box sx={{ lineHeight: 0 }}>
+      <Box sx={{ height: 4, bgcolor: accent }} />
+      <CardMedia
+        component="img"
+        image={member.image}
+        alt={member.name}
+        sx={{ aspectRatio: '4 / 5', objectFit: 'cover', objectPosition: 'top center' }}
+      />
+    </Box>
     <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', p: 2 }}>
       <Typography variant="subtitle1" sx={{ fontWeight: 700, lineHeight: 1.25 }}>
         {member.name}
       </Typography>
-      <Typography variant="body2" color="text.secondary" sx={{ mb: 1.5 }}>
+      <Typography variant="body2" sx={{ color: accent, fontWeight: 600, mb: 1.5 }}>
         {member.role}
       </Typography>
       <Box sx={{ mt: 'auto' }}>
@@ -70,7 +94,11 @@ const TeamCard = ({ member, accent }: { member: LeadershipMember; accent: string
             variant="text"
             href={`mailto:${member.email}`}
             startIcon={<EmailIcon fontSize="small" />}
-            sx={{ pl: 0 }}
+            sx={{
+              pl: 0,
+              color: 'text.secondary',
+              '&:hover': { color: accent, bgcolor: 'transparent' },
+            }}
           >
             Email
           </Button>
@@ -228,27 +256,41 @@ const About = () => {
         <Typography variant="h4" gutterBottom>
           Our Team
         </Typography>
-        <Typography variant="subtitle1" sx={{ mb: 3, color: 'text.secondary' }}>
-          Directors
+        <Typography variant="body1" color="text.secondary" sx={{ mb: 5, maxWidth: 700 }}>
+          SASComm is organized into four branches. Each is run by a director or two, with officers
+          helping plan and staff the work week to week.
         </Typography>
-        <Grid container spacing={2.5} sx={{ mb: 5 }}>
-          {directors.map((member, i) => (
-            <Grid item xs={6} sm={4} md={3} key={member.name}>
-              <TeamCard member={member} accent={i % 2 === 0 ? colors.gold : colors.pink} />
-            </Grid>
-          ))}
-        </Grid>
 
-        <Typography variant="subtitle1" sx={{ mb: 3, color: 'text.secondary' }}>
-          Officers
-        </Typography>
-        <Grid container spacing={2.5}>
-          {officers.map((member, i) => (
-            <Grid item xs={6} sm={4} md={3} key={member.name}>
-              <TeamCard member={member} accent={i % 2 === 0 ? colors.pink : colors.gold} />
-            </Grid>
-          ))}
-        </Grid>
+        {leadBranches.map((branch) => {
+          const members = [...directors, ...officers].filter(
+            (member) => member.committee === branch.committee
+          );
+          if (members.length === 0) return null;
+          const accent = committeeAccent[branch.committee];
+
+          return (
+            <Box key={branch.committee} sx={{ mb: { xs: 5, md: 6 } }}>
+              <Stack direction="row" alignItems="baseline" spacing={1.25} sx={{ mb: 2.5 }}>
+                <Box
+                  sx={{ width: 10, height: 10, borderRadius: '50%', bgcolor: accent, flexShrink: 0 }}
+                />
+                <Typography variant="h6" sx={{ fontWeight: 700 }}>
+                  {branch.name}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {branch.focus}
+                </Typography>
+              </Stack>
+              <Grid container spacing={2.5}>
+                {members.map((member) => (
+                  <Grid item xs={6} sm={4} md={3} key={member.email}>
+                    <TeamCard member={member} accent={accent} />
+                  </Grid>
+                ))}
+              </Grid>
+            </Box>
+          );
+        })}
       </Container>
 
       <Box

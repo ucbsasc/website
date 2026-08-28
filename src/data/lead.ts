@@ -41,7 +41,7 @@ export type LeadBranch = {
 export const leadBranches: LeadBranch[] = [
   {
     name: 'Internal Affairs',
-    focus: 'GMs & member life',
+    focus: 'General meetings & member life',
     overview:
       'Internal runs general meetings and semester goals. Bonding, wellness, and keeping members looped in also sit here.',
     image: '/internal.webp',
@@ -55,7 +55,7 @@ export const leadBranches: LeadBranch[] = [
   },
   {
     name: 'External Affairs',
-    focus: 'Outreach & events',
+    focus: 'Outreach & event planning',
     overview:
       'External does outreach and helps plan major events and collaborations with other orgs and campus partners.',
     image: '/grid/tabling.webp',
@@ -68,7 +68,7 @@ export const leadBranches: LeadBranch[] = [
   },
   {
     name: 'Operations',
-    focus: 'Money & venues',
+    focus: 'Finance & logistics',
     overview:
       'Ops handles money and logistics: budgets, fundraising, reimbursements, booking venues.',
     image: '/operations.webp',
@@ -81,7 +81,7 @@ export const leadBranches: LeadBranch[] = [
   },
   {
     name: 'Public Relations',
-    focus: 'Web, merch, photo',
+    focus: 'Design, media & communications',
     overview:
       'PR does website design and development, merch, photography, graphics, and Instagram.',
     image: '/pr.webp',
