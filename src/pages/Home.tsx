@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { Instagram } from '@mui/icons-material';
 import MailingListModal from '../components/MailingListModal';
+import LeadInviteModal from '../components/home/LeadInviteModal';
 import Footer from '../components/Footer';
 import { programs } from '../data/programs';
 import { siteSeason } from '../data/season';
@@ -137,6 +138,7 @@ const sections = [
 const Home = () => {
   usePageTitle();
   const [mailingListOpen, setMailingListOpen] = useState(false);
+  const [leadInviteOpen, setLeadInviteOpen] = useState(false);
   const [pairIndex, setPairIndex] = useState(0);
   const { mode, nextEvent } = siteSeason;
   const location = useLocation();
@@ -146,6 +148,26 @@ const Home = () => {
       document.getElementById('programs')?.scrollIntoView({ behavior: 'smooth' });
     }
   }, [location]);
+
+  useEffect(() => {
+    if (mode !== 'recruitment') return;
+    try {
+      if (localStorage.getItem('lead_invite_dismissed_fall_2026') === '1') return;
+    } catch {
+      // Continue showing the modal if localStorage is unavailable.
+    }
+    const id = window.setTimeout(() => setLeadInviteOpen(true), 1200);
+    return () => window.clearTimeout(id);
+  }, [mode]);
+
+  const handleLeadInviteClose = () => {
+    try {
+      localStorage.setItem('lead_invite_dismissed_fall_2026', '1');
+    } catch {
+      // Continue closing if localStorage is unavailable.
+    }
+    setLeadInviteOpen(false);
+  };
 
   useEffect(() => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -578,6 +600,7 @@ const Home = () => {
       </Box>
       <Footer />
       <MailingListModal open={mailingListOpen} onClose={() => setMailingListOpen(false)} />
+      <LeadInviteModal open={leadInviteOpen} onClose={handleLeadInviteClose} />
     </Box>
   );
 };

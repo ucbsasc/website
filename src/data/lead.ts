@@ -104,18 +104,22 @@ export const leadApplicationSteps: Array<{
 }> = [
   {
     title: 'Pick a branch',
-    detail: 'We’re recruiting for Internal, External, Ops, and PR for Fall 2026. Details are below.',
+    detail: 'Read the open position descriptions and think about how you’d like to contribute in SASComm.',
     icon: 'lightbulb',
   },
   {
-    title: 'Watch for dates',
-    detail:
-      'Application dates aren’t set. We’ll post on Instagram (@ucbsasc), the mailing list, and at GMs.',
+    title: 'Background & short response',
+    detail: 'The form asks for background info and short response questions about your fit for the role.',
     icon: 'diversity',
   },
   {
-    title: 'Ask someone',
-    detail: 'Email a director under a branch, or DM @ucbsasc, if you want hours or workload info.',
+    title: 'Interview',
+    detail: 'Applications are reviewed on a rolling basis, so apply early. Selected applicants are invited to interview.',
     icon: 'event',
+  },
+  {
+    title: 'Apply by Sept. 25',
+    detail: 'Fall 2026 applications are due Friday, Sept. 25 @ 11:59 p.m. Email a director if you want hours or workload info.',
+    icon: 'volunteer',
   },
 ];

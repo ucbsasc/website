@@ -7,6 +7,8 @@ import {
   Typography,
 } from '@mui/material';
 
+const LEAD_APPLICATION_FORM_URL = 'https://forms.gle/2vkFbNL3s8DxbCvi9';
+
 type LeadInviteModalProps = {
   open: boolean;
   onClose: () => void;
@@ -21,7 +23,8 @@ const LeadInviteModal = ({ open, onClose }: LeadInviteModalProps) => {
           Recruiting for Internal, External, Ops, and PR. Branch details are on the Lead page.
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Dates aren&apos;t set. Follow @ucbsasc for updates.
+          Applications are reviewed on a rolling basis, so apply as soon as possible for priority. Fall 2026
+          applications are due Friday, Sept. 25 @ 11:59 p.m.
         </Typography>
       </DialogContent>
       <DialogActions sx={{ flexWrap: 'wrap', gap: 1.5, justifyContent: 'flex-end', px: 3, py: 2 }}>
@@ -31,7 +34,7 @@ const LeadInviteModal = ({ open, onClose }: LeadInviteModalProps) => {
         <Button
           component="a"
           href="/lead"
-          variant="contained"
+          variant="outlined"
           color="primary"
           onClick={onClose}
         >
@@ -39,14 +42,14 @@ const LeadInviteModal = ({ open, onClose }: LeadInviteModalProps) => {
         </Button>
         <Button
           component="a"
-          href="https://www.instagram.com/ucbsasc"
+          href={LEAD_APPLICATION_FORM_URL}
           target="_blank"
           rel="noopener"
-          variant="outlined"
+          variant="contained"
           color="primary"
           onClick={onClose}
         >
-          Follow @ucbsasc
+          Apply now
         </Button>
       </DialogActions>
     </Dialog>

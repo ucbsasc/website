@@ -76,32 +76,32 @@ const Lead = () => {
             textShadow: '0 1px 10px rgba(0,0,0,0.45)',
           }}
         >
-          Fall 2026 recruiting is open for Internal, External, Ops, and PR. Dates aren&apos;t set yet.
-          We&apos;ll post on Instagram and the mailing list.
+          Fall 2026 recruiting is open for Internal, External, Ops, and PR. Applications are reviewed on a
+          rolling basis, so apply as soon as possible for priority. Due Friday, Sept. 25 @ 11:59 p.m.
         </Typography>
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mt: 4 }}>
           <Button
             variant="contained"
             color="inherit"
             size="large"
-            href="#branches"
+            href="https://forms.gle/2vkFbNL3s8DxbCvi9"
+            target="_blank"
+            rel="noopener"
             sx={{
               color: 'primary.main',
               bgcolor: 'white',
               '&:hover': { bgcolor: 'rgba(255, 255, 255, 0.9)' },
             }}
           >
-            See the branches
+            Apply now
           </Button>
           <Button
             variant="outlined"
             color="inherit"
             size="large"
-            href="https://www.instagram.com/ucbsasc"
-            target="_blank"
-            rel="noopener"
+            href="#branches"
           >
-            Follow @ucbsasc
+            See the branches
           </Button>
         </Stack>
       </PageHeader>
@@ -299,8 +299,34 @@ const Lead = () => {
         <Typography variant="h4" gutterBottom>
           How to apply
         </Typography>
+        <Typography variant="body1" color="text.secondary" sx={{ mb: 1, maxWidth: 760 }}>
+          Applications are reviewed on a rolling basis, so submit as soon as possible for priority. Fall 2026
+          applications are due Friday, Sept. 25 @ 11:59 p.m.
+        </Typography>
         <Typography variant="body1" color="text.secondary" sx={{ mb: 3, maxWidth: 760 }}>
-          No form yet. Dates still TBD.
+          Read the{' '}
+          <Button
+            variant="text"
+            color="primary"
+            href="https://docs.google.com/document/d/1A-lNUm6g9DHF4C2DvHATFUrNFskGwxCy-GiSm9pe7YI/edit?usp=sharing"
+            target="_blank"
+            rel="noopener"
+            sx={{ p: 0, minWidth: 0, textTransform: 'none', fontWeight: 600 }}
+          >
+            open position descriptions
+          </Button>{' '}
+          to find your best fit, then{' '}
+          <Button
+            variant="text"
+            color="primary"
+            href="https://forms.gle/2vkFbNL3s8DxbCvi9"
+            target="_blank"
+            rel="noopener"
+            sx={{ p: 0, minWidth: 0, textTransform: 'none', fontWeight: 600 }}
+          >
+            apply here
+          </Button>
+          .
         </Typography>
         <Grid container spacing={3}>
           {leadApplicationSteps.map((step) => (
@@ -330,17 +356,17 @@ const Lead = () => {
               Questions
             </Typography>
             <Typography variant="body1" color="text.secondary">
-              Dates usually hit Instagram first. DM @ucbsasc or email a director above.
+              Applications are due Friday, Sept. 25 @ 11:59 p.m. DM @ucbsasc or email a director above with questions.
             </Typography>
             <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ pt: 1 }}>
               <Button
                 variant="contained"
                 color="primary"
-                href="https://www.instagram.com/ucbsasc"
+                href="https://forms.gle/2vkFbNL3s8DxbCvi9"
                 target="_blank"
                 rel="noopener"
               >
-                Follow @ucbsasc
+                Apply now
               </Button>
               <Button
                 variant="outlined"
