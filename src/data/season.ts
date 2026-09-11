@@ -21,10 +21,9 @@ export const siteSeason: {
 } = {
   mode: 'recruitment',
   nextEvent: {
-    title: 'SEASO 2026',
-    dateLabel: 'Thu, Sept 3 · 4–9 PM',
-    location: 'Tilden Room',
-    href: 'https://forms.gle/hJtHBtT5BRexuVgj8',
-    ctaLabel: 'RSVP',
+    title: 'Fall General Meeting',
+    dateLabel: 'Thu, Sept 17 · 8–9 PM',
+    location: 'Wheeler 120',
+    href: '/events',
   },
 };

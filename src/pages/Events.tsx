@@ -31,16 +31,18 @@ import GameNight from '../components/events/GameNight';
 import TasteOfSeaNightMarket from '../components/events/TasteOfSeaNightMarket';
 import ResumeWorkshop from '../components/events/ResumeWorkshop';
 import SEASO from '../components/events/SEASO';
+import GeneralMeetingSep2026 from '../components/events/GeneralMeetingSep2026';
 
 const Events = () => {
   usePageTitle('Events');
   const [mailingListOpen, setMailingListOpen] = useState(false);
 
   const upcomingEvents: { date: Date; key: string; render: () => JSX.Element }[] = [
-    { date: new Date('2026-09-03T16:00:00-07:00'), key: 'seaso-2026', render: () => <SEASO /> },
+    { date: new Date('2026-09-17T20:00:00-07:00'), key: 'gm-2026-fall', render: () => <GeneralMeetingSep2026 /> },
   ];
 
   const pastEvents: { date: Date; key: string; render: () => JSX.Element }[] = [
+    { date: new Date('2026-09-03T16:00:00-07:00'), key: 'seaso-2026', render: () => <SEASO /> },
     { date: new Date('2026-05-09T18:00:00-07:00'), key: 'seagrad-2026', render: () => <SEAGrad26 /> },
     { date: new Date('2026-04-29T17:00:00-07:00'), key: 'seapicnic-2026', render: () => <SEAPicnic /> },
     { date: new Date('2026-04-06T18:00:00-07:00'), key: 'nightmarket-2026', render: () => <TasteOfSeaNightMarket /> },
