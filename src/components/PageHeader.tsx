@@ -6,11 +6,20 @@ type PageHeaderProps = {
   title: string;
   subtitle?: string;
   image: string;
+  /** CSS background-position for the image, e.g. 'center 25%' to keep faces in frame */
+  imagePosition?: string;
   children?: ReactNode;
   compact?: boolean;
 };
 
-const PageHeader = ({ title, subtitle, image, children, compact = false }: PageHeaderProps) => {
+const PageHeader = ({
+  title,
+  subtitle,
+  image,
+  imagePosition = 'center',
+  children,
+  compact = false,
+}: PageHeaderProps) => {
   return (
     <Box
       sx={{
@@ -26,7 +35,7 @@ const PageHeader = ({ title, subtitle, image, children, compact = false }: PageH
           inset: 0,
           backgroundImage: `url(${image})`,
           backgroundSize: 'cover',
-          backgroundPosition: 'center',
+          backgroundPosition: imagePosition,
           filter: 'saturate(0.9) contrast(1.05)',
           zIndex: 0,
         },

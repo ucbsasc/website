@@ -20,15 +20,21 @@ import {
 } from '@mui/icons-material';
 import Footer from '../components/Footer';
 import PageHeader from '../components/PageHeader';
+import { Fragment } from 'react';
 import {
   leadBenefits,
   leadBranches,
   leadApplicationSteps,
+  leadRecruitingFacts,
   BenefitIconKey,
   ApplicationStepIconKey,
 } from '../data/lead';
 import { directors as leadershipDirectors } from '../data/leadership';
 import { usePageTitle } from '../hooks/usePageTitle';
+
+const applicationUrl = 'https://forms.gle/2vkFbNL3s8DxbCvi9';
+const positionsUrl =
+  'https://docs.google.com/document/d/1A-lNUm6g9DHF4C2DvHATFUrNFskGwxCy-GiSm9pe7YI/edit?usp=sharing';
 
 const getBenefitIcon = (icon: BenefitIconKey) => {
   switch (icon) {
@@ -65,7 +71,8 @@ const Lead = () => {
       <PageHeader
         title="Lead with SASC"
         subtitle="SASC doesn't run itself. SASComm is the student leadership group that plans the programs, books the rooms, and keeps the day-to-day moving."
-        image="/sasc-old.webp"
+        image="/sascatnightmarket.webp"
+        imagePosition="center 20%"
       >
         <Typography
           variant="body1"
@@ -76,15 +83,15 @@ const Lead = () => {
             textShadow: '0 1px 10px rgba(0,0,0,0.45)',
           }}
         >
-          Fall 2026 recruiting is open for Internal, External, Ops, and PR. Applications are reviewed on a
-          rolling basis, so apply as soon as possible for priority. Due Friday, Sept. 25 @ 11:59 p.m.
+          We&apos;re recruiting for all four branches this fall: Internal, External, Ops, and PR. We read
+          applications as they come in, so earlier is better. Due Friday, Sept. 25 at 11:59 p.m.
         </Typography>
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mt: 4 }}>
           <Button
             variant="contained"
             color="inherit"
             size="large"
-            href="https://forms.gle/2vkFbNL3s8DxbCvi9"
+            href={applicationUrl}
             target="_blank"
             rel="noopener"
             sx={{
@@ -107,6 +114,72 @@ const Lead = () => {
       </PageHeader>
 
       <Container sx={{ mb: 8 }}>
+        <Grid container spacing={{ xs: 4, md: 6 }} alignItems="center">
+          <Grid item xs={12} md={5}>
+            <Box
+              component="img"
+              src="/fall26sascomm.webp"
+              alt="Fall 2026 recruiting flyer: the Southeast Asian Student Coalition is recruiting for SASCommittee. Plan programs, work with SEA students, build community."
+              width={1000}
+              height={1250}
+              sx={{
+                display: 'block',
+                width: '100%',
+                maxWidth: 440,
+                height: 'auto',
+                mx: 'auto',
+                borderRadius: 3,
+                boxShadow: (theme) => theme.shadows[6],
+              }}
+            />
+          </Grid>
+          <Grid item xs={12} md={7}>
+            <Typography variant="h4" gutterBottom>
+              Fall 2026 recruiting
+            </Typography>
+            <Typography variant="body1" color="text.secondary" sx={{ mb: 3, maxWidth: 560 }}>
+              Applications are open for every branch. We read them as they come in and reach out to schedule
+              interviews, so applying early helps. Not sure yet? Come to the info session and ask us anything.
+            </Typography>
+            <Box
+              component="dl"
+              sx={{
+                m: 0,
+                mb: 3,
+                display: 'grid',
+                gridTemplateColumns: { xs: '1fr', sm: '160px 1fr' },
+                columnGap: 3,
+                rowGap: { xs: 0.25, sm: 1.5 },
+              }}
+            >
+              {leadRecruitingFacts.map((fact, i) => (
+                <Fragment key={fact.label}>
+                  <Typography
+                    component="dt"
+                    variant="subtitle2"
+                    sx={{ fontWeight: 700, mt: { xs: i === 0 ? 0 : 1.25, sm: 0 } }}
+                  >
+                    {fact.label}
+                  </Typography>
+                  <Typography component="dd" variant="body1" color="text.secondary" sx={{ m: 0 }}>
+                    {fact.value}
+                  </Typography>
+                </Fragment>
+              ))}
+            </Box>
+            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5}>
+              <Button variant="contained" color="primary" href={applicationUrl} target="_blank" rel="noopener">
+                Apply now
+              </Button>
+              <Button variant="outlined" color="primary" href={positionsUrl} target="_blank" rel="noopener">
+                Read the position descriptions
+              </Button>
+            </Stack>
+          </Grid>
+        </Grid>
+      </Container>
+
+      <Container sx={{ mb: 8 }}>
         <Grid container spacing={4} alignItems="center">
           <Grid item xs={12} md={6}>
             <Box
@@ -124,7 +197,7 @@ const Lead = () => {
           <Grid item xs={12} md={6}>
             <Stack spacing={2}>
               <Typography variant="h4">
-                SASComm in Action
+                What it&apos;s like
               </Typography>
               <Typography variant="body1" color="text.secondary">
                 SASC feels like home because people show up, especially when it’s messy. We have wellness nights when people are burnt
@@ -299,27 +372,23 @@ const Lead = () => {
         <Typography variant="h4" gutterBottom>
           How to apply
         </Typography>
-        <Typography variant="body1" color="text.secondary" sx={{ mb: 1, maxWidth: 760 }}>
-          Applications are reviewed on a rolling basis, so submit as soon as possible for priority. Fall 2026
-          applications are due Friday, Sept. 25 @ 11:59 p.m.
-        </Typography>
         <Typography variant="body1" color="text.secondary" sx={{ mb: 3, maxWidth: 760 }}>
           Read the{' '}
           <Button
             variant="text"
             color="primary"
-            href="https://docs.google.com/document/d/1A-lNUm6g9DHF4C2DvHATFUrNFskGwxCy-GiSm9pe7YI/edit?usp=sharing"
+            href={positionsUrl}
             target="_blank"
             rel="noopener"
             sx={{ p: 0, minWidth: 0, textTransform: 'none', fontWeight: 600 }}
           >
-            open position descriptions
+            position descriptions
           </Button>{' '}
-          to find your best fit, then{' '}
+          to see what each role does, then{' '}
           <Button
             variant="text"
             color="primary"
-            href="https://forms.gle/2vkFbNL3s8DxbCvi9"
+            href={applicationUrl}
             target="_blank"
             rel="noopener"
             sx={{ p: 0, minWidth: 0, textTransform: 'none', fontWeight: 600 }}
@@ -356,13 +425,14 @@ const Lead = () => {
               Questions
             </Typography>
             <Typography variant="body1" color="text.secondary">
-              Applications are due Friday, Sept. 25 @ 11:59 p.m. DM @ucbsasc or email a director above with questions.
+              Not sure which branch fits, or how much time it takes? Come to the info session at our GM on Sept. 17,
+              DM @ucbsasc, or email one of the directors listed above.
             </Typography>
             <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ pt: 1 }}>
               <Button
                 variant="contained"
                 color="primary"
-                href="https://forms.gle/2vkFbNL3s8DxbCvi9"
+                href={applicationUrl}
                 target="_blank"
                 rel="noopener"
               >

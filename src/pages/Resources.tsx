@@ -41,7 +41,7 @@ const Resources = () => {
             Immigration Resources
           </Typography>
           <Typography variant="body1" paragraph>
-            For immediate immigration resources and know your right pamphlets in Arabic, Bengali, Burmese, Chinese, English, Gujarati, Hindi, Karen, Khmer, Korean, Nepali, Punjabi, Urdu, Vietnamese, Tagalog, Thai, and Spanish, please visit:
+            Immigration help and know-your-rights pamphlets in Arabic, Bengali, Burmese, Chinese, English, Gujarati, Hindi, Karen, Khmer, Korean, Nepali, Punjabi, Urdu, Vietnamese, Tagalog, Thai, and Spanish:
           </Typography>
           <Link 
             href="https://ajsocal.org/immigration/" 
@@ -58,7 +58,7 @@ const Resources = () => {
             Know Your Rights
           </Typography>
           <Typography variant="body1" paragraph>
-            For all other know your rights resources please visit:
+            What to do if you encounter ICE, plus other know-your-rights guides:
           </Typography>
           <Link 
             href="https://immigrantjustice.org/know-your-rights/ice-encounter" 
@@ -75,7 +75,7 @@ const Resources = () => {
             Legal Aid
           </Typography>
           <Typography variant="body1" paragraph>
-            For immediate help and direction please visit:
+            If you need legal help and don&apos;t know where to start:
           </Typography>
           <Link 
             href="https://ajsocal.org/legal-victim-help/" 
@@ -92,7 +92,7 @@ const Resources = () => {
             California Wildfire Resources
           </Typography>
           <Typography variant="body1" paragraph>
-            For California Wildfire Resources, please visit:
+            Help for people affected by California wildfires:
           </Typography>
           <Link 
             href="https://ajsocal.org/california-wildfire-resources/" 
@@ -110,7 +110,7 @@ const Resources = () => {
           Media Kit
         </Typography>
         <Typography variant="body1" sx={{ mb: 3 }}>
-          Download official SASC assets and reference our brand colors for flyers, social posts, and partner materials.
+          Our logo and colors, for anyone making a flyer or a collab post with us.
         </Typography>
 
         <Grid container spacing={3} sx={{ mb: 4 }}>
@@ -162,7 +162,7 @@ const Resources = () => {
                 </Button>
               </Stack>
               <Typography variant="caption" color="text.secondary" sx={{ mt: 2, display: 'block' }}>
-                Please avoid altering colors or proportions. For alternate formats (SVG/white mark), contact us at UCB.SASC@gmail.com.
+                Need an SVG or a white version? Email UCB.SASC@gmail.com.
               </Typography>
             </Paper>
           </Grid>
@@ -171,9 +171,9 @@ const Resources = () => {
         <Paper elevation={2} sx={{ p: 3 }}>
           <Typography variant="h5" gutterBottom>Usage Guidelines</Typography>
           <Box component="ul" sx={{ pl: 3, m: 0 }}>
-            <li><Typography variant="body2">Use official colors and maintain sufficient contrast for accessibility.</Typography></li>
-            <li><Typography variant="body2">Leave clear space around the logo; do not distort or recolor.</Typography></li>
-            <li><Typography variant="body2">For co-branding, place partner marks with balanced visual weight.</Typography></li>
+            <li><Typography variant="body2">Stick to our colors, and make sure any text on top of them is easy to read.</Typography></li>
+            <li><Typography variant="body2">Give the logo some room. Don&apos;t stretch it or change its colors.</Typography></li>
+            <li><Typography variant="body2">On collab posts, keep our logo and your partner&apos;s logo about the same size.</Typography></li>
           </Box>
         </Paper>
       </Container>

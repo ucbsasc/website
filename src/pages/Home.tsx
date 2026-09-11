@@ -109,17 +109,17 @@ const sections = [
   {
     title: 'Community Building',
     paragraphs: [
-      'SASC began in 2000 after a Southeast Asian conference at Berkeley organized with Professor Khatharya Um. Students from Lao, Hmong, Cambodian, and Vietnamese groups helped run the youth program, then stayed together to build a coalition focused on recruitment, retention, and shared community issues. The longer hxstory, including A Dream Denied, the Summer Institute, and SASComm, lives on our About page.',
+      'SASC began in 2000 after a Southeast Asian conference at Berkeley organized with Professor Khatharya Um. Students from Lao, Hmong, Cambodian, and Vietnamese groups helped run the youth program, then kept meeting and built a coalition around getting SEA students into Berkeley and helping them stay. The longer version, including A Dream Denied and how SASComm came together, is on our About page.',
     ],
     aboutLink: true,
     instagramPost: 'https://www.instagram.com/p/8mkvEjw-66',
     align: 'left' as const,
   },
   {
-    title: 'SEA Grad',
+    title: 'SEAGrad',
     paragraphs: [
-      'SEAGrad is our yearly ceremony for graduating Southeast Asian seniors and the families who got them here. It usually includes speeches, performances, and cultural sashes, and it is intentionally smaller than campus commencement so seniors can be recognized by people who know them.',
-      'For many first-generation students, finishing Berkeley is a family milestone as much as an academic one. Alumni often come back, and current members help put the night together.',
+      'SEAGrad is our yearly ceremony for graduating Southeast Asian seniors and the families who got them here. There are speeches, performances, and cultural sashes, and it’s smaller than commencement on purpose, so every senior gets called up by people who actually know them.',
+      'For a lot of first-gen students, graduating is something the whole family did. Alumni come back for it, and current members run the night.',
     ],
     instagramPost: 'https://www.instagram.com/p/DZBGmcWElwT',
     align: 'right' as const,
@@ -128,7 +128,7 @@ const sections = [
     title: 'SEAMentorship',
     paragraphs: [
       'SEAM pairs Berkeley students with SEA high schoolers for a semester of applications, academics, and questions that are hard to ask if nobody in your family has done this before.',
-      'Mentors and mentees work through essays, deadlines, financial aid forms, and what campus life is actually like. High school students from across California have come through the program, including visits that let them see Berkeley in person.',
+      'Mentors and mentees work through essays, deadlines, financial aid forms, and what campus life is actually like. Mentees come from all over California, and some get to visit Berkeley through the program.',
     ],
     instagramPost: 'https://www.instagram.com/p/DKpgpl5pGhL',
     align: 'left' as const,
@@ -341,8 +341,8 @@ const Home = () => {
                 lineHeight: 1.6,
               }}
             >
-              Mentorship, culture nights, and a stage for SEA orgs: Night Market performances, festivals, and showing up
-              for our communities on campus and in the Bay.
+              We mentor SEA high schoolers, run Night Market and SEAGrad, and hold a lot of general meetings with free
+              food. Started by students in 2000 and still run by them.
             </Typography>
 
             {nextEvent && (
@@ -518,7 +518,7 @@ const Home = () => {
             Programs
           </Typography>
           <Typography variant="body1" color="text.secondary" sx={{ mb: 5, maxWidth: 540 }}>
-            Flagship programs through the school year. Dates live on Events once rooms are locked.
+            The big ones we run every year. Dates go up on the Events page once we have rooms.
           </Typography>
           <Grid container spacing={2.5}>
             {programs.map((program, i) => (
@@ -567,7 +567,7 @@ const Home = () => {
             variant="body1"
             sx={{ mb: 4, color: 'rgba(255,255,255,0.75)', maxWidth: 480, mx: { md: 'auto' } }}
           >
-            GMs, culture nights, and next year&apos;s dates hit the mailing list and Instagram first.
+            GM dates, event flyers, and applications go out on the mailing list and Instagram first.
           </Typography>
           <Stack
             direction={{ xs: 'column', sm: 'row' }}

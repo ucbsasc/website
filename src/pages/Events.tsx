@@ -68,7 +68,7 @@ const Events = () => {
     <>
       <PageHeader
         title="Events"
-        subtitle="Public programs, general meetings, and cultural nights. Archive below for what we ran this past year."
+        subtitle="What's coming up this semester. Past events are in the archive at the bottom."
         image="/nightmarket-14.jpg"
         compact
       />

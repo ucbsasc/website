@@ -44,7 +44,7 @@ const MailingListModal = ({ open, onClose }: MailingListModalProps) => {
         </Typography>
         <Box sx={{ textAlign: 'center', py: 4 }}>
           <Typography variant="body2" sx={{ mb: 3, color: 'text.secondary' }}>
-            Sign up for our mailing list to stay in the loop on events, GMs, and announcements.
+            We&apos;ll email you GM dates, event flyers, and when applications open.
           </Typography>
           <Button
             variant="contained"
@@ -54,7 +54,7 @@ const MailingListModal = ({ open, onClose }: MailingListModalProps) => {
             rel="noopener noreferrer"
             sx={{ mt: 2 }}
           >
-            Subscribe to Mailing List
+            Join the mailing list
           </Button>
         </Box>
       </ModalContent>

@@ -44,13 +44,13 @@ const storyMilestones: StoryMilestone[] = [
     year: '2005',
     title: 'SASComm',
     body:
-      'By 2005, members had worked out something more durable than an officer board that got rebuilt from scratch every couple of years. SASComm is a round-table leadership structure that spreads programs, outreach, and advocacy across the whole table, which keeps the org from depending on the two or three people who happen to be running it that year.',
+      'By 2005, members wanted something sturdier than an officer board that got rebuilt from scratch every couple of years. SASComm is a round table where programs, outreach, and advocacy are split across everyone, so the org doesn’t fall apart when the two or three people running it graduate.',
   },
   {
     year: 'Today',
-    title: 'SEAM, SEASO, Night Market, SEAgrad',
+    title: 'SEAM, SEASO, Night Market, SEAGrad',
     body:
-      'The lineup shifts with each cohort, but most years it includes SEAM (mentorship), SEASO (orientation), SEACF and Night Market (culture, food, and a stage for SEA orgs), and SEAgrad (graduation). We also table on Sproul, cook for SEAsgiving, run history workshops, and try to keep alumni in the loop.',
+      'The lineup shifts with each cohort, but most years it includes SEAM (mentorship), SEASO (orientation), SEACF and Night Market (culture, food, and a stage for SEA orgs), and SEAGrad (graduation). We also table on Sproul, cook for SEAsgiving, run history workshops, and try to keep alumni in the loop.',
   },
 ];
 
@@ -117,7 +117,7 @@ const About = () => {
     <Box sx={{ position: 'relative' }}>
       <PageHeader
         title="About SASC"
-        subtitle="Student-run at UC Berkeley since 2000. We do mentorship, cultural programming, and advocacy for Southeast Asian students on campus."
+        subtitle="Student-run at UC Berkeley since 2000, for Southeast Asian students on campus and the high schoolers coming up after them."
         image="/sascomm.webp"
       />
 
@@ -126,10 +126,9 @@ const About = () => {
           Our Story
         </Typography>
         <Typography variant="body1" color="text.secondary" sx={{ mb: 4, maxWidth: 780 }}>
-          SASC has been student-founded and student-run since 2000. Officer boards change every year and so does a
-          lot of the programming, though the core of it is fairly consistent: a place for Southeast Asian students at
-          Berkeley to find each other, learn our hxstories, put on culture in public, and push the university for
-          resources it doesn&apos;t otherwise provide.
+          The board turns over every year and the events change with it. What stays the same is Southeast Asian
+          students at Berkeley finding each other, learning our hxstories, and pushing the university for resources
+          it wouldn&apos;t hand over on its own.
         </Typography>
 
         <Grid container spacing={{ xs: 4, md: 6 }}>
@@ -309,8 +308,8 @@ const About = () => {
             variant="body1"
             sx={{ mb: 4, color: 'rgba(255,255,255,0.75)', maxWidth: 560, mx: { md: 'auto' } }}
           >
-            Fall 2026 recruiting is open, though we haven&apos;t set dates yet. Come to a GM, read through the Lead
-            page, or email{' '}
+            Fall 2026 lead applications are open until Friday, Sept. 25. Come to our GM on Sept. 17 for the info
+            session, read through the Lead page, or email{' '}
             <Box component="strong" sx={{ color: 'white' }}>
               UCB.SASC@gmail.com
             </Box>
@@ -323,7 +322,7 @@ const About = () => {
             sx={{ mb: 3 }}
           >
             <Button variant="contained" size="large" href="/lead">
-              Leadership & Involvement
+              Lead with SASC
             </Button>
             <Button
               variant="outlined"

@@ -45,7 +45,7 @@ const Footer = () => {
               UC Berkeley · Est. 2000
             </Typography>
             <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.72)', maxWidth: 320, lineHeight: 1.65 }}>
-              Southeast Asian Student Coalition. Mentorship, culture, and community. Built by students, for our people.
+              Southeast Asian Student Coalition. Student-run, and always happy to see new faces at a GM.
             </Typography>
           </Grid>
 

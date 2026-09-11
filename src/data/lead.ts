@@ -20,7 +20,7 @@ export const leadBenefits: Array<{
     icon: 'groups',
   },
   {
-    title: 'Ship real events',
+    title: 'Put on real events',
     description:
       'Room bookings, reimbursements, Instagram posts, Night Market setup. The work shows up as things people can go to.',
     icon: 'campaign',
@@ -104,22 +104,30 @@ export const leadApplicationSteps: Array<{
 }> = [
   {
     title: 'Pick a branch',
-    detail: 'Read the open position descriptions and think about how you’d like to contribute in SASComm.',
+    detail: 'Read the position descriptions and figure out which branch fits what you want to do.',
     icon: 'lightbulb',
   },
   {
-    title: 'Background & short response',
-    detail: 'The form asks for background info and short response questions about your fit for the role.',
+    title: 'Fill out the form',
+    detail: 'Some background info and a few short-answer questions about the role you picked.',
     icon: 'diversity',
   },
   {
     title: 'Interview',
-    detail: 'Applications are reviewed on a rolling basis, so apply early. Selected applicants are invited to interview.',
+    detail: 'We read applications as they come in and reach out to schedule interviews.',
     icon: 'event',
   },
   {
     title: 'Apply by Sept. 25',
-    detail: 'Fall 2026 applications are due Friday, Sept. 25 @ 11:59 p.m. Email a director if you want hours or workload info.',
+    detail: 'The form closes Friday, Sept. 25 at 11:59 p.m. Email a director if you want to know more about hours or workload.',
     icon: 'volunteer',
   },
+];
+
+export const leadRecruitingFacts: Array<{ label: string; value: string }> = [
+  { label: 'Applications close', value: 'Friday, Sept. 25 at 11:59 p.m.' },
+  { label: 'Info session', value: 'Thursday, Sept. 17, 8–9 PM in Wheeler 120, at our GM' },
+  { label: 'Open branches', value: 'Internal, External, Ops, and PR' },
+  { label: 'Time', value: 'About 5 hours a week, more around big events' },
+  { label: 'After you apply', value: 'Interviews on a rolling basis' },
 ];

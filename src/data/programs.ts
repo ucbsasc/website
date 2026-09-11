@@ -8,25 +8,25 @@ export const programs: Program[] = [
   {
     title: 'Southeast Asian Mentorship Program (SEAM)',
     description:
-      'SEAM pairs Berkeley students with Southeast Asian high schoolers for a semester of college applications, academics, and practical questions about getting to campus. High school students from across California have come through the program, including visits to Berkeley.',
+      'Berkeley students mentor Southeast Asian high schoolers through a semester of college apps, financial aid, and all the questions that are hard to ask when nobody in your family has done this before.',
     goals: 'Support high school students through the college process and into their first years on campus.',
   },
   {
     title: 'Southeast Asian Orientation (SEASO)',
     description:
-      'SEASO is orientation for first-year and transfer Southeast Asian students, co-hosted with AAPA: dinner, workshops on campus resources, intros to SEA orgs, and time to meet other new and current students.',
+      'Orientation for new SEA students, first-years and transfers, co-hosted with AAPA every fall. There’s dinner, workshops on campus resources, and a chance to meet the SEA orgs before the semester gets busy.',
     goals: 'Help new SEA students get settled, find people, and plug into orgs early.',
   },
   {
     title: 'Southeast Asian Cultural Festival (SEACF)',
     description:
-      'SEACF brings together Southeast Asian organizations for dance, music, food, and related arts. Alongside Night Market, it is one of the main ways SASC gives SEA orgs a platform and shares those cultures with the wider campus.',
+      'A night of dance, music, and food put on with the SEA orgs on campus. Along with Night Market, it’s one of the main ways we get SEA orgs in front of the rest of Berkeley.',
     goals: 'Give SEA organizations a stage and share our cultures with the Berkeley community.',
   },
   {
-    title: 'SEAgraduation',
+    title: 'SEAGrad',
     description:
-      'SEAgrad is our annual ceremony for graduating Southeast Asian seniors, with family, performances, cultural sashes, and time to recognize each student’s path through Berkeley.',
+      'Our graduation for Southeast Asian seniors and their families, with performances and cultural sashes. It’s smaller than commencement on purpose, so every senior gets recognized by people who know them.',
     goals: 'Celebrate graduating seniors with their families and community.',
   },
 ];

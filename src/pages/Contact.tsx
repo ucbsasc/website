@@ -17,7 +17,7 @@ const contactRoutes: Array<{
 }> = [
   {
     title: 'General questions & collabs',
-    detail: 'Best starting point for most messages. We route things from here if needed.',
+    detail: 'Start here if you’re not sure who to ask. We’ll pass it to the right person.',
     people: [{ name: 'SASC inbox', email: generalEmail }],
   },
   {
@@ -44,7 +44,7 @@ const Contact = () => {
     <>
       <PageHeader
         title="Contact"
-        subtitle="Email is the most reliable way to reach us. Use the topic list below if you already know who you need."
+        subtitle="Email is the best way to reach us. If you already know who you need, their emails are below."
         image="/grid/tabling.webp"
         compact
       />
