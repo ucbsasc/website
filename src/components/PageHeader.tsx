@@ -8,6 +8,8 @@ type PageHeaderProps = {
   image: string;
   /** CSS background-position for the image, e.g. 'center 25%' to keep faces in frame */
   imagePosition?: string;
+  /** Lighter, neutral overlay for photos that should read clearly behind the text */
+  lightOverlay?: boolean;
   children?: ReactNode;
   compact?: boolean;
 };
@@ -17,6 +19,7 @@ const PageHeader = ({
   subtitle,
   image,
   imagePosition = 'center',
+  lightOverlay = false,
   children,
   compact = false,
 }: PageHeaderProps) => {
@@ -36,14 +39,19 @@ const PageHeader = ({
           backgroundImage: `url(${image})`,
           backgroundSize: 'cover',
           backgroundPosition: imagePosition,
-          filter: 'saturate(0.9) contrast(1.05)',
+          filter: lightOverlay ? 'none' : 'saturate(0.9) contrast(1.05)',
           zIndex: 0,
         },
         '&::after': {
           content: '""',
           position: 'absolute',
           inset: 0,
-          background: `linear-gradient(115deg, rgba(20,18,16,0.88) 0%, rgba(30,43,54,0.72) 55%, rgba(0,50,98,0.45) 100%)`,
+          background: lightOverlay
+            ? {
+                xs: 'rgba(20,18,16,0.6)',
+                md: 'linear-gradient(100deg, rgba(20,18,16,0.8) 0%, rgba(20,18,16,0.5) 45%, rgba(20,18,16,0.1) 100%)',
+              }
+            : `linear-gradient(115deg, rgba(20,18,16,0.88) 0%, rgba(30,43,54,0.72) 55%, rgba(0,50,98,0.45) 100%)`,
           zIndex: 1,
         },
       }}

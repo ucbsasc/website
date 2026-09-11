@@ -73,6 +73,7 @@ const Lead = () => {
         subtitle="SASC doesn't run itself. SASComm is the student leadership group that plans the programs, books the rooms, and keeps the day-to-day moving."
         image="/sascatnightmarket.webp"
         imagePosition="center 20%"
+        lightOverlay
       >
         <Typography
           variant="body1"
