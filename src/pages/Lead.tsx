@@ -107,6 +107,15 @@ const Lead = () => {
             color="inherit"
             size="large"
             href="#branches"
+            sx={{
+              borderColor: 'rgba(255,255,255,0.75)',
+              color: 'white',
+              '&:hover': {
+                borderColor: 'white',
+                bgcolor: 'rgba(255,255,255,0.08)',
+                borderWidth: 1.5,
+              },
+            }}
           >
             See the branches
           </Button>
