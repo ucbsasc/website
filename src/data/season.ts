@@ -23,7 +23,7 @@ export const siteSeason: {
   nextEvent: {
     title: 'Fall General Meeting',
     dateLabel: 'Thu, Sept 17 · 8–9 PM',
-    location: 'Wheeler 120',
+    location: 'Wheeler 130',
     href: '/events',
   },
 };

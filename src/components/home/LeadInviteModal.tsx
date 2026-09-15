@@ -25,7 +25,7 @@ const LeadInviteModal = ({ open, onClose }: LeadInviteModalProps) => {
         </Typography>
         <Typography variant="body2" color="text.secondary">
           Have questions first? We&apos;re doing an info session at our GM on Thursday, Sept. 17, 8–9 PM in
-          Wheeler 120. There will be pandan waffles.
+          Wheeler 130 (room corrected from 120). There will be pandan waffles.
         </Typography>
       </DialogContent>
       <DialogActions sx={{ flexWrap: 'wrap', gap: 1.5, justifyContent: 'flex-end', px: 3, py: 2 }}>

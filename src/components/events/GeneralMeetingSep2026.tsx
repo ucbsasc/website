@@ -9,7 +9,7 @@ const calendarHref =
   `&details=${encodeURIComponent(
     'First SASC general meeting of the fall, plus an info session on leading with SASC. Free pandan waffles and bầu cua cá cọp / klah klouk / nam tao pu pla / hoo hey how. Lead applications due Fri, Sept. 25: https://ucbsasc.org/lead'
   )}` +
-  `&location=${encodeURIComponent('120 Wheeler Hall, UC Berkeley')}`;
+  `&location=${encodeURIComponent('130 Wheeler Hall, UC Berkeley')}`;
 
 const GeneralMeetingSep2026 = () => {
   return (
@@ -21,10 +21,25 @@ const GeneralMeetingSep2026 = () => {
       maxMediaHeight={600}
       image={{
         src: '/gen9-17.webp',
-        alt: 'SASC General Meeting flyer: September 17, 8–9 PM, Wheeler 120. Free food and a social game.',
+        alt: 'SASC General Meeting flyer: September 17, 8–9 PM. Free food and a social game. Note: the flyer says Wheeler 120, but the room has changed to Wheeler 130.',
         sx: { objectFit: 'contain', objectPosition: 'center', bgcolor: 'black' },
       }}
     >
+      <Box
+        sx={{
+          mb: 2,
+          px: 1.5,
+          py: 1,
+          borderRadius: 1,
+          bgcolor: 'warning.main',
+          color: 'warning.contrastText',
+        }}
+      >
+        <Typography variant="body2" sx={{ fontWeight: 700 }}>
+          Room change: the flyer says Wheeler 120 — the meeting is now in Wheeler 130.
+        </Typography>
+      </Box>
+
       <Typography variant="h4" component="h2" sx={{ mb: 0.5 }}>
         Fall General Meeting
       </Typography>
@@ -32,7 +47,7 @@ const GeneralMeetingSep2026 = () => {
         + Lead with SASC info session
       </Typography>
       <Typography variant="subtitle2" color="text.secondary" sx={{ mb: 2 }}>
-        Thursday, September 17, 2026 · 8:00–9:00 PM · Wheeler 120
+        Thursday, September 17, 2026 · 8:00–9:00 PM · Wheeler 130
       </Typography>
 
       <Typography variant="body1" sx={{ mb: 1.5 }}>

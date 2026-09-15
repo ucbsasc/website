@@ -126,7 +126,7 @@ export const leadApplicationSteps: Array<{
 
 export const leadRecruitingFacts: Array<{ label: string; value: string }> = [
   { label: 'Applications close', value: 'Friday, Sept. 25 at 11:59 p.m.' },
-  { label: 'Info session', value: 'Thursday, Sept. 17, 8–9 PM in Wheeler 120, at our GM' },
+  { label: 'Info session', value: 'Thursday, Sept. 17, 8–9 PM in Wheeler 130 (room corrected from 120), at our GM' },
   { label: 'Open branches', value: 'Internal, External, Ops, and PR' },
   { label: 'Time', value: 'About 5 hours a week, more around big events' },
   { label: 'After you apply', value: 'Interviews on a rolling basis' },
