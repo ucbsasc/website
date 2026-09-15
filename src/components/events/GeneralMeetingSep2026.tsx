@@ -27,6 +27,7 @@ const GeneralMeetingSep2026 = () => {
     >
       <Box
         sx={{
+          mt: 4,
           mb: 2,
           px: 1.5,
           py: 1,
