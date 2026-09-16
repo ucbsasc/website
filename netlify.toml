@@ -7,13 +7,13 @@
 
 [[redirects]]
   from = "/attendance"
-  to = "https://forms.gle/SqyzHvv6hco4XQBc6"
+  to = "https://docs.google.com/forms/d/e/1FAIpQLSdDDkEwgssE2WL3AcZEMVNCEGLZXN6yEHXZ1GBI_VgrDeMoKg/viewform"
   status = 301
   force = true
 
 [[redirects]]
   from = "/attendance/"
-  to = "https://forms.gle/SqyzHvv6hco4XQBc6"
+  to = "https://docs.google.com/forms/d/e/1FAIpQLSdDDkEwgssE2WL3AcZEMVNCEGLZXN6yEHXZ1GBI_VgrDeMoKg/viewform"
   status = 301
   force = true
 
