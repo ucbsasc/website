@@ -100,7 +100,7 @@ export const leadership: LeadershipMember[] = [
     },
     {
         name: 'Krishna Sam',
-        role: 'Internal Officer',
+        role: 'Director of Legal & Policy Advocacy',
         committee: 'Internal',
         email: 'krishnaksam@berkeley.edu',
         image: '/officers/krishna.webp',
