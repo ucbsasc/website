@@ -18,3 +18,34 @@ a {
 img {
   max-width: 100%;
 }
+
+/* Station signs on /game print one per sheet; everything else stays off the page. */
+@media print {
+  body > *:not(.MuiDialog-root) {
+    display: none !important;
+  }
+
+  .MuiDialog-root .MuiBackdrop-root,
+  .MuiDialog-root .no-print {
+    display: none !important;
+  }
+
+  .MuiDialog-root,
+  .MuiDialog-root .MuiDialog-container,
+  .MuiDialog-root .MuiPaper-root {
+    position: static !important;
+    max-width: none !important;
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+  }
+
+  .station-sign {
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}

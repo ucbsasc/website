@@ -13,6 +13,7 @@ const Resources = lazy(() => import('./pages/Resources'));
 const Lead = lazy(() => import('./pages/Lead'));
 const QRGenerator = lazy(() => import('./pages/QRGenerator'));
 const StudentSlate = lazy(() => import('./pages/StudentSlate'));
+const Game = lazy(() => import('./pages/Game'));
 
 function ExternalRedirect({ href }: { href: string }) {
   useEffect(() => {
@@ -80,6 +81,7 @@ function App() {
                 <Route path="/lead" element={<Lead />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/resources" element={<Resources />} />
+                <Route path="/game" element={<Game />} />
                 <Route path="/qr" element={<QRGenerator />} />
                 <Route path="/checkin" element={<StudentSlate />} />
                 <Route
