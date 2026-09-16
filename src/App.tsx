@@ -94,6 +94,12 @@ function App() {
                     <ExternalRedirect href="https://docs.google.com/forms/d/e/1FAIpQLSeWoyN973oVwosgE5Sq15u9V8bCUttuo9gyXe6brqs_AQxRrQ/viewform" />
                   }
                 />
+                <Route
+                  path="/attendance"
+                  element={
+                    <ExternalRedirect href="https://docs.google.com/forms/d/e/1FAIpQLSdDDkEwgssE2WL3AcZEMVNCEGLZXN6yEHXZ1GBI_VgrDeMoKg/viewform" />
+                  }
+                />
                 <Route path="/seagrad26" element={<Navigate to="/events" replace />} />
                 <Route path="/seagrad2026" element={<Navigate to="/events" replace />} />
                 <Route path="/tos-vendor" element={<Navigate to="/events" replace />} />
