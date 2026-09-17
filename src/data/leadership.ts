@@ -1,4 +1,4 @@
-export type LeadershipCommittee = 'Internal' | 'External' | 'Operations' | 'PR';
+export type LeadershipCommittee = 'Internal' | 'External' | 'Operations' | 'PR' | 'Advocacy';
 
 export type LeadershipMember = {
     name: string;
@@ -101,10 +101,10 @@ export const leadership: LeadershipMember[] = [
     {
         name: 'Krishna Sam',
         role: 'Director of Legal & Policy Advocacy',
-        committee: 'Internal',
+        committee: 'Advocacy',
         email: 'krishnaksam@berkeley.edu',
         image: '/officers/krishna.webp',
-        type: 'officer',
+        type: 'director',
     },
     {
         name: 'Thu Ta',

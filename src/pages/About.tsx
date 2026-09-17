@@ -19,7 +19,27 @@ const committeeAccent: Record<LeadershipCommittee, string> = {
   External: colors.darkPink,
   Operations: colors.bayNavy,
   PR: colors.pink,
+  Advocacy: colors.calBlue,
 };
+
+type TeamSection = {
+  name: string;
+  focus: string;
+  committee: LeadershipCommittee;
+  blurb?: string;
+};
+
+/** The four recruiting branches, plus the roles that sit outside them. */
+const teamSections: TeamSection[] = [
+  ...leadBranches.map(({ name, focus, committee }) => ({ name, focus, committee })),
+  {
+    name: 'Legal & Policy Advocacy',
+    focus: 'Policy, rights & advocacy',
+    committee: 'Advocacy',
+    blurb:
+      'A standing role rather than a branch. It tracks the policy that reaches Southeast Asian students — immigration and deportation, disaggregated data, financial aid — and works with the branches when something needs a response.',
+  },
+];
 
 type StoryMilestone = {
   year: string;
@@ -257,29 +277,39 @@ const About = () => {
         </Typography>
         <Typography variant="body1" color="text.secondary" sx={{ mb: 5, maxWidth: 700 }}>
           SASComm is organized into four branches. Each is run by a director or two, with officers
-          helping plan and staff the work week to week.
+          helping plan and staff the work week to week. A couple of roles sit outside the branches.
         </Typography>
 
-        {leadBranches.map((branch) => {
+        {teamSections.map((section) => {
           const members = [...directors, ...officers].filter(
-            (member) => member.committee === branch.committee
+            (member) => member.committee === section.committee
           );
           if (members.length === 0) return null;
-          const accent = committeeAccent[branch.committee];
+          const accent = committeeAccent[section.committee];
 
           return (
-            <Box key={branch.committee} sx={{ mb: { xs: 5, md: 6 } }}>
-              <Stack direction="row" alignItems="baseline" spacing={1.25} sx={{ mb: 2.5 }}>
+            <Box key={section.committee} sx={{ mb: { xs: 5, md: 6 } }}>
+              <Stack
+                direction="row"
+                alignItems="baseline"
+                spacing={1.25}
+                sx={{ mb: section.blurb ? 1 : 2.5, flexWrap: 'wrap' }}
+              >
                 <Box
                   sx={{ width: 10, height: 10, borderRadius: '50%', bgcolor: accent, flexShrink: 0 }}
                 />
                 <Typography variant="h6" sx={{ fontWeight: 700 }}>
-                  {branch.name}
+                  {section.name}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {branch.focus}
+                  {section.focus}
                 </Typography>
               </Stack>
+              {section.blurb && (
+                <Typography variant="body2" color="text.secondary" sx={{ mb: 2.5, maxWidth: 700 }}>
+                  {section.blurb}
+                </Typography>
+              )}
               <Grid container spacing={2.5}>
                 {members.map((member) => (
                   <Grid item xs={6} sm={4} md={3} key={member.email}>
