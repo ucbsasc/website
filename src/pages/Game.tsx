@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   Box,
   Button,
@@ -12,17 +12,13 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  ToggleButton,
-  ToggleButtonGroup,
   Typography,
 } from '@mui/material';
-import { keyframes } from '@mui/material/styles';
 import CasinoIcon from '@mui/icons-material/Casino';
 import StopIcon from '@mui/icons-material/Stop';
-import FullscreenIcon from '@mui/icons-material/Fullscreen';
-import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
 import PrintIcon from '@mui/icons-material/Print';
 import Footer from '../components/Footer';
+import DiceScene from '../components/game/DiceScene';
 import { usePageTitle } from '../hooks/usePageTitle';
 import { colors, RADIUS } from '../theme/colors';
 
@@ -81,46 +77,13 @@ const TWISTS: { name: string; text: string }[] = [
   },
 ];
 
-const MODE_HINT = {
-  knockout: 'Lose and you are out. Play until one person is left.',
-  chips: 'Five chips each. Wins pay one chip per matching die, losses cost one.',
-} as const;
-
-type Mode = keyof typeof MODE_HINT;
 type Phase = 'bets' | 'shaking' | 'result';
 
-const rattle = keyframes`
-  0% { transform: translateX(-50%) rotate(-1.5deg) translateY(0); }
-  25% { transform: translateX(-50%) rotate(1.4deg) translateY(-5px); }
-  50% { transform: translateX(-50%) rotate(-1.1deg) translateY(2px); }
-  75% { transform: translateX(-50%) rotate(1.7deg) translateY(-3px); }
-  100% { transform: translateX(-50%) rotate(-1.5deg) translateY(0); }
-`;
-
-/** Faces sit around a cube in SYMBOLS order; FACE_ANGLE spins one of them to the front. */
-const FACE_PLACE = [
-  '',
-  'rotateY(90deg)',
-  'rotateY(180deg)',
-  'rotateY(-90deg)',
-  'rotateX(90deg)',
-  'rotateX(-90deg)',
+const DICE_SOUND_FILES = [
+  '/sounds/dice-roll-1.mp3',
+  '/sounds/dice-roll-2.mp3',
+  '/sounds/dice-roll-3.mp3',
 ];
-
-const FACE_ANGLE = [
-  { x: 0, y: 0 },
-  { x: 0, y: -90 },
-  { x: 0, y: 180 },
-  { x: 0, y: 90 },
-  { x: -90, y: 0 },
-  { x: 90, y: 0 },
-];
-
-const faceTransform = (face: number) =>
-  `rotateX(${FACE_ANGLE[face].x}deg) rotateY(${FACE_ANGLE[face].y}deg)`;
-
-/** What the dice show before the first shake. */
-const REST_FACES = [1, 3, 4];
 
 /** Unbiased 0-5 from the browser's crypto, with a plain fallback. */
 function rollDie() {
@@ -139,37 +102,25 @@ function rollDie() {
 const Game = () => {
   usePageTitle('Six Corners');
 
-  const [round, setRound] = useState(1);
   const [phase, setPhase] = useState<Phase>('bets');
   const [roll, setRoll] = useState<number[] | null>(null);
-  const [bowlUp, setBowlUp] = useState(false);
-  const [mode, setMode] = useState<Mode>('knockout');
-  const [twistsOn, setTwistsOn] = useState(false);
-  const [twist, setTwist] = useState<{ name: string; text: string } | null>(null);
+  const [rollTarget, setRollTarget] = useState<number[] | null>(null);
+  const [spinToken, setSpinToken] = useState(0);
   const [history, setHistory] = useState<number[][]>([]);
   const [signIndex, setSignIndex] = useState<number | null>(null);
   const [isFull, setIsFull] = useState(false);
+  const [reduceMotion] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+  );
 
-  const deck = useRef<{ name: string; text: string }[]>([]);
-  const timers = useRef<number[]>([]);
-  const dieRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const cubeRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const shadowRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const anims = useRef<Animation[]>([]);
   const ledgerRef = useRef<HTMLDivElement | null>(null);
   const stageRef = useRef<HTMLDivElement | null>(null);
+  const diceSounds = useRef<HTMLAudioElement[]>([]);
+  const rollTargetRef = useRef<number[] | null>(null);
 
-  const clearTimers = useCallback(() => {
-    timers.current.forEach((id) => window.clearTimeout(id));
-    timers.current = [];
-    anims.current.forEach((animation) => animation.cancel());
-    anims.current = [];
-    cubeRefs.current.forEach((cube) => {
-      if (cube) cube.style.transform = '';
-    });
+  useEffect(() => {
+    diceSounds.current = DICE_SOUND_FILES.map((src) => new Audio(src));
   }, []);
-
-  useEffect(() => clearTimers, [clearTimers]);
 
   const toggleFullscreen = useCallback(() => {
     const node = stageRef.current as
@@ -202,128 +153,50 @@ const Game = () => {
     };
   }, []);
 
-  const drawTwist = useCallback((enabled: boolean) => {
-    if (!enabled) {
-      setTwist(null);
-      return;
-    }
-    if (deck.current.length === 0) deck.current = [...TWISTS];
-    const pick = Math.floor(Math.random() * deck.current.length);
-    setTwist(deck.current.splice(pick, 1)[0]);
-  }, []);
-
   const shake = useCallback(() => {
     if (phase === 'shaking') return;
-    clearTimers();
     setRoll(null);
-    setBowlUp(false);
+    setRollTarget(null);
+    rollTargetRef.current = null;
     setPhase('shaking');
-  }, [clearTimers, phase]);
-
-  const stopShake = useCallback(() => {
-    if (phase !== 'shaking') return;
-
-    const result = [rollDie(), rollDie(), rollDie()];
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const step = reduceMotion ? 0 : 170;
-    const fallMs = reduceMotion ? 0 : 620;
-
-    setBowlUp(true);
-
-    result.forEach((face, i) => {
-      const cube = cubeRefs.current[i];
-      const die = dieRefs.current[i];
-      const shadow = shadowRefs.current[i];
-      const angle = FACE_ANGLE[face];
-
-      if (reduceMotion || !cube || !die) {
-        if (cube) cube.style.transform = faceTransform(face);
-        return;
-      }
-
-      const delay = step * i;
-      const tilt = i === 1 ? -8 : i === 2 ? 7 : 0;
-
-      anims.current.push(
-        die.animate(
-          [
-            { transform: 'translate3d(0, -170px, 0)', opacity: 0, offset: 0 },
-            { transform: 'translate3d(0, -140px, 0)', opacity: 1, offset: 0.14 },
-            {
-              transform: 'translate3d(0, 0, 0)',
-              offset: 0.6,
-              easing: 'cubic-bezier(0.45, 0, 0.75, 1)',
-            },
-            { transform: 'translate3d(0, -22px, 0)', offset: 0.78 },
-            { transform: 'translate3d(0, 0, 0)', offset: 0.92 },
-            { transform: 'translate3d(0, -5px, 0)', offset: 0.97 },
-            { transform: 'translate3d(0, 0, 0)', offset: 1 },
-          ],
-          { duration: fallMs, delay, easing: 'ease-in', fill: 'both' },
-        ),
-      );
-
-      anims.current.push(
-        cube.animate(
-          [
-            {
-              transform: `rotateZ(${tilt - 24}deg) rotateX(${angle.x - 1080}deg) rotateY(${angle.y - 900}deg)`,
-            },
-            { transform: `rotateZ(${tilt}deg) rotateX(${angle.x}deg) rotateY(${angle.y}deg)` },
-          ],
-          {
-            duration: fallMs + 90,
-            delay,
-            easing: 'cubic-bezier(0.17, 0.72, 0.24, 1)',
-            fill: 'both',
-          },
-        ),
-      );
-
-      if (shadow) {
-        anims.current.push(
-          shadow.animate(
-            [
-              { transform: 'translateX(-50%) scale(0.45)', opacity: 0.05 },
-              { transform: 'translateX(-50%) scale(1)', opacity: 0.34 },
-            ],
-            { duration: fallMs, delay, easing: 'ease-in', fill: 'both' },
-          ),
-        );
-      }
-    });
-
-    timers.current.push(
-      window.setTimeout(
-        () => {
-          setRoll(result);
-          setPhase('result');
-          setHistory((prev) => [...prev, result]);
-        },
-        step * 2 + fallMs,
-      ),
-    );
   }, [phase]);
 
+  const stopShake = useCallback(() => {
+    if (phase !== 'shaking' || rollTargetRef.current) return;
+
+    const result = [rollDie(), rollDie(), rollDie()];
+    rollTargetRef.current = result;
+    setRollTarget(result);
+    setSpinToken((t) => t + 1);
+
+    const sounds = diceSounds.current;
+    if (sounds.length > 0) {
+      const sound = sounds[Math.floor(Math.random() * sounds.length)];
+      sound.currentTime = 0;
+      sound.play().catch(() => {});
+    }
+  }, [phase]);
+
+  const handleSettled = useCallback(() => {
+    const result = rollTargetRef.current;
+    if (!result) return;
+    setRoll(result);
+    setPhase('result');
+    setHistory((prev) => [...prev, result]);
+  }, []);
+
   const nextRound = useCallback(() => {
-    clearTimers();
-    setRound((r) => r + 1);
+    // rollTarget is left as-is: the bowl lowers back over the same resting dice, so there's
+    // nothing to pop until the next `shake()` actually starts a new roll.
     setPhase('bets');
     setRoll(null);
-    setBowlUp(false);
-    drawTwist(twistsOn);
-  }, [clearTimers, drawTwist, twistsOn]);
+  }, []);
 
   const newGame = useCallback(() => {
-    clearTimers();
-    setRound(1);
     setPhase('bets');
     setRoll(null);
-    setBowlUp(false);
     setHistory([]);
-    deck.current = [];
-    drawTwist(twistsOn);
-  }, [clearTimers, drawTwist, twistsOn]);
+  }, []);
 
   const advance = useCallback(() => {
     if (phase === 'result') nextRound();
@@ -359,9 +232,7 @@ const Game = () => {
     history.reduce((sum, r) => sum + r.filter((face) => face === i).length, 0),
   );
   const winners = roll ? Array.from(new Set(roll)) : [];
-  const dieSize = isFull ? { xs: 76, sm: 110, md: 136 } : { xs: 68, sm: 84, md: 96 };
-  const glyphSize = isFull ? { xs: '2.4rem', md: '3.6rem' } : { xs: '2rem', md: '2.6rem' };
-  const dieFace = (i: number) => (roll ? roll[i] : REST_FACES[i]);
+  const symbolGlyphs = useMemo(() => SYMBOLS.map((s) => s.glyph), []);
 
   let kicker = 'Bowl down';
   let call = 'Place your bets.';
@@ -369,10 +240,7 @@ const Game = () => {
     kicker = 'Shaking';
     call = 'Stop when the bets are in.';
   } else if (phase === 'result' && roll) {
-    kicker =
-      mode === 'chips'
-        ? `${winners.length} of 6 spots get paid`
-        : `${winners.length} of 6 spots survive`;
+    kicker = `${winners.length} of 6 spots survive`;
     call =
       winners.length === 1
         ? `${SYMBOLS[winners[0]].name} ×3`
@@ -439,64 +307,6 @@ const Game = () => {
             }),
           }}
         >
-          <Stack
-            direction="row"
-            spacing={1.5}
-            useFlexGap
-            flexWrap="wrap"
-            alignItems="center"
-            sx={{ mb: 2.5 }}
-          >
-            <Box
-              sx={{
-                fontFamily: '"Fraunces", serif',
-                fontWeight: 700,
-                fontSize: '1.05rem',
-                bgcolor: colors.charcoal,
-                color: colors.cream,
-                px: 1.5,
-                py: 0.5,
-                borderRadius: `${RADIUS}px`,
-              }}
-            >
-              Round {round}
-            </Box>
-            <ToggleButtonGroup
-              size="small"
-              exclusive
-              value={mode}
-              onChange={(_, value: Mode | null) => value && setMode(value)}
-              aria-label="Scoring"
-            >
-              <ToggleButton value="knockout">Knockout</ToggleButton>
-              <ToggleButton value="chips">Chips</ToggleButton>
-            </ToggleButtonGroup>
-            <ToggleButton
-              size="small"
-              value="twists"
-              selected={twistsOn}
-              onChange={() => {
-                const next = !twistsOn;
-                setTwistsOn(next);
-                drawTwist(next);
-              }}
-            >
-              Twists
-            </ToggleButton>
-            <Button
-              size="small"
-              variant="outlined"
-              startIcon={isFull ? <FullscreenExitIcon /> : <FullscreenIcon />}
-              onClick={toggleFullscreen}
-              sx={{ color: 'text.secondary', borderColor: 'divider' }}
-            >
-              {isFull ? 'Exit full screen' : 'Full screen'}
-            </Button>
-            <Typography variant="body2" color="text.secondary">
-              {MODE_HINT[mode]}
-            </Typography>
-          </Stack>
-
           <Box
             sx={{
               background: `linear-gradient(180deg, ${board.face} 0%, ${board.deep} 100%)`,
@@ -504,150 +314,28 @@ const Game = () => {
               borderRadius: `${RADIUS}px`,
               boxShadow: 'inset 0 0 0 5px rgba(247,240,230,0.1)',
               px: { xs: 2, md: 3 },
-              py: { xs: 3, md: 4 },
+              py: { xs: 2, md: 2.5 },
             }}
           >
             <Box
               sx={{
                 position: 'relative',
-                height: isFull ? { xs: 220, md: 320 } : { xs: 200, md: 236 },
-                display: 'flex',
-                alignItems: 'flex-end',
-                justifyContent: 'center',
+                height: isFull ? { xs: 380, md: 480 } : { xs: 320, md: 380 },
+                borderRadius: `${RADIUS}px`,
+                overflow: 'hidden',
               }}
             >
-              <Box
-                aria-hidden
-                sx={{
-                  position: 'absolute',
-                  left: '50%',
-                  bottom: 0,
-                  transform: 'translateX(-50%)',
-                  width: isFull ? { xs: '94%', md: 620 } : { xs: '92%', md: 430 },
-                  height: 112,
-                  borderRadius: '50%',
-                  background:
-                    'radial-gradient(ellipse at 50% 32%, #FFFDF8 0%, #F2E9DA 58%, #CFC3B0 100%)',
-                  boxShadow: '0 10px 26px rgba(0,0,0,0.35)',
-                }}
-              />
-
-              <Stack
-                direction="row"
-                spacing={{ xs: 1.25, md: 3 }}
-                sx={{ position: 'relative', mb: 3.5, opacity: bowlUp ? 1 : 0 }}
-                aria-live="polite"
-              >
-                {[0, 1, 2].map((i) => (
-                  <Box key={i} sx={{ position: 'relative', width: dieSize, aspectRatio: '1' }}>
-                    <Box
-                      aria-hidden
-                      ref={(node: HTMLDivElement | null) => {
-                        shadowRefs.current[i] = node;
-                      }}
-                      sx={{
-                        position: 'absolute',
-                        left: '50%',
-                        bottom: -12,
-                        width: '84%',
-                        height: 13,
-                        transform: 'translateX(-50%)',
-                        borderRadius: '50%',
-                        bgcolor: 'rgba(28, 22, 18, 0.5)',
-                        filter: 'blur(5px)',
-                        opacity: 0.34,
-                      }}
-                    />
-                    <Box
-                      ref={(node: HTMLDivElement | null) => {
-                        dieRefs.current[i] = node;
-                      }}
-                      sx={{
-                        position: 'absolute',
-                        inset: 0,
-                        perspective: isFull ? '1500px' : '1100px',
-                      }}
-                    >
-                      <Box
-                        ref={(node: HTMLDivElement | null) => {
-                          cubeRefs.current[i] = node;
-                        }}
-                        sx={{
-                          position: 'absolute',
-                          inset: 0,
-                          transformStyle: 'preserve-3d',
-                          transform: faceTransform(dieFace(i)),
-                        }}
-                      >
-                        {SYMBOLS.map((symbol, f) => (
-                          <Box
-                            key={symbol.id}
-                            sx={{
-                              position: 'absolute',
-                              inset: 0,
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              fontSize: glyphSize,
-                              lineHeight: 1,
-                              borderRadius: `${RADIUS + 2}px`,
-                              background: `linear-gradient(155deg, ${colors.paper} 0%, #EDE1CD 100%)`,
-                              border: '1px solid rgba(44, 53, 57, 0.16)',
-                              boxShadow: 'inset 0 -12px 20px rgba(44, 53, 57, 0.14)',
-                              backfaceVisibility: 'hidden',
-                              transform: {
-                                xs: `${FACE_PLACE[f]} translateZ(${dieSize.xs / 2}px)`,
-                                sm: `${FACE_PLACE[f]} translateZ(${dieSize.sm / 2}px)`,
-                                md: `${FACE_PLACE[f]} translateZ(${dieSize.md / 2}px)`,
-                              },
-                            }}
-                          >
-                            {symbol.glyph}
-                          </Box>
-                        ))}
-                      </Box>
-                    </Box>
-                  </Box>
-                ))}
-              </Stack>
-
-              <Box
-                aria-hidden
-                sx={{
-                  position: 'absolute',
-                  left: '50%',
-                  bottom: 12,
-                  transform: 'translateX(-50%)',
-                  width: isFull ? { xs: '80%', md: 480 } : { xs: '74%', md: 300 },
-                  height: isFull ? 220 : 164,
-                  borderRadius: isFull ? '240px 240px 30px 30px' : '150px 150px 26px 26px',
-                  background: `linear-gradient(175deg, ${colors.paper} 0%, #F0E5D3 55%, #C9BCA8 100%)`,
-                  boxShadow: 'inset 0 -14px 26px rgba(0,0,0,0.15), 0 14px 26px rgba(0,0,0,0.35)',
-                  zIndex: 2,
-                  transition: 'transform 0.55s cubic-bezier(0.3,0.8,0.3,1), opacity 0.45s ease',
-                  animation:
-                    phase === 'shaking' && !bowlUp ? `${rattle} 0.18s linear infinite` : 'none',
-                  ...(bowlUp && {
-                    transform:
-                    'translateX(-50%) translateY(-96px) perspective(900px) rotateX(-24deg) scale(1.06)',
-                    opacity: 0,
-                  }),
-                  '&::after': {
-                    content: '""',
-                    position: 'absolute',
-                    left: '50%',
-                    top: 14,
-                    transform: 'translateX(-50%)',
-                    width: 54,
-                    height: 20,
-                    borderRadius: '50%',
-                    background: 'rgba(255,255,255,0.6)',
-                  },
-                }}
+              <DiceScene
+                glyphs={symbolGlyphs}
+                phase={phase}
+                spinToken={spinToken}
+                rollTarget={rollTarget}
+                onSettled={handleSettled}
+                reduceMotion={reduceMotion}
               />
             </Box>
 
-            <Box sx={{ textAlign: 'center', mb: 2.5, minHeight: 78 }}>
+            <Box sx={{ textAlign: 'center', mb: 1, mt: 1, minHeight: 44 }}>
               <Typography
                 variant="overline"
                 sx={{ color: board.creamDim, letterSpacing: '0.18em', display: 'block' }}
@@ -659,19 +347,18 @@ const Game = () => {
                 component="p"
                 sx={{
                   color: board.cream,
-                  fontSize: isFull ? { xs: '2rem', md: '3.2rem' } : { xs: '1.6rem', md: '2.2rem' },
-                  mt: 0.5,
+                  fontSize: isFull ? { xs: '1.5rem', md: '2rem' } : { xs: '1.15rem', md: '1.4rem' },
+                  mt: 0.25,
                 }}
               >
                 {call}
               </Typography>
             </Box>
 
-            <Stack direction="row" spacing={1.5} justifyContent="center" flexWrap="wrap" useFlexGap>
+            <Stack direction="row" spacing={1.25} justifyContent="center" flexWrap="wrap" useFlexGap>
               <Button
                 variant="contained"
                 color="primary"
-                size="large"
                 startIcon={phase === 'shaking' ? <StopIcon /> : <CasinoIcon />}
                 onClick={advance}
                 sx={{ fontWeight: 700 }}
@@ -680,7 +367,6 @@ const Game = () => {
               </Button>
               <Button
                 variant="outlined"
-                size="large"
                 onClick={newGame}
                 sx={{
                   color: board.cream,
@@ -691,13 +377,6 @@ const Game = () => {
                 New game
               </Button>
             </Stack>
-
-            <Typography
-              variant="caption"
-              sx={{ display: 'block', textAlign: 'center', mt: 1.5, color: board.creamDim }}
-            >
-              Space: shake, stop, next round. F: full screen. R: reset.
-            </Typography>
           </Box>
 
           <Box
@@ -716,11 +395,8 @@ const Game = () => {
               const won = shown && matches > 0;
               const lost = shown && matches === 0;
               let verdict = 'Open';
-              if (won) {
-                verdict =
-                  mode === 'chips' ? `Pays ${matches}` : matches > 1 ? `Safe ×${matches}` : 'Safe';
-              }
-              if (lost) verdict = mode === 'chips' ? 'Lose 1' : 'Out';
+              if (won) verdict = matches > 1 ? `Safe ×${matches}` : 'Safe';
+              if (lost) verdict = 'Out';
 
               return (
                 <Box
@@ -781,25 +457,6 @@ const Game = () => {
             })}
           </Box>
 
-          {twistsOn && twist && (
-            <Box
-              sx={{
-                mt: 2,
-                p: 2,
-                border: `2px dashed ${colors.gold}`,
-                borderRadius: `${RADIUS}px`,
-                bgcolor: 'rgba(212,175,55,0.08)',
-              }}
-            >
-              <Typography variant="overline" color="text.secondary">
-                Twist for this round
-              </Typography>
-              <Typography variant="h5" sx={{ mt: 0.25, mb: 0.5 }}>
-                {twist.name}
-              </Typography>
-              <Typography variant="body1">{twist.text}</Typography>
-            </Box>
-          )}
         </Box>
 
         <Box sx={{ mt: 4 }}>
@@ -857,7 +514,7 @@ const Game = () => {
             </li>
             <li>
               <Typography variant="body1" sx={{ mb: 1 }}>
-                Open this page on the projector and hit Full screen.
+                Open this page on the projector and press F for full screen.
               </Typography>
             </li>
             <li>
@@ -879,20 +536,9 @@ const Game = () => {
           <Typography variant="h3" component="h2" sx={{ mb: 1.5 }}>
             Scoring
           </Typography>
-          <Typography variant="h6" component="h3" sx={{ mb: 0.5 }}>
-            Knockout
-          </Typography>
-          <Typography variant="body1" sx={{ mb: 2 }}>
+          <Typography variant="body1" sx={{ mb: 3 }}>
             If your symbol does not come up, you are out. Whoever is left picks again each round
             and can stay or move. Forty players takes four or five rounds, about ten minutes.
-          </Typography>
-          <Typography variant="h6" component="h3" sx={{ mb: 0.5 }}>
-            Chips
-          </Typography>
-          <Typography variant="body1" sx={{ mb: 3 }}>
-            Everyone starts with five chips and bets one a round. A win pays one chip per matching
-            die: one die pays one, two dice pay two, three dice pay three. A loss costs the chip.
-            Play ten rounds and count. Out of chips, out of the game.
           </Typography>
 
           <Typography variant="h3" component="h2" sx={{ mb: 1.5 }}>
@@ -907,29 +553,29 @@ const Game = () => {
               <TableHead>
                 <TableRow>
                   <TableCell>Your symbol shows on</TableCell>
-                  <TableCell>Pays</TableCell>
+                  <TableCell>Result</TableCell>
                   <TableCell align="right">Chance</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 <TableRow>
                   <TableCell>No dice</TableCell>
-                  <TableCell>Lose 1</TableCell>
+                  <TableCell>Out</TableCell>
                   <TableCell align="right">57.9%</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>One die</TableCell>
-                  <TableCell>1 chip</TableCell>
+                  <TableCell>Safe</TableCell>
                   <TableCell align="right">34.7%</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>Two dice</TableCell>
-                  <TableCell>2 chips</TableCell>
+                  <TableCell>Safe ×2</TableCell>
                   <TableCell align="right">6.9%</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>Three dice</TableCell>
-                  <TableCell>3 chips</TableCell>
+                  <TableCell>Safe ×3</TableCell>
                   <TableCell align="right">0.5%</TableCell>
                 </TableRow>
               </TableBody>
@@ -940,7 +586,8 @@ const Game = () => {
             Twists
           </Typography>
           <Typography variant="body1" sx={{ mb: 2 }}>
-            Turn on Twists and one is drawn each round. Read it out before bets.
+            Draw one at random each round — slips of paper in a hat works fine — and read it out
+            before bets.
           </Typography>
           <Box component="dl" sx={{ m: 0, mb: 3 }}>
             {TWISTS.map((item) => (
