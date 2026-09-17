@@ -29,14 +29,14 @@ const REST_X = [-1.85, 0, 1.85];
 const SHAKE_BOUNCE = 0.6;
 const SHAKE_JITTER_XZ = 0.18;
 
-const TABLE_RADIUS = 4.3;
-const BOWL_RADIUS = 3.5;
+const TABLE_RADIUS = 4.5;
+const BOWL_RADIUS = 3.7;
 const BOWL_DOWN_Y = 0.02;
 const BOWL_UP_Y = 9;
 
 const SHAKE_CAM_POS = new THREE.Vector3(0, 5.8, 9.4);
 const SHAKE_LOOKAT = new THREE.Vector3(0, 1.4, 0.3);
-const REVEAL_CAM_POS = new THREE.Vector3(0, 6.8, 2.1);
+const REVEAL_CAM_POS = new THREE.Vector3(0, 8.4, 2.5);
 const REVEAL_LOOKAT = new THREE.Vector3(0, 0, 0.1);
 
 /**
@@ -248,9 +248,12 @@ interface DieProps {
   materials: THREE.Material[];
   target: number | null;
   spinToken: number;
+  restX: number;
+  restZ: number;
   reduceMotion: boolean;
 }
 
+/** A fresh random spin/wobble seed each roll. */
 function makeSeed() {
   return {
     yaw: Math.random() * Math.PI * 2,
@@ -259,8 +262,39 @@ function makeSeed() {
   };
 }
 
+const LANDING_RADIUS = 2.5;
+const LANDING_MIN_SEPARATION = 1.25;
+
+function randomPointInCircle(radius: number) {
+  const r = radius * Math.sqrt(Math.random());
+  const theta = Math.random() * Math.PI * 2;
+  return { x: r * Math.cos(theta), z: r * Math.sin(theta) };
+}
+
+/**
+ * Where all three dice land this roll — scattered anywhere within the bowl, not anchored to a
+ * fixed left/center/right slot, so they don't keep landing back in a tidy row. Rejection-samples
+ * for a little breathing room between them without hard-guaranteeing no overlap (real tossed dice
+ * do sometimes end up touching).
+ */
+function randomLandingSpots(): { x: number; z: number }[] {
+  const spots: { x: number; z: number }[] = [];
+  for (let i = 0; i < 3; i += 1) {
+    let candidate = randomPointInCircle(LANDING_RADIUS);
+    for (let attempt = 0; attempt < 30; attempt += 1) {
+      const tooClose = spots.some(
+        (s) => Math.hypot(s.x - candidate.x, s.z - candidate.z) < LANDING_MIN_SEPARATION,
+      );
+      if (!tooClose) break;
+      candidate = randomPointInCircle(LANDING_RADIUS);
+    }
+    spots.push(candidate);
+  }
+  return spots;
+}
+
 /** Rattles in place, then settles into its landed pose — timed to surface as the bowl lifts. */
-function Die({ index, geometry, materials, target, spinToken, reduceMotion }: DieProps) {
+function Die({ index, geometry, materials, target, spinToken, restX, restZ, reduceMotion }: DieProps) {
   const groupRef = useRef<THREE.Group>(null);
   const lastToken = useRef(spinToken);
   const elapsed = useRef(0);
@@ -294,7 +328,7 @@ function Die({ index, geometry, materials, target, spinToken, reduceMotion }: Di
     }
 
     if (reduceMotion) {
-      g.position.set(REST_X[index], REST_Y, 0);
+      g.position.set(restX, REST_Y, restZ);
       g.quaternion.copy(landedQuat.current);
       return;
     }
@@ -313,8 +347,8 @@ function Die({ index, geometry, materials, target, spinToken, reduceMotion }: Di
         seed.current.turns.z * rotationEase * Math.PI * 2,
       );
       g.position.y = REST_Y + SHAKE_BOUNCE * Math.abs(Math.sin(local * Math.PI * 5 + seed.current.jitterPhase));
-      g.position.x = REST_X[index] + Math.sin(local * 24 + seed.current.jitterPhase) * SHAKE_JITTER_XZ;
-      g.position.z = Math.cos(local * 21 + seed.current.jitterPhase) * SHAKE_JITTER_XZ;
+      g.position.x = restX + Math.sin(local * 24 + seed.current.jitterPhase) * SHAKE_JITTER_XZ;
+      g.position.z = restZ + Math.cos(local * 21 + seed.current.jitterPhase) * SHAKE_JITTER_XZ;
     } else {
       if (!phaseBStarted.current) {
         phaseBStarted.current = true;
@@ -324,8 +358,8 @@ function Die({ index, geometry, materials, target, spinToken, reduceMotion }: Di
       const localT = (t - PHASE_A_FRACTION) / (1 - PHASE_A_FRACTION);
       const eased = easeOutCubic(localT);
       g.quaternion.copy(phaseBStartQuat.current).slerp(landedQuat.current, eased);
-      g.position.x = THREE.MathUtils.lerp(phaseBStartPos.current.x, REST_X[index], eased);
-      g.position.z = THREE.MathUtils.lerp(phaseBStartPos.current.z, 0, eased);
+      g.position.x = THREE.MathUtils.lerp(phaseBStartPos.current.x, restX, eased);
+      g.position.z = THREE.MathUtils.lerp(phaseBStartPos.current.z, restZ, eased);
       // Falls and bounces to rest from wherever the rattle happened to leave it, instead of
       // gliding down smoothly — gives the landing some actual weight.
       const fallHeight = Math.max(0, phaseBStartPos.current.y - REST_Y);
@@ -359,6 +393,10 @@ export default function DiceScene({
     const id = window.setTimeout(onSettled, delay);
     return () => window.clearTimeout(id);
   }, [spinToken, reduceMotion, onSettled]);
+
+  // Recomputed once per roll (not per render), so all three dice get a fresh scatter each spin.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const landingSpots = useMemo(() => randomLandingSpots(), [spinToken]);
 
   const geometry = useMemo(() => new RoundedBoxGeometry(DIE_SIZE, DIE_SIZE, DIE_SIZE, 3, 0.14), []);
   const materials = useMemo(
@@ -402,6 +440,8 @@ export default function DiceScene({
             materials={materials}
             spinToken={spinToken}
             target={rollTarget ? rollTarget[i] : null}
+            restX={landingSpots[i].x}
+            restZ={landingSpots[i].z}
             reduceMotion={reduceMotion}
           />
         ))}
