@@ -228,19 +228,13 @@ const Game = () => {
     if (node) node.scrollLeft = node.scrollWidth;
   }, [history]);
 
-  const tally = SYMBOLS.map((_, i) =>
-    history.reduce((sum, r) => sum + r.filter((face) => face === i).length, 0),
-  );
   const winners = roll ? Array.from(new Set(roll)) : [];
   const symbolGlyphs = useMemo(() => SYMBOLS.map((s) => s.glyph), []);
 
-  let kicker = 'Bowl down';
   let call = 'Place your bets.';
   if (phase === 'shaking') {
-    kicker = 'Shaking';
     call = 'Stop when the bets are in.';
   } else if (phase === 'result' && roll) {
-    kicker = `${winners.length} of 6 spots survive`;
     call =
       winners.length === 1
         ? `${SYMBOLS[winners[0]].name} ×3`
@@ -254,7 +248,7 @@ const Game = () => {
           bgcolor: board.ink,
           color: board.cream,
           borderBottom: `4px solid ${colors.pink}`,
-          py: { xs: 5, md: 7 },
+          py: { xs: 3, md: 4 },
         }}
       >
         <Container maxWidth="lg">
@@ -267,7 +261,7 @@ const Game = () => {
               borderRadius: `${RADIUS}px`,
               px: 1.1,
               py: 0.4,
-              mb: 2,
+              mb: 1.25,
             }}
           >
             Fall GM · Sept 17 · Wheeler 130
@@ -277,8 +271,8 @@ const Game = () => {
             component="h1"
             sx={{
               color: board.cream,
-              fontSize: { xs: '2.6rem', md: '3.4rem' },
-              mb: 1.75,
+              fontSize: { xs: '2.1rem', md: '2.6rem' },
+              mb: 1,
             }}
           >
             Six Corners
@@ -303,7 +297,7 @@ const Game = () => {
               gap: 2,
               overflowY: 'auto',
               bgcolor: 'background.default',
-              p: { xs: 2, md: 4 },
+              p: 0,
             }),
           }}
         >
@@ -313,14 +307,14 @@ const Game = () => {
               border: `3px solid ${colors.gold}`,
               borderRadius: `${RADIUS}px`,
               boxShadow: 'inset 0 0 0 5px rgba(247,240,230,0.1)',
-              px: { xs: 2, md: 3 },
-              py: { xs: 2, md: 2.5 },
+              px: { xs: 1, md: 1.5 },
+              py: { xs: 1, md: 1.5 },
             }}
           >
             <Box
               sx={{
                 position: 'relative',
-                height: isFull ? { xs: 380, md: 480 } : { xs: 320, md: 380 },
+                height: isFull ? { xs: 520, md: 640 } : { xs: 440, md: 540 },
                 borderRadius: `${RADIUS}px`,
                 overflow: 'hidden',
               }}
@@ -335,13 +329,7 @@ const Game = () => {
               />
             </Box>
 
-            <Box sx={{ textAlign: 'center', mb: 1, mt: 1, minHeight: 44 }}>
-              <Typography
-                variant="overline"
-                sx={{ color: board.creamDim, letterSpacing: '0.18em', display: 'block' }}
-              >
-                {kicker}
-              </Typography>
+            <Box sx={{ textAlign: 'center', mb: 1, mt: 1 }}>
               <Typography
                 variant="h3"
                 component="p"
@@ -377,86 +365,72 @@ const Game = () => {
                 New game
               </Button>
             </Stack>
-          </Box>
 
-          <Box
-            sx={{
-              mt: 2,
-              display: 'grid',
-              gridTemplateColumns: isFull
-                ? { xs: 'repeat(3, 1fr)', sm: 'repeat(6, 1fr)' }
-                : { xs: 'repeat(2, 1fr)', sm: 'repeat(3, 1fr)' },
-              gap: 1.5,
-            }}
-          >
-            {SYMBOLS.map((symbol, i) => {
-              const matches = roll ? roll.filter((face) => face === i).length : 0;
-              const shown = phase === 'result' && roll !== null;
-              const won = shown && matches > 0;
-              const lost = shown && matches === 0;
-              let verdict = 'Open';
-              if (won) verdict = matches > 1 ? `Safe ×${matches}` : 'Safe';
-              if (lost) verdict = 'Out';
+            <Stack
+              direction="row"
+              spacing={0.75}
+              justifyContent="center"
+              flexWrap="wrap"
+              useFlexGap
+              sx={{ mt: 2 }}
+            >
+              {SYMBOLS.map((symbol, i) => {
+                const matches = roll ? roll.filter((face) => face === i).length : 0;
+                const shown = phase === 'result' && roll !== null;
+                const won = shown && matches > 0;
+                const lost = shown && matches === 0;
+                let verdict = '';
+                if (won) verdict = matches > 1 ? `×${matches}` : 'Safe';
+                if (lost) verdict = 'Out';
 
-              return (
-                <Box
-                  key={symbol.id}
-                  component="button"
-                  type="button"
-                  onClick={() => setSignIndex(i)}
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    gap: 0.25,
-                    p: 1.75,
-                    cursor: 'pointer',
-                    font: 'inherit',
-                    color: 'inherit',
-                    textAlign: 'center',
-                    border: '2px solid',
-                    borderColor: won ? colors.darkPink : 'divider',
-                    borderRadius: `${RADIUS}px`,
-                    bgcolor: won ? colors.lightPink : 'background.paper',
-                    opacity: lost ? 0.5 : 1,
-                    transition: 'border-color 0.2s ease, transform 0.2s ease',
-                    '&:hover': { transform: 'translateY(-2px)', borderColor: colors.gold },
-                  }}
-                >
+                return (
                   <Box
-                    component="span"
-                    sx={{ fontSize: { xs: '2.2rem', md: '2.8rem' }, lineHeight: 1 }}
-                  >
-                    {symbol.glyph}
-                  </Box>
-                  <Typography variant="h5" component="span" sx={{ mt: 0.75 }}>
-                    {symbol.name}
-                  </Typography>
-                  <Box
-                    component="span"
+                    key={symbol.id}
+                    component="button"
+                    type="button"
+                    onClick={() => setSignIndex(i)}
                     sx={{
-                      mt: 1,
-                      px: 1.25,
-                      py: 0.5,
-                      borderRadius: 999,
-                      fontSize: '0.75rem',
-                      fontWeight: 700,
-                      letterSpacing: '0.08em',
-                      textTransform: 'uppercase',
-                      bgcolor: won ? colors.darkPink : 'rgba(44,53,57,0.08)',
-                      color: won ? '#FFFFFF' : 'text.secondary',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      gap: 0.1,
+                      px: 1,
+                      py: 0.6,
+                      minWidth: 52,
+                      cursor: 'pointer',
+                      font: 'inherit',
+                      color: 'inherit',
+                      textAlign: 'center',
+                      border: '1px solid',
+                      borderColor: won ? colors.gold : 'rgba(247,240,230,0.16)',
+                      borderRadius: `${RADIUS}px`,
+                      bgcolor: won ? 'rgba(212,175,55,0.14)' : 'rgba(0,0,0,0.16)',
+                      opacity: lost ? 0.4 : 1,
+                      transition: 'border-color 0.2s ease, transform 0.2s ease',
+                      '&:hover': { transform: 'translateY(-1px)', borderColor: colors.gold },
                     }}
                   >
-                    {verdict}
+                    <Box component="span" sx={{ fontSize: '1.3rem', lineHeight: 1 }}>
+                      {symbol.glyph}
+                    </Box>
+                    <Box
+                      component="span"
+                      sx={{
+                        fontSize: '0.62rem',
+                        fontWeight: 700,
+                        letterSpacing: '0.05em',
+                        textTransform: 'uppercase',
+                        color: won ? colors.gold : board.creamDim,
+                        minHeight: '1em',
+                      }}
+                    >
+                      {verdict}
+                    </Box>
                   </Box>
-                  <Typography variant="caption" color="text.secondary" sx={{ mt: 0.75 }}>
-                    {tally[i]} {tally[i] === 1 ? 'hit' : 'hits'}
-                  </Typography>
-                </Box>
-              );
-            })}
+                );
+              })}
+            </Stack>
           </Box>
-
         </Box>
 
         <Box sx={{ mt: 4 }}>

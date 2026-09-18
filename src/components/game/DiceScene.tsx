@@ -106,6 +106,33 @@ function createGlyphTexture(glyph: string) {
   return texture;
 }
 
+/** A soft lit-from-above vignette for the tray, so it reads as a pool of light rather than a flat disc. */
+function createFeltTexture() {
+  const size = 512;
+  const canvas = document.createElement('canvas');
+  canvas.width = size;
+  canvas.height = size;
+  const ctx = canvas.getContext('2d');
+  if (ctx) {
+    const gradient = ctx.createRadialGradient(
+      size / 2,
+      size / 2,
+      size * 0.08,
+      size / 2,
+      size / 2,
+      size * 0.62,
+    );
+    gradient.addColorStop(0, '#FFFDF8');
+    gradient.addColorStop(0.55, '#F3E9D8');
+    gradient.addColorStop(1, '#D8C6A6');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, size, size);
+  }
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  return texture;
+}
+
 function CameraRig({ revealed, reduceMotion }: { revealed: boolean; reduceMotion: boolean }) {
   const { camera } = useThree();
   const lookAt = useRef(SHAKE_LOOKAT.clone());
@@ -131,18 +158,19 @@ function CameraRig({ revealed, reduceMotion }: { revealed: boolean; reduceMotion
 }
 
 function Table() {
+  const feltMap = useMemo(() => createFeltTexture(), []);
   return (
     <group>
       <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
         <circleGeometry args={[TABLE_RADIUS, 64]} />
-        <meshStandardMaterial color={colors.paper} roughness={0.92} metalness={0} />
+        <meshStandardMaterial map={feltMap} roughness={0.9} metalness={0} />
       </mesh>
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.002, 0]}>
-        <ringGeometry args={[TABLE_RADIUS - 0.1, TABLE_RADIUS + 0.1, 64]} />
+        <ringGeometry args={[TABLE_RADIUS - 0.12, TABLE_RADIUS + 0.06, 64]} />
         <meshStandardMaterial
           color={colors.gold}
-          roughness={0.35}
-          metalness={0.6}
+          roughness={0.3}
+          metalness={0.7}
           side={THREE.DoubleSide}
         />
       </mesh>
@@ -227,16 +255,18 @@ function Bowl({ rattling, reduceMotion }: { rattling: boolean; reduceMotion: boo
     <group ref={ref} position={[0, BOWL_DOWN_Y, 0]}>
       <mesh castShadow>
         <sphereGeometry args={[BOWL_RADIUS, 48, 32, 0, Math.PI * 2, 0, Math.PI / 2]} />
-        <meshStandardMaterial
+        <meshPhysicalMaterial
           color={colors.paper}
-          roughness={0.45}
-          metalness={0.05}
+          roughness={0.4}
+          metalness={0.04}
+          clearcoat={0.6}
+          clearcoatRoughness={0.25}
           side={THREE.DoubleSide}
         />
       </mesh>
       <mesh rotation={[Math.PI / 2, 0, 0]}>
         <torusGeometry args={[BOWL_RADIUS, 0.07, 16, 48]} />
-        <meshStandardMaterial color={colors.gold} roughness={0.3} metalness={0.6} />
+        <meshStandardMaterial color={colors.gold} roughness={0.25} metalness={0.75} />
       </mesh>
     </group>
   );
@@ -418,17 +448,20 @@ export default function DiceScene({
       shadows
       dpr={[1, 2]}
       camera={{ position: SHAKE_CAM_POS.toArray(), fov: 40, near: 0.1, far: 40 }}
-      gl={{ antialias: true }}
+      gl={{ antialias: true, toneMappingExposure: 1.1 }}
     >
       <color attach="background" args={[colors.bayNavy]} />
+      <fog attach="fog" args={[colors.bayNavy, 10, 23]} />
       <ambientLight intensity={0.7} />
       <directionalLight
         position={[3, 6, 4]}
         intensity={1.7}
         castShadow
         shadow-mapSize={[1024, 1024]}
+        shadow-radius={4}
       />
       <directionalLight position={[-4, 3, -2]} intensity={0.4} color={colors.gold} />
+      <pointLight position={[0, 4.5, 3]} intensity={0.35} color={colors.pink} distance={12} />
       <CameraRig revealed={phase === 'result'} reduceMotion={reduceMotion} />
       <ShakeRig rattling={rattling} reduceMotion={reduceMotion}>
         <Table />
