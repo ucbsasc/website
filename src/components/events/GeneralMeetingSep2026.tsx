@@ -97,9 +97,6 @@ const GeneralMeetingSep2026 = () => {
         <Button variant="outlined" color="primary" href="/lead">
           Lead with SASC
         </Button>
-        <Button variant="outlined" color="primary" href="/game">
-          Game rules
-        </Button>
       </Stack>
     </EventCard>
   );

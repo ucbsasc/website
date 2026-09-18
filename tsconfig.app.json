@@ -23,7 +23,5 @@
 
     "incremental": true
   },
-  "include": ["src"],
-  "exclude": ["src/components/game"],
-  "references": [{ "path": "./tsconfig.game.json" }]
+  "include": ["src"]
 }
