@@ -14,9 +14,9 @@ const calendarHref =
 const GeneralMeetingSep2026 = () => {
   return (
     <EventCard
-      statusLabel="UPCOMING"
-      statusBgColor="primary.main"
-      borderColor="primary.main"
+      statusLabel="PAST EVENT"
+      statusBgColor="text.disabled"
+      borderColor="divider"
       minMediaHeight={500}
       maxMediaHeight={600}
       image={{
