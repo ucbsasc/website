@@ -79,7 +79,7 @@ export const leadership: LeadershipMember[] = [
         role: 'PR Officer',
         committee: 'PR',
         email: 'adonisnsom@berkeley.edu',
-        image: '/officers/adonissom.avif',
+        image: '/officers/adonis.jpg',
         type: 'officer',
     },
     {
