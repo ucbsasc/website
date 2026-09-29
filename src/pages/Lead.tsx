@@ -128,7 +128,7 @@ const Lead = () => {
           <Grid item xs={12} md={5}>
             <Box
               component="img"
-              src="/fall26sascomm.webp"
+              src="/updatedleadershipflyer.webp"
               alt="Fall 2026 recruiting flyer: the Southeast Asian Student Coalition is recruiting for SASCommittee. Plan programs, work with SEA students, build community."
               width={1000}
               height={1250}
