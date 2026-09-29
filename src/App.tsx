@@ -4,7 +4,7 @@ import { lazy, Suspense, useEffect } from 'react';
 import theme from './theme/theme';
 import Navbar from './components/Navbar';
 
-const Home = lazy(() => import('./pages/Home'));
+const Home = lazy(() => import('./pages/Home));
 const About = lazy(() => import('./pages/About'));
 const Partners = lazy(() => import('./pages/Partners'));
 const Events = lazy(() => import('./pages/Events'));
