@@ -42,8 +42,8 @@ const Navbar = () => {
         color="default"
         elevation={0}
         sx={{
-          backgroundColor: 'rgba(247, 240, 230, 0.96)',
-          borderBottom: `2px solid ${colors.charcoal}`,
+          backgroundColor: colors.berkeleyBlue,
+          borderBottom: `3px solid ${colors.calGold}`,
         }}
       >
         <Container maxWidth="lg">
@@ -89,7 +89,7 @@ const Navbar = () => {
                     fontWeight: 700,
                     fontSize: '26px',
                     letterSpacing: '-0.03em',
-                    color: colors.charcoal,
+                    color: '#fff',
                     lineHeight: 1,
                     display: 'block',
                   }}
@@ -102,7 +102,7 @@ const Navbar = () => {
                     display: { xs: 'none', sm: 'block' },
                     fontFamily: '"DM Sans", sans-serif',
                     fontSize: '10px',
-                    color: colors.calBlue,
+                    color: colors.calGold,
                     fontWeight: 700,
                     letterSpacing: '0.06em',
                     textTransform: 'uppercase',
@@ -115,7 +115,11 @@ const Navbar = () => {
             </Box>
 
             {isMobile ? (
-              <IconButton sx={{ ml: 'auto' }} onClick={handleDrawerToggle} aria-label="Open menu">
+              <IconButton
+                sx={{ ml: 'auto', color: '#fff' }}
+                onClick={handleDrawerToggle}
+                aria-label="Open menu"
+              >
                 <MenuIcon />
               </IconButton>
             ) : (
@@ -128,11 +132,11 @@ const Navbar = () => {
                       target="_blank"
                       rel="noopener"
                       sx={{
-                        color: 'text.secondary',
+                        color: 'rgba(255,255,255,0.75)',
                         fontWeight: 600,
                         px: 1.35,
                         minWidth: 0,
-                        '&:hover': { color: 'text.primary', bgcolor: 'transparent' },
+                        '&:hover': { color: colors.calGold, bgcolor: 'transparent' },
                       }}
                     >
                       {item.text}
@@ -143,15 +147,15 @@ const Navbar = () => {
                       component={Link}
                       to={item.path}
                       sx={{
-                        color: isActive(item.path) ? 'text.primary' : 'text.secondary',
+                        color: isActive(item.path) ? colors.calGold : 'rgba(255,255,255,0.75)',
                         fontWeight: 600,
                         px: 1.35,
                         minWidth: 0,
-                        bgcolor: isActive(item.path) ? colors.lightPink : 'transparent',
+                        bgcolor: isActive(item.path) ? 'rgba(253, 181, 21, 0.16)' : 'transparent',
                         borderRadius: 1,
                         '&:hover': {
-                          color: 'text.primary',
-                          bgcolor: colors.lightPink,
+                          color: colors.calGold,
+                          bgcolor: 'rgba(253, 181, 21, 0.16)',
                         },
                       }}
                     >
@@ -173,16 +177,16 @@ const Navbar = () => {
         PaperProps={{
           sx: {
             width: 280,
-            bgcolor: colors.cream,
-            borderLeft: `2px solid ${colors.charcoal}`,
+            bgcolor: colors.berkeleyBlue,
+            borderLeft: `3px solid ${colors.calGold}`,
           },
         }}
       >
-        <Box sx={{ px: 2.5, py: 2.5, borderBottom: `2px solid ${colors.charcoal}` }}>
-          <Typography sx={{ fontFamily: '"Fraunces", serif', fontWeight: 700, fontSize: '1.5rem' }}>
+        <Box sx={{ px: 2.5, py: 2.5, borderBottom: `2px solid rgba(255,255,255,0.18)` }}>
+          <Typography sx={{ fontFamily: '"Fraunces", serif', fontWeight: 700, fontSize: '1.5rem', color: '#fff' }}>
             SASC
           </Typography>
-          <Typography variant="body2" sx={{ color: colors.calBlue, fontWeight: 700, letterSpacing: '0.06em' }}>
+          <Typography variant="body2" sx={{ color: colors.calGold, fontWeight: 700, letterSpacing: '0.06em' }}>
             UC BERKELEY
           </Typography>
         </Box>
@@ -198,7 +202,8 @@ const Navbar = () => {
                 px: 3,
                 py: 1.25,
                 fontWeight: 600,
-                bgcolor: location.pathname === '/' ? colors.lightPink : 'transparent',
+                color: location.pathname === '/' ? colors.calGold : 'rgba(255,255,255,0.85)',
+                bgcolor: location.pathname === '/' ? 'rgba(253, 181, 21, 0.16)' : 'transparent',
               }}
             >
               Home
@@ -212,7 +217,14 @@ const Navbar = () => {
                   target="_blank"
                   rel="noopener"
                   onClick={handleDrawerToggle}
-                  sx={{ width: '100%', justifyContent: 'flex-start', px: 3, py: 1.25, fontWeight: 600 }}
+                  sx={{
+                    width: '100%',
+                    justifyContent: 'flex-start',
+                    px: 3,
+                    py: 1.25,
+                    fontWeight: 600,
+                    color: 'rgba(255,255,255,0.85)',
+                  }}
                 >
                   {item.text}
                 </Button>
@@ -227,7 +239,8 @@ const Navbar = () => {
                     px: 3,
                     py: 1.25,
                     fontWeight: 600,
-                    bgcolor: isActive(item.path) ? colors.lightPink : 'transparent',
+                    color: isActive(item.path) ? colors.calGold : 'rgba(255,255,255,0.85)',
+                    bgcolor: isActive(item.path) ? 'rgba(253, 181, 21, 0.16)' : 'transparent',
                   }}
                 >
                   {item.text}

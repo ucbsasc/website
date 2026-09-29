@@ -7,14 +7,14 @@ const sans = '"DM Sans", "Helvetica Neue", Helvetica, Arial, sans-serif';
 let theme = createTheme({
   palette: {
     primary: {
-      main: colors.pink,
-      light: colors.lightPink,
-      dark: colors.darkPink,
+      main: colors.berkeleyBlue,
+      light: colors.foundersRock,
+      dark: colors.darkBlue,
     },
     secondary: {
-      main: colors.gold,
+      main: colors.calGold,
       light: colors.lightGold,
-      dark: '#B38F2D',
+      dark: colors.medalist,
     },
     background: {
       default: colors.cream,
@@ -22,13 +22,13 @@ let theme = createTheme({
     },
     text: {
       primary: colors.charcoal,
-      secondary: '#5C6368',
+      secondary: '#4A6072',
     },
-    divider: 'rgba(44, 53, 57, 0.14)',
+    divider: 'rgba(0, 50, 98, 0.18)',
     info: {
-      main: colors.bayNavy,
-      light: '#3A4A56',
-      dark: '#141C24',
+      main: colors.foundersRock,
+      light: '#5D9BBC',
+      dark: colors.darkBlue,
       contrastText: '#FFFFFF',
     },
   },
@@ -110,7 +110,7 @@ let theme = createTheme({
           backgroundColor: colors.cream,
           color: colors.charcoal,
           backgroundImage: `
-            radial-gradient(rgba(44, 53, 57, 0.035) 0.7px, transparent 0.7px)
+            radial-gradient(rgba(0, 50, 98, 0.06) 0.8px, transparent 0.8px)
           `,
           backgroundSize: '7px 7px',
         },
@@ -118,7 +118,7 @@ let theme = createTheme({
           color: 'inherit',
         },
         '::selection': {
-          backgroundColor: colors.lightPink,
+          backgroundColor: colors.lightGold,
           color: colors.charcoal,
         },
         'img, video, iframe, canvas': {
@@ -129,7 +129,7 @@ let theme = createTheme({
     MuiAppBar: {
       styleOverrides: {
         root: {
-          backgroundColor: 'rgba(247, 240, 230, 0.94)',
+          backgroundColor: colors.berkeleyBlue,
           boxShadow: 'none',
         },
       },
@@ -151,20 +151,20 @@ let theme = createTheme({
           },
         },
         containedPrimary: {
-          backgroundColor: colors.darkPink,
+          backgroundColor: colors.berkeleyBlue,
           color: '#fff',
           '&:hover': {
-            backgroundColor: '#D44E6C',
+            backgroundColor: colors.foundersRock,
           },
         },
         outlined: {
           borderWidth: 1.5,
-          borderColor: colors.charcoal,
-          color: colors.charcoal,
+          borderColor: colors.berkeleyBlue,
+          color: colors.berkeleyBlue,
           '&:hover': {
             borderWidth: 1.5,
-            borderColor: colors.charcoal,
-            backgroundColor: 'rgba(44, 53, 57, 0.05)',
+            borderColor: colors.berkeleyBlue,
+            backgroundColor: 'rgba(0, 50, 98, 0.06)',
           },
         },
         sizeLarge: {
@@ -177,8 +177,8 @@ let theme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: RADIUS,
-          boxShadow: '3px 3px 0 rgba(44, 53, 57, 0.12)',
-          border: `1.5px solid ${colors.charcoal}`,
+          boxShadow: '3px 3px 0 rgba(0, 50, 98, 0.22)',
+          border: `1.5px solid ${colors.berkeleyBlue}`,
           backgroundImage: 'none',
           backgroundColor: colors.paper,
         },
@@ -192,11 +192,11 @@ let theme = createTheme({
         },
         elevation1: {
           boxShadow: 'none',
-          border: `1.5px solid rgba(44, 53, 57, 0.18)`,
+          border: `1.5px solid rgba(0, 50, 98, 0.28)`,
         },
         elevation2: {
-          boxShadow: '2px 2px 0 rgba(44, 53, 57, 0.1)',
-          border: `1.5px solid rgba(44, 53, 57, 0.2)`,
+          boxShadow: '2px 2px 0 rgba(0, 50, 98, 0.16)',
+          border: `1.5px solid rgba(0, 50, 98, 0.3)`,
         },
       },
     },
@@ -205,7 +205,7 @@ let theme = createTheme({
         root: {
           borderRadius: RADIUS,
           fontWeight: 600,
-          border: `1px solid ${colors.charcoal}`,
+          border: `1px solid ${colors.berkeleyBlue}`,
         },
       },
     },

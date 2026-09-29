@@ -31,7 +31,7 @@ const PageHeader = ({
         py: compact ? { xs: 7, md: 9 } : { xs: 8, md: 11 },
         mb: { xs: 5, md: 7 },
         overflow: 'hidden',
-        borderBottom: `4px solid ${colors.pink}`,
+        borderBottom: `4px solid ${colors.berkeleyBlue}`,
         '&::before': {
           content: '""',
           position: 'absolute',
@@ -48,10 +48,10 @@ const PageHeader = ({
           inset: 0,
           background: lightOverlay
             ? {
-                xs: 'rgba(20,18,16,0.6)',
-                md: 'linear-gradient(100deg, rgba(20,18,16,0.8) 0%, rgba(20,18,16,0.5) 45%, rgba(20,18,16,0.1) 100%)',
+                xs: 'rgba(0,19,38,0.62)',
+                md: 'linear-gradient(100deg, rgba(0,19,38,0.82) 0%, rgba(0,50,98,0.5) 45%, rgba(0,50,98,0.12) 100%)',
               }
-            : `linear-gradient(115deg, rgba(20,18,16,0.88) 0%, rgba(30,43,54,0.72) 55%, rgba(0,50,98,0.45) 100%)`,
+            : `linear-gradient(115deg, rgba(0,19,38,0.9) 0%, rgba(0,50,98,0.76) 55%, rgba(59,126,161,0.5) 100%)`,
           zIndex: 1,
         },
       }}
@@ -60,9 +60,9 @@ const PageHeader = ({
         <Typography
           variant="overline"
           sx={{
-            color: colors.gold,
+            color: colors.calGold,
             display: 'inline-block',
-            border: `1.5px solid ${colors.gold}`,
+            border: `1.5px solid ${colors.calGold}`,
             borderRadius: `${RADIUS}px`,
             px: 1.1,
             py: 0.4,

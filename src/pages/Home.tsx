@@ -31,18 +31,18 @@ const HeroSection = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   overflow: 'hidden',
-  backgroundColor: colors.charcoal,
+  backgroundColor: colors.darkBlue,
   '&::after': {
     content: '""',
     position: 'absolute',
     inset: 0,
     background:
-      'linear-gradient(105deg, rgba(20,18,16,0.82) 0%, rgba(20,18,16,0.55) 45%, rgba(20,18,16,0.35) 100%)',
+      'linear-gradient(105deg, rgba(0,19,38,0.85) 0%, rgba(0,50,98,0.6) 45%, rgba(0,50,98,0.4) 100%)',
     zIndex: 1,
     pointerEvents: 'none',
     [theme.breakpoints.down('md')]: {
       background:
-        'linear-gradient(180deg, rgba(20,18,16,0.5) 0%, rgba(20,18,16,0.38) 40%, rgba(20,18,16,0.86) 74%, rgba(20,18,16,0.95) 100%)',
+        'linear-gradient(180deg, rgba(0,50,98,0.55) 0%, rgba(0,50,98,0.42) 40%, rgba(0,19,38,0.88) 74%, rgba(0,19,38,0.96) 100%)',
     },
   },
 }));
@@ -287,9 +287,9 @@ const Home = () => {
             <Typography
               variant="overline"
               sx={{
-                color: colors.gold,
+                color: colors.calGold,
                 display: 'inline-block',
-                border: `1.5px solid ${colors.gold}`,
+                border: `1.5px solid ${colors.calGold}`,
                 borderRadius: `${RADIUS}px`,
                 px: 1.25,
                 py: 0.5,
@@ -351,12 +351,12 @@ const Home = () => {
                   mb: 3,
                   p: 2,
                   maxWidth: 400,
-                  border: `1.5px solid ${colors.gold}`,
+                  border: `1.5px solid ${colors.calGold}`,
                   borderRadius: `${RADIUS}px`,
                   bgcolor: 'rgba(0,0,0,0.4)',
                 }}
               >
-                <Typography variant="overline" sx={{ color: colors.gold }}>
+                <Typography variant="overline" sx={{ color: colors.calGold }}>
                   Next up
                 </Typography>
                 <Typography sx={{ color: 'white', fontFamily: '"Fraunces", serif', fontWeight: 600, fontSize: '1.2rem' }}>
@@ -477,9 +477,9 @@ const Home = () => {
                     mx: { xs: 'auto', md: undefined },
                     pt: '108%',
                     overflow: 'hidden',
-                    border: `2px solid ${colors.charcoal}`,
+                    border: `2px solid ${colors.berkeleyBlue}`,
                     borderRadius: `${RADIUS}px`,
-                    boxShadow: `6px 6px 0 ${colors.pink}`,
+                    boxShadow: `6px 6px 0 ${colors.calGold}`,
                     bgcolor: 'background.paper',
                     transform: {
                       xs: 'none',
@@ -526,7 +526,7 @@ const Home = () => {
                 <Card
                   sx={{
                     height: '100%',
-                    boxShadow: i % 2 === 0 ? `5px 5px 0 ${colors.gold}` : `5px 5px 0 ${colors.pink}`,
+                    boxShadow: i % 2 === 0 ? `5px 5px 0 ${colors.calGold}` : `5px 5px 0 ${colors.berkeleyBlue}`,
                   }}
                 >
                   <CardContent sx={{ p: { xs: 2.5, md: 3 } }}>
@@ -546,10 +546,10 @@ const Home = () => {
 
       <Box
         sx={{
-          bgcolor: colors.charcoal,
+          bgcolor: colors.berkeleyBlue,
           color: 'white',
           py: { xs: 8, md: 10 },
-          borderTop: `4px solid ${colors.pink}`,
+          borderTop: `4px solid ${colors.calGold}`,
         }}
       >
         <Container sx={{ textAlign: { xs: 'left', md: 'center' } }}>

@@ -429,7 +429,7 @@ const Lead = () => {
       </Container>
 
       <Container sx={{ mb: 8 }}>
-        <Card sx={{ p: { xs: 3, md: 5 }, backgroundColor: 'rgba(33, 150, 243, 0.08)' }}>
+        <Card sx={{ p: { xs: 3, md: 5 }, backgroundColor: 'rgba(0, 50, 98, 0.06)' }}>
           <Stack spacing={2}>
             <Typography variant="h5" sx={{ fontWeight: 600 }}>
               Questions

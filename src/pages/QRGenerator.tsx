@@ -57,11 +57,11 @@ const QRGenerator = () => {
 
     const colorOptions = [
         {
-            label: 'Primary Pink',
+            label: 'Berkeley Blue',
             value: theme.palette.primary.main,
         },
         {
-            label: 'Secondary Gold',
+            label: 'California Gold',
             value: theme.palette.secondary.main,
         },
         {

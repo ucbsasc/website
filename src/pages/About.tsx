@@ -15,11 +15,11 @@ import { usePageTitle } from '../hooks/usePageTitle';
 import { colors, RADIUS } from '../theme/colors';
 
 const committeeAccent: Record<LeadershipCommittee, string> = {
-  Internal: colors.gold,
-  External: colors.darkPink,
+  Internal: colors.calGold,
+  External: colors.berkeleyBlue,
   Operations: colors.bayNavy,
-  PR: colors.pink,
-  Advocacy: colors.calBlue,
+  PR: colors.medalist,
+  Advocacy: colors.foundersRock,
 };
 
 type TeamSection = {
@@ -169,7 +169,7 @@ const About = () => {
                       flexShrink: 0,
                       width: { sm: 88 },
                       fontWeight: 700,
-                      color: i % 2 === 0 ? colors.darkPink : 'primary.dark',
+                      color: i % 2 === 0 ? colors.medalist : 'primary.dark',
                       letterSpacing: '0.08em',
                     }}
                   >
@@ -191,9 +191,9 @@ const About = () => {
           <Grid item xs={12} md={5}>
             <Box
               sx={{
-                border: `2px solid ${colors.charcoal}`,
+                border: `2px solid ${colors.berkeleyBlue}`,
                 borderRadius: `${RADIUS}px`,
-                boxShadow: `5px 5px 0 ${colors.pink}`,
+                boxShadow: `5px 5px 0 ${colors.calGold}`,
                 overflow: 'hidden',
                 bgcolor: 'background.paper',
                 position: { md: 'sticky' },
@@ -324,10 +324,10 @@ const About = () => {
 
       <Box
         sx={{
-          bgcolor: colors.charcoal,
+          bgcolor: colors.berkeleyBlue,
           color: 'white',
           py: { xs: 7, md: 9 },
-          borderTop: `4px solid ${colors.pink}`,
+          borderTop: `4px solid ${colors.calGold}`,
         }}
       >
         <Container sx={{ textAlign: { xs: 'left', md: 'center' } }}>

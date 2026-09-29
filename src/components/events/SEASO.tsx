@@ -2,6 +2,7 @@ import { Accordion, AccordionDetails, AccordionSummary, Button, Link, Stack, Typ
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import EventCard from './EventCard';
+import { colors } from '../../theme/colors';
 
 const volunteerHref =
   'https://docs.google.com/forms/d/e/1FAIpQLSeWoyN973oVwosgE5Sq15u9V8bCUttuo9gyXe6brqs_AQxRrQ/viewform';
@@ -22,7 +23,7 @@ const SEASO = () => {
       image={{
         src: '/seaso26.webp',
         alt: 'SEASO 2026 flyer: Southeast Asian Student Orientation on September 3 at the Tilden Room',
-        sx: { objectFit: 'contain', objectPosition: 'center', bgcolor: '#F4B6C8' },
+        sx: { objectFit: 'contain', objectPosition: 'center', bgcolor: colors.paleBlue },
       }}
     >
       <Stack

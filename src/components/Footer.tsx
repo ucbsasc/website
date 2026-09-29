@@ -17,11 +17,11 @@ const Footer = () => {
     <Box
       component="footer"
       sx={{
-        bgcolor: colors.charcoal,
+        bgcolor: colors.berkeleyBlue,
         color: 'white',
         py: { xs: 5, md: 7 },
         mt: 'auto',
-        borderTop: `4px solid ${colors.gold}`,
+        borderTop: `4px solid ${colors.calGold}`,
       }}
     >
       <Container maxWidth="lg">
@@ -40,7 +40,7 @@ const Footer = () => {
             </Typography>
             <Typography
               variant="overline"
-              sx={{ color: colors.gold, display: 'block', mb: 1.5, letterSpacing: '0.1em' }}
+              sx={{ color: colors.calGold, display: 'block', mb: 1.5, letterSpacing: '0.1em' }}
             >
               UC Berkeley · Est. 2000
             </Typography>
@@ -81,7 +81,7 @@ const Footer = () => {
             <MuiLink
               href="mailto:UCB.SASC@gmail.com"
               underline="hover"
-              sx={{ color: colors.pink, fontSize: '0.95rem', fontWeight: 600 }}
+              sx={{ color: colors.foundersRock, fontSize: '0.95rem', fontWeight: 600 }}
             >
               UCB.SASC@gmail.com
             </MuiLink>
