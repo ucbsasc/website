@@ -85,7 +85,7 @@ const Lead = () => {
           }}
         >
           We&apos;re recruiting for all four branches this fall: Internal, External, Ops, and PR. We read
-          applications as they come in, so earlier is better. Due Friday, Sept. 25 at 11:59 p.m.
+          applications as they come in, so earlier is better. Due Friday, Oct. 2 at 11:59 p.m.
         </Typography>
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mt: 4 }}>
           <Button

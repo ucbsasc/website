@@ -20,7 +20,7 @@ const LeadInviteModal = ({ open, onClose }: LeadInviteModalProps) => {
       <DialogTitle>Lead with SASC · Fall 2026</DialogTitle>
       <DialogContent dividers>
         <Typography variant="body1" sx={{ mb: 2 }}>
-          SASComm is recruiting for Internal, External, Ops, and PR. Applications close Friday, Sept. 25 at
+          SASComm is recruiting for Internal, External, Ops, and PR. Applications close Friday, Oct. 2 at
           11:59 p.m., and we read them as they come in, so earlier is better.
         </Typography>
         <Typography variant="body2" color="text.secondary">
