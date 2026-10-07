@@ -55,7 +55,7 @@ export const leadership: LeadershipMember[] = [
         role: 'Operations Director',
         committee: 'Operations',
         email: 'tylerhtut7@berkeley.edu',
-        image: '/officers/tyler.webp',
+        image: '/officers/tyler.jpeg',
         type: 'director',
     },
     {
