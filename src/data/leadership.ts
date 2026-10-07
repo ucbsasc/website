@@ -23,7 +23,7 @@ export const leadership: LeadershipMember[] = [
         role: 'External Director',
         committee: 'External',
         email: 'lialenguyen@berkeley.edu',
-        image: '/officers/lialenguyen.webp',
+        image: '/officers/lia.png',
         type: 'director',
     },
     {
