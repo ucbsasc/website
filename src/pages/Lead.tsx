@@ -32,7 +32,6 @@ import {
 import { directors as leadershipDirectors } from '../data/leadership';
 import { usePageTitle } from '../hooks/usePageTitle';
 
-const applicationUrl = 'https://forms.gle/2vkFbNL3s8DxbCvi9';
 const positionsUrl =
   'https://docs.google.com/document/d/1A-lNUm6g9DHF4C2DvHATFUrNFskGwxCy-GiSm9pe7YI/edit?usp=sharing';
 
@@ -84,25 +83,10 @@ const Lead = () => {
             textShadow: '0 1px 10px rgba(0,0,0,0.45)',
           }}
         >
-          We&apos;re recruiting for all four branches this fall: Internal, External, Ops, and PR. We read
-          applications as they come in, so earlier is better. Due Friday, Oct. 2 at 11:59 p.m.
+          Fall 2026 applications for Internal, External, Ops, and PR closed on Friday, Oct. 2. Look
+          through the branches below, and follow @ucbsasc to hear when we recruit next.
         </Typography>
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mt: 4 }}>
-          <Button
-            variant="contained"
-            color="inherit"
-            size="large"
-            href={applicationUrl}
-            target="_blank"
-            rel="noopener"
-            sx={{
-              color: 'primary.main',
-              bgcolor: 'white',
-              '&:hover': { bgcolor: 'rgba(255, 255, 255, 0.9)' },
-            }}
-          >
-            Apply now
-          </Button>
           <Button
             variant="outlined"
             color="inherit"
@@ -148,8 +132,8 @@ const Lead = () => {
               Fall 2026 recruiting
             </Typography>
             <Typography variant="body1" color="text.secondary" sx={{ mb: 3, maxWidth: 560 }}>
-              Applications are open for every branch. We read them as they come in and reach out to schedule
-              interviews, so applying early helps. Not sure yet? Come to the info session and ask us anything.
+              Applications for every branch have closed, and we&apos;re reaching out to schedule interviews.
+              Interested in leading later? Email a director or DM us and ask anything.
             </Typography>
             <Box
               component="dl"
@@ -178,10 +162,7 @@ const Lead = () => {
               ))}
             </Box>
             <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5}>
-              <Button variant="contained" color="primary" href={applicationUrl} target="_blank" rel="noopener">
-                Apply now
-              </Button>
-              <Button variant="outlined" color="primary" href={positionsUrl} target="_blank" rel="noopener">
+              <Button variant="contained" color="primary" href={positionsUrl} target="_blank" rel="noopener">
                 Read the position descriptions
               </Button>
             </Stack>
@@ -285,7 +266,7 @@ const Lead = () => {
           Ways to Lead
         </Typography>
         <Typography variant="body1" color="text.secondary" sx={{ mb: 4, maxWidth: 760 }}>
-          All four branches are recruiting for Fall 2026. Most weeks are about 5 hours: branch meeting, SASComm,
+          All four branches recruited for Fall 2026. Most weeks are about 5 hours: branch meeting, SASComm,
           and prep. Big events take more. Email a director if you want details on a specific branch.
         </Typography>
         <Grid container spacing={4}>
@@ -394,18 +375,8 @@ const Lead = () => {
           >
             position descriptions
           </Button>{' '}
-          to see what each role does, then{' '}
-          <Button
-            variant="text"
-            color="primary"
-            href={applicationUrl}
-            target="_blank"
-            rel="noopener"
-            sx={{ p: 0, minWidth: 0, textTransform: 'none', fontWeight: 600 }}
-          >
-            apply here
-          </Button>
-          .
+          to see what each role does. Applications are closed for now; this is how the process worked
+          for Fall 2026.
         </Typography>
         <Grid container spacing={3}>
           {leadApplicationSteps.map((step) => (
@@ -435,21 +406,12 @@ const Lead = () => {
               Questions
             </Typography>
             <Typography variant="body1" color="text.secondary">
-              Not sure which branch fits, or how much time it takes? Come to the info session at our GM on Sept. 17,
-              DM @ucbsasc, or email one of the directors listed above.
+              Curious about leading next time, or how much time it takes? DM @ucbsasc or email one of the
+              directors listed above.
             </Typography>
             <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ pt: 1 }}>
               <Button
                 variant="contained"
-                color="primary"
-                href={applicationUrl}
-                target="_blank"
-                rel="noopener"
-              >
-                Apply now
-              </Button>
-              <Button
-                variant="outlined"
                 color="primary"
                 href="https://www.instagram.com/ucbsasc"
                 target="_blank"

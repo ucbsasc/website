@@ -338,8 +338,8 @@ const About = () => {
             variant="body1"
             sx={{ mb: 4, color: 'rgba(255,255,255,0.75)', maxWidth: 560, mx: { md: 'auto' } }}
           >
-            Fall 2026 lead applications are open until Friday, Sept. 25. Come to our GM on Sept. 17 for the info
-            session, read through the Lead page, or email{' '}
+            Fall 2026 lead applications have closed. Read through the Lead page to see what the branches do, or
+            email{' '}
             <Box component="strong" sx={{ color: 'white' }}>
               UCB.SASC@gmail.com
             </Box>

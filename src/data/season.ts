@@ -19,6 +19,6 @@ export const siteSeason: {
   /** Set when the next GM / public event is confirmed */
   nextEvent: NextEvent | null;
 } = {
-  mode: 'recruitment',
+  mode: 'quiet',
   nextEvent: null,
 };
