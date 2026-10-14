@@ -118,16 +118,15 @@ export const leadApplicationSteps: Array<{
     icon: 'event',
   },
   {
-    title: 'Apply by Oct. 2',
-    detail: 'The form closes Friday, Oct. 2 at 11:59 p.m. Email a director if you want to know more about hours or workload.',
+    title: 'Applications closed Oct. 2',
+    detail: 'The Fall 2026 form closed Friday, Oct. 2. Email a director if you want to know more about hours or workload before next cycle.',
     icon: 'volunteer',
   },
 ];
 
 export const leadRecruitingFacts: Array<{ label: string; value: string }> = [
-  { label: 'Applications close', value: 'Friday, Oct. 2 at 11:59 p.m.' },
-  { label: 'Info session', value: 'Thursday, Sept. 17, 8–9 PM in Wheeler 130 (room corrected from 120), at our GM' },
-  { label: 'Open branches', value: 'Internal, External, Ops, and PR' },
+  { label: 'Applications', value: 'Closed Friday, Oct. 2' },
+  { label: 'Branches', value: 'Internal, External, Ops, and PR' },
   { label: 'Time', value: 'About 5 hours a week, more around big events' },
-  { label: 'After you apply', value: 'Interviews on a rolling basis' },
+  { label: 'Next cycle', value: 'Follow @ucbsasc or join the mailing list to hear when applications reopen' },
 ];
