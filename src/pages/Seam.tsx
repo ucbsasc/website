@@ -98,8 +98,8 @@ const Seam = () => {
       <PageHeader
         title="Southeast Asian Mentorship"
         subtitle="Berkeley students mentoring Southeast Asian high schoolers. Run by SASC since 2007."
-        image="/seam-traditional.webp"
-        imagePosition="center 35%"
+        image="/seam-group.webp"
+        imagePosition="center 62%"
         lightOverlay
       >
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
@@ -140,16 +140,16 @@ const Seam = () => {
           <Grid item xs={12} md={5}>
             <Box
               component="img"
-              src="/partners/seam.jpg"
+              src="/seam-logo.png"
               alt="SEAM logo: the word Seam in green script above two hands holding a pink lotus"
+              width={800}
+              height={800}
               sx={{
-                ...framedImage,
                 display: 'block',
                 width: '100%',
-                maxWidth: 340,
+                maxWidth: 360,
                 height: 'auto',
                 mx: 'auto',
-                bgcolor: 'white',
               }}
             />
           </Grid>
