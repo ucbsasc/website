@@ -13,77 +13,58 @@ const mission =
 
 const steps = [
   {
-    title: 'Apply',
-    when: 'Before the program starts',
-    body: 'Berkeley students apply to be mentors and high schoolers apply to be mentees. Each mentor is paired with a mentee.',
+    title: 'Applications',
+    when: 'Spring',
+    body: 'Berkeley students apply to be mentors and high school students apply to be mentees. We pair each mentee with a mentor before the workshops start.',
   },
   {
-    title: 'Virtual workshops',
-    when: 'About 4 weeks (May 9–31 in 2025)',
-    body: 'Workshops on Zoom for mentors and mentees. Mentors also check in with their mentee once a week.',
+    title: 'Workshops on Zoom',
+    when: 'May 9 to 31, 2025',
+    body: 'For about four weeks, mentors and mentees attend virtual workshops together.',
   },
   {
-    title: 'Summer conference',
-    when: '3 days, 2 nights (June 6–8 in 2025)',
-    body: 'Mentors and mentees meet in person at Berkeley. SEAM pays for everything, including food and housing.',
+    title: 'Conference at Berkeley',
+    when: 'June 6 to 8, 2025',
+    body: 'Mentors and mentees meet in person for three days and two nights on campus. SEAM covers all expenses, so food and housing are paid for.',
   },
 ];
 
 const history = [
   {
     year: '2000',
-    title: 'Youth summit',
     body:
-      'SASC started at a Southeast Asian conference at Berkeley. That December it held a Southeast Asian Youth Summit with high schoolers, college students, educators, and community workers.',
+      'SASC started after a Southeast Asian conference at Berkeley. In December, members held a Southeast Asian Youth Summit for high school students, college students, educators, and community workers.',
   },
   {
     year: '2002',
-    title: 'Summer Institute',
     body:
-      'SASC started the Summer Institute, a free program where Southeast Asian high schoolers stayed on campus for several days of college workshops.',
+      'The first Summer Institute brought Southeast Asian high school students to stay on campus for a few days of college workshops, free of charge.',
   },
   {
     year: '2007',
-    title: 'First mentorship pairing',
-    body:
-      'SASC members were paired with students from South East Asian Youth Leaders (SEAYL), a youth program in Richmond. Most early mentees came from Richmond and nearby Bay Area cities.',
+    body: 'SASC members started mentoring students from South East Asian Youth Leaders (SEAYL) in Richmond.',
   },
   {
     year: '2008',
-    title: 'Renamed SEAM',
-    body: 'The pairing became the Southeast Asian Mentorship program.',
+    body: 'The mentorship was renamed SEAM, the Southeast Asian Mentorship program.',
   },
   {
     year: '2019–20',
-    title: 'Back online',
-    body: 'After a hiatus, SEAM came back as a virtual program, open to high schoolers across California.',
-  },
-  {
-    year: 'Now',
-    title: 'Virtual and in person',
-    body: 'Spring workshops happen online, followed by a conference at Berkeley in early June.',
+    body: 'After a hiatus, SEAM restarted as an online program and opened up to high school students outside the Bay Area.',
   },
 ];
 
-const responsibilities = [
-  'Check in with your mentee once a week.',
-  'Go to the workshops and encourage your mentee to come too.',
-  'Help your mentee with whatever they want to do after high school.',
-  'Come to the summer conference.',
-];
+const traditionalPhoto = {
+  src: '/seam-traditional.webp',
+  alt: 'SEAM mentees posing in traditional clothes, making heart shapes with their arms',
+  caption: 'Mentees in traditional clothes',
+};
 
-const gallery = [
-  {
-    src: '/seam-traditional.webp',
-    alt: 'SEAM mentees posing in traditional clothes, making heart shapes with their arms',
-    caption: 'Mentees in traditional clothes',
-  },
-  {
-    src: '/seam-fundraiser.webp',
-    alt: 'SEAM officers smiling at a fundraising table selling strawberry sago under the SASC banner',
-    caption: 'Selling strawberry sago to fundraise for SEAM',
-  },
-];
+const fundraiserPhoto = {
+  src: '/seam-fundraiser.webp',
+  alt: 'SEAM officers smiling at a fundraising table selling strawberry sago under the SASC banner',
+  caption: 'Officers selling strawberry sago to raise money for SEAM',
+};
 
 const framedImage = {
   border: `2px solid ${colors.charcoal}`,
@@ -91,13 +72,30 @@ const framedImage = {
   boxShadow: `6px 6px 0 ${colors.pink}`,
 };
 
+const Photo = ({ src, alt, caption }: { src: string; alt: string; caption: string }) => (
+  <Box component="figure" sx={{ ...framedImage, m: 0, overflow: 'hidden', bgcolor: 'background.paper' }}>
+    <Box
+      component="img"
+      src={src}
+      alt={alt}
+      width={1440}
+      height={1440}
+      loading="lazy"
+      sx={{ display: 'block', width: '100%', height: 'auto' }}
+    />
+    <Typography component="figcaption" variant="body2" color="text.secondary" sx={{ px: 2.5, py: 1.5 }}>
+      {caption}
+    </Typography>
+  </Box>
+);
+
 const Seam = () => {
   usePageTitle('SEAM');
   return (
     <Box>
       <PageHeader
         title="Southeast Asian Mentorship"
-        subtitle="Berkeley students mentoring Southeast Asian high schoolers. Run by SASC since 2007."
+        subtitle="SASC's mentorship program for Southeast Asian high school students."
         image="/seam-group.webp"
         imagePosition="center 62%"
         lightOverlay
@@ -159,13 +157,14 @@ const Seam = () => {
             </Typography>
             <Stack spacing={2}>
               <Typography variant="body1" color="text.secondary">
-                SEAM is SASC&apos;s mentorship program for Southeast Asian high schoolers. Each mentee gets a Berkeley
-                student as a mentor, someone to ask about college applications, financial aid, and the stuff
-                that&apos;s hard to ask about when nobody in your family has done it before.
+                SEAM pairs UC Berkeley students with Southeast Asian high school students. When it started, SEAM
+                worked mainly with students from Richmond and the surrounding Bay Area, holding workshops and
+                activities that supported high school youth academically and politically. We&apos;re continuing
+                that work today.
               </Typography>
               <Typography variant="body1" color="text.secondary">
-                Workshops also cover Southeast Asian history and identity and the issues our communities deal with.
-                Our mission calls it a two-way exchange, so mentors are expected to learn from it as well.
+                Mentors help their mentees with college applications and with planning for after high school.
+                Workshops also cover Southeast Asian history and identity.
               </Typography>
             </Stack>
           </Grid>
@@ -187,30 +186,31 @@ const Seam = () => {
             How it works
           </Typography>
           <Typography variant="body1" color="text.secondary" sx={{ maxWidth: 680, mb: 5 }}>
-            SEAM runs online first, then in person. Dates change a little each year. Here&apos;s what 2025 looked
-            like.
+            The program has two parts: a few weeks of workshops on Zoom and a conference at Berkeley. We
+            encourage everyone to do both. The dates below are from 2025, and next year&apos;s will be around the
+            same time.
           </Typography>
-          <Grid container spacing={{ xs: 4, md: 5 }}>
-            {steps.map((item, i) => (
-              <Grid item xs={12} md={4} key={item.title}>
-                <Box sx={{ borderTop: `3px solid ${colors.charcoal}`, pt: 2.5 }}>
-                  <Typography
-                    sx={{ fontFamily: '"Fraunces", serif', fontWeight: 700, color: colors.darkPink }}
-                  >
-                    {i + 1}
-                  </Typography>
-                  <Typography variant="h5" component="h3" sx={{ fontWeight: 700, mt: 0.5 }}>
-                    {item.title}
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: 'text.secondary', fontWeight: 600, mb: 1 }}>
-                    {item.when}
-                  </Typography>
-                  <Typography variant="body1" color="text.secondary">
-                    {item.body}
-                  </Typography>
-                </Box>
-              </Grid>
-            ))}
+          <Grid container spacing={{ xs: 5, md: 8 }} alignItems="center">
+            <Grid item xs={12} md={7}>
+              <Stack spacing={4}>
+                {steps.map((item) => (
+                  <Box key={item.title} sx={{ borderTop: `3px solid ${colors.charcoal}`, pt: 2 }}>
+                    <Typography variant="h5" component="h3" sx={{ fontWeight: 700 }}>
+                      {item.title}
+                    </Typography>
+                    <Typography variant="body2" sx={{ color: colors.darkPink, fontWeight: 600, mb: 1 }}>
+                      {item.when}
+                    </Typography>
+                    <Typography variant="body1" color="text.secondary">
+                      {item.body}
+                    </Typography>
+                  </Box>
+                ))}
+              </Stack>
+            </Grid>
+            <Grid item xs={12} md={5}>
+              <Photo {...traditionalPhoto} />
+            </Grid>
           </Grid>
         </Container>
       </Box>
@@ -221,24 +221,16 @@ const Seam = () => {
             <Typography variant="h4" gutterBottom>
               Being a mentor
             </Typography>
-            <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
-              Mentors are Berkeley students. If you mentor, we ask you to:
-            </Typography>
-            <Stack spacing={1.5}>
-              {responsibilities.map((item, i) => (
-                <Stack direction="row" spacing={2} key={item} alignItems="baseline">
-                  <Typography
-                    sx={{ fontFamily: '"Fraunces", serif', fontWeight: 700, color: colors.darkPink, minWidth: 16 }}
-                  >
-                    {i + 1}
-                  </Typography>
-                  <Typography variant="body1">{item}</Typography>
-                </Stack>
-              ))}
+            <Stack spacing={2}>
+              <Typography variant="body1" color="text.secondary">
+                As a mentor, you contact your mentee once a week, encourage them to come to our workshops, and come
+                to the workshops yourself. You also support them with whatever they want to pursue after high
+                school.
+              </Typography>
+              <Typography variant="body1" color="text.secondary">
+                We expect mentors to come to the summer conference too. Food, housing, and other costs are covered.
+              </Typography>
             </Stack>
-            <Typography variant="body1" color="text.secondary" sx={{ mt: 3 }}>
-              The conference costs you nothing. Food and housing are paid for.
-            </Typography>
           </Grid>
           <Grid item xs={12} md={6}>
             <Box component="figure" sx={{ ...framedImage, m: 0, overflow: 'hidden', bgcolor: 'background.paper' }}>
@@ -252,7 +244,7 @@ const Seam = () => {
                 sx={{ display: 'block', width: '100%', height: 'auto' }}
               />
               <Typography component="figcaption" variant="body2" color="text.secondary" sx={{ px: 2.5, py: 1.75 }}>
-                Workshop: Reclaiming our Mental Health as Southeast Asians
+                Irene Phuong Van presenting &ldquo;Reclaiming our Mental Health as Southeast Asians&rdquo;
               </Typography>
             </Box>
           </Grid>
@@ -266,9 +258,11 @@ const Seam = () => {
               History
             </Typography>
             <Typography variant="body1" color="text.secondary">
-              SASC has worked with Southeast Asian high schoolers since it started in 2000. SEAM is the current
-              version of that work.
+              SASC has run programs for Southeast Asian high school students since it started in 2000.
             </Typography>
+            <Box sx={{ mt: 4, maxWidth: { xs: 420, md: 'none' } }}>
+              <Photo {...fundraiserPhoto} />
+            </Box>
           </Grid>
           <Grid item xs={12} md={8}>
             <Box sx={{ borderLeft: `2px solid ${colors.charcoal}`, pl: { xs: 2.5, sm: 4 } }}>
@@ -293,9 +287,6 @@ const Seam = () => {
                     >
                       {item.year}
                     </Typography>
-                    <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 0.5 }}>
-                      {item.title}
-                    </Typography>
                     <Typography variant="body1" color="text.secondary">
                       {item.body}
                     </Typography>
@@ -307,7 +298,7 @@ const Seam = () => {
         </Grid>
       </Container>
 
-      <Box sx={{ bgcolor: colors.lightPink, py: { xs: 7, md: 9 }, mb: { xs: 7, md: 9 } }}>
+      <Box sx={{ bgcolor: colors.lightPink, py: { xs: 7, md: 9 } }}>
         <Container sx={{ maxWidth: '860px !important' }}>
           <Typography variant="h4" gutterBottom>
             Mission
@@ -327,38 +318,6 @@ const Seam = () => {
         </Container>
       </Box>
 
-      <Container sx={{ mb: { xs: 7, md: 9 } }}>
-        <Typography variant="h4" sx={{ mb: 3 }}>
-          Photos
-        </Typography>
-        <Grid container spacing={3}>
-          {gallery.map((photo) => (
-            <Grid item xs={12} sm={6} key={photo.src}>
-              <Box component="figure" sx={{ m: 0 }}>
-                <Box
-                  component="img"
-                  src={photo.src}
-                  alt={photo.alt}
-                  width={1440}
-                  height={1440}
-                  loading="lazy"
-                  sx={{
-                    display: 'block',
-                    width: '100%',
-                    height: 'auto',
-                    borderRadius: `${RADIUS}px`,
-                    border: `2px solid ${colors.charcoal}`,
-                  }}
-                />
-                <Typography component="figcaption" variant="body2" color="text.secondary" sx={{ mt: 1.25 }}>
-                  {photo.caption}
-                </Typography>
-              </Box>
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
-
       <Box
         sx={{
           bgcolor: colors.charcoal,
@@ -375,11 +334,12 @@ const Seam = () => {
             variant="body1"
             sx={{ mb: 4, color: 'rgba(255,255,255,0.75)', maxWidth: 560, mx: { md: 'auto' } }}
           >
-            Applications for the next cycle aren&apos;t open yet. Follow @ucbseam for updates, or email{' '}
+            Applications for next year aren&apos;t open yet. We&apos;ll post on Instagram when they are. If you
+            have questions, email us at{' '}
             <Box component="strong" sx={{ color: 'white' }}>
               {seamEmail}
-            </Box>{' '}
-            if you have questions.
+            </Box>
+            .
           </Typography>
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} justifyContent={{ md: 'center' }}>
             <Button variant="contained" size="large" href={`mailto:${seamEmail}?subject=SEAM`}>
