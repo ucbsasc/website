@@ -11,6 +11,7 @@ const Events = lazy(() => import('./pages/Events'));
 const Contact = lazy(() => import('./pages/Contact'));
 const Resources = lazy(() => import('./pages/Resources'));
 const Lead = lazy(() => import('./pages/Lead'));
+const Seam = lazy(() => import('./pages/Seam'));
 const QRGenerator = lazy(() => import('./pages/QRGenerator'));
 const StudentSlate = lazy(() => import('./pages/StudentSlate'));
 
@@ -78,6 +79,7 @@ function App() {
                 <Route path="/partners" element={<Partners />} />
                 <Route path="/events" element={<Events />} />
                 <Route path="/lead" element={<Lead />} />
+                <Route path="/seam" element={<Seam />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/resources" element={<Resources />} />
                 <Route path="/qr" element={<QRGenerator />} />
