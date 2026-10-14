@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardContent, Container, Grid, Stack, Typography } from '@mui/material';
+import { Box, Button, Card, Container, Grid, Stack, Typography } from '@mui/material';
 import { Groups, Handshake, Home as HomeIcon, Instagram, VideoCall } from '@mui/icons-material';
 import Footer from '../components/Footer';
 import PageHeader from '../components/PageHeader';
