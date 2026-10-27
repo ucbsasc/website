@@ -5,7 +5,8 @@ export type LeadershipMember = {
     role: string;
     committee: LeadershipCommittee;
     email: string;
-    image: string;
+    /** Omit until we have a headshot; the About page shows initials instead. */
+    image?: string;
     type: 'director' | 'officer';
 };
 
@@ -143,7 +144,6 @@ export const leadership: LeadershipMember[] = [
         role: 'Web and Media Officer · SEAM',
         committee: 'PR',
         email: 'jennilynminguy@berkeley.edu',
-        image: '/headshots.webp',
         type: 'officer',
     },
     {
@@ -151,7 +151,6 @@ export const leadership: LeadershipMember[] = [
         role: 'Operations Officer',
         committee: 'Operations',
         email: 'josephinethaopham18@berkeley.edu',
-        image: '/headshots.webp',
         type: 'officer',
     },
     {

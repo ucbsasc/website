@@ -1,4 +1,4 @@
-import { Box, Container, Typography, Grid, Card, CardContent, CardMedia, Button, Stack } from '@mui/material';
+import { Box, Container, Typography, Grid, Button, Stack, IconButton } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import EmailIcon from '@mui/icons-material/EmailOutlined';
 import Tooltip from '@mui/material/Tooltip';
@@ -74,58 +74,207 @@ const storyMilestones: StoryMilestone[] = [
   },
 ];
 
-const TeamCard = ({ member, accent }: { member: LeadershipMember; accent: string }) => (
-  <Card
-    sx={{
-      height: '100%',
-      display: 'flex',
-      flexDirection: 'column',
-      overflow: 'hidden',
-      border: '1px solid',
-      borderColor: 'divider',
-      boxShadow: 'none',
-      transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-      '&:hover': {
-        transform: 'translateY(-3px)',
-        boxShadow: (theme) => theme.shadows[6],
-      },
-    }}
-  >
-    <Box sx={{ lineHeight: 0 }}>
-      <Box sx={{ height: 4, bgcolor: accent }} />
-      <CardMedia
-        component="img"
-        image={member.image}
-        alt={member.name}
-        sx={{ aspectRatio: '4 / 5', objectFit: 'cover', objectPosition: 'top center' }}
-      />
+const values = [
+  {
+    title: 'Community',
+    body: 'A lot of SASC is people looking out for each other, which shows up in bonding events, wellness check-ins, and alumni who stay in touch long after graduating.',
+    accent: colors.gold,
+  },
+  {
+    title: 'Culture',
+    body: 'Our languages, food, dance, and histories are knowledge worth taking seriously. A good part of what we do is putting them in front of the rest of campus.',
+    accent: colors.pink,
+  },
+  {
+    title: 'Advocacy',
+    body: 'Representation, funding, and campus resources don\'t arrive on their own, so a lot of this work is asking repeatedly, sitting in meetings, and following up when nothing happens.',
+    accent: colors.calBlue,
+  },
+];
+
+const SectionHeading = ({ eyebrow, title, intro }: { eyebrow: string; title: string; intro?: string }) => (
+  <Box sx={{ mb: { xs: 4, md: 5 }, maxWidth: 760 }}>
+    <Stack direction="row" alignItems="center" spacing={1.25} sx={{ mb: 1.25 }}>
+      <Box sx={{ width: 28, height: 2, bgcolor: colors.pink }} />
+      <Typography variant="overline" sx={{ color: 'text.secondary', fontWeight: 700, letterSpacing: '0.14em' }}>
+        {eyebrow}
+      </Typography>
+    </Stack>
+    <Typography variant="h2" component="h2" sx={{ fontSize: { xs: '2rem', md: '2.5rem' }, mb: intro ? 1.5 : 0 }}>
+      {title}
+    </Typography>
+    {intro && (
+      <Typography variant="body1" color="text.secondary">
+        {intro}
+      </Typography>
+    )}
+  </Box>
+);
+
+/** "Internal Officer · SEAM" -> title "Internal Officer", tags ["SEAM"] */
+const splitRole = (role: string) => {
+  const [title, ...tags] = role.split(' · ');
+  return { title, tags };
+};
+
+const initials = (name: string) => {
+  const parts = name.split(' ');
+  return `${parts[0][0]}${parts.length > 1 ? parts[parts.length - 1][0] : ''}`;
+};
+
+const Portrait = ({ member, accent }: { member: LeadershipMember; accent: string }) =>
+  member.image ? (
+    <Box
+      component="img"
+      src={member.image}
+      alt={member.name}
+      loading="lazy"
+      sx={{
+        display: 'block',
+        width: '100%',
+        aspectRatio: '4 / 5',
+        objectFit: 'cover',
+        objectPosition: 'top center',
+        borderRadius: 0,
+      }}
+    />
+  ) : (
+    <Box
+      role="img"
+      aria-label={member.name}
+      sx={{
+        width: '100%',
+        aspectRatio: '4 / 5',
+        display: 'grid',
+        placeItems: 'center',
+        bgcolor: `${accent}26`,
+        color: 'text.primary',
+        fontFamily: '"Fraunces", serif',
+        fontSize: '2.25rem',
+      }}
+    >
+      {initials(member.name)}
     </Box>
-    <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', p: 2 }}>
-      <Typography variant="subtitle1" sx={{ fontWeight: 700, lineHeight: 1.25 }}>
-        {member.name}
-      </Typography>
-      <Typography variant="body2" sx={{ color: accent, fontWeight: 600, mb: 1.5 }}>
-        {member.role}
-      </Typography>
-      <Box sx={{ mt: 'auto' }}>
-        <Tooltip title={member.email}>
-          <Button
-            size="small"
-            variant="text"
-            href={`mailto:${member.email}`}
-            startIcon={<EmailIcon fontSize="small" />}
-            sx={{
-              pl: 0,
-              color: 'text.secondary',
-              '&:hover': { color: accent, bgcolor: 'transparent' },
-            }}
-          >
-            Email
-          </Button>
-        </Tooltip>
+  );
+
+const RoleTags = ({ tags }: { tags: string[] }) =>
+  tags.length > 0 ? (
+    <Stack direction="row" spacing={0.5} sx={{ mt: 0.75 }}>
+      {tags.map((tag) => (
+        <Box
+          key={tag}
+          component="span"
+          sx={{
+            px: 0.75,
+            py: 0.125,
+            fontSize: '0.7rem',
+            fontWeight: 700,
+            letterSpacing: '0.06em',
+            border: '1px solid',
+            borderColor: 'divider',
+            borderRadius: `${RADIUS / 2}px`,
+            color: 'text.secondary',
+          }}
+        >
+          {tag}
+        </Box>
+      ))}
+    </Stack>
+  ) : null;
+
+const DirectorCard = ({ member, accent }: { member: LeadershipMember; accent: string }) => {
+  const { title, tags } = splitRole(member.role);
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        height: '100%',
+        overflow: 'hidden',
+        bgcolor: 'background.paper',
+        border: '1px solid',
+        borderColor: 'divider',
+        borderLeft: `4px solid ${accent}`,
+        borderRadius: `${RADIUS}px`,
+      }}
+    >
+      <Box sx={{ width: { xs: 112, sm: 136 }, flexShrink: 0 }}>
+        <Portrait member={member} accent={accent} />
       </Box>
-    </CardContent>
-  </Card>
+      <Box sx={{ p: { xs: 2, sm: 2.5 }, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+        <Typography variant="h5" component="h4" sx={{ lineHeight: 1.2, mb: 0.5 }}>
+          {member.name}
+        </Typography>
+        <Typography variant="body2" sx={{ color: 'text.secondary', fontWeight: 600 }}>
+          {title}
+        </Typography>
+        <RoleTags tags={tags} />
+        <Button
+          size="small"
+          href={`mailto:${member.email}`}
+          startIcon={<EmailIcon fontSize="small" />}
+          sx={{
+            mt: 'auto',
+            pt: 1.5,
+            pl: 0,
+            alignSelf: 'flex-start',
+            color: 'text.secondary',
+            '&:hover': { color: 'text.primary', bgcolor: 'transparent' },
+          }}
+        >
+          Email
+        </Button>
+      </Box>
+    </Box>
+  );
+};
+
+const OfficerCard = ({ member, accent }: { member: LeadershipMember; accent: string }) => {
+  const { title, tags } = splitRole(member.role);
+  return (
+    <Box
+      sx={{
+        height: '100%',
+        overflow: 'hidden',
+        bgcolor: 'background.paper',
+        border: '1px solid',
+        borderColor: 'divider',
+        borderRadius: `${RADIUS}px`,
+      }}
+    >
+      <Portrait member={member} accent={accent} />
+      <Box sx={{ p: 1.5 }}>
+        <Stack direction="row" alignItems="flex-start" justifyContent="space-between" spacing={0.5}>
+          <Typography variant="subtitle2" component="h4" sx={{ fontWeight: 700, lineHeight: 1.3 }}>
+            {member.name}
+          </Typography>
+          <Tooltip title={member.email}>
+            <IconButton
+              size="small"
+              href={`mailto:${member.email}`}
+              aria-label={`Email ${member.name}`}
+              sx={{ mt: -0.5, mr: -0.75, color: 'text.secondary', '&:hover': { color: 'text.primary' } }}
+            >
+              <EmailIcon sx={{ fontSize: 18 }} />
+            </IconButton>
+          </Tooltip>
+        </Stack>
+        <Typography variant="caption" sx={{ display: 'block', color: 'text.secondary', lineHeight: 1.4 }}>
+          {title}
+        </Typography>
+        <RoleTags tags={tags} />
+      </Box>
+    </Box>
+  );
+};
+
+const TierLabel = ({ children }: { children: string }) => (
+  <Typography
+    variant="overline"
+    component="p"
+    sx={{ color: 'text.secondary', fontWeight: 700, letterSpacing: '0.12em', mb: 1.5 }}
+  >
+    {children}
+  </Typography>
 );
 
 const About = () => {
@@ -141,51 +290,68 @@ const About = () => {
         image="/sascomm.webp"
       />
 
-      <Container sx={{ py: 2, mb: 6 }}>
-        <Typography variant="h4" gutterBottom>
-          Our Story
-        </Typography>
-        <Typography variant="body1" color="text.secondary" sx={{ mb: 4, maxWidth: 780 }}>
-          The board turns over every year and the events change with it. What stays the same is Southeast Asian
-          students at Berkeley finding each other, learning our hxstories, and pushing the university for resources
-          it wouldn&apos;t hand over on its own.
-        </Typography>
+      <Container sx={{ pt: 2, pb: { xs: 8, md: 10 } }}>
+        <SectionHeading
+          eyebrow="Since 2000"
+          title="Our Story"
+          intro="The board turns over every year and the events change with it. What stays the same is Southeast Asian students at Berkeley finding each other, learning our hxstories, and pushing the university for resources it wouldn’t hand over on its own."
+        />
 
-        <Grid container spacing={{ xs: 4, md: 6 }}>
+        <Grid container spacing={{ xs: 5, md: 8 }}>
           <Grid item xs={12} md={7}>
-            <Stack spacing={3}>
+            <Box
+              component="ol"
+              sx={{
+                listStyle: 'none',
+                m: 0,
+                p: 0,
+                pl: { xs: 3.5, sm: 4.5 },
+                position: 'relative',
+                '&::before': {
+                  content: '""',
+                  position: 'absolute',
+                  left: 6,
+                  top: 10,
+                  bottom: 10,
+                  width: 2,
+                  bgcolor: 'divider',
+                },
+              }}
+            >
               {storyMilestones.map((milestone, i) => (
                 <Box
+                  component="li"
                   key={milestone.year}
-                  sx={{
-                    display: 'flex',
-                    flexDirection: { xs: 'column', sm: 'row' },
-                    gap: { xs: 0.5, sm: 3 },
-                  }}
+                  sx={{ position: 'relative', pb: i < storyMilestones.length - 1 ? 4.5 : 0 }}
                 >
+                  <Box
+                    sx={{
+                      position: 'absolute',
+                      left: { xs: -28, sm: -36 },
+                      top: 5,
+                      width: 14,
+                      height: 14,
+                      borderRadius: '50%',
+                      bgcolor: 'background.default',
+                      border: `3px solid ${i === storyMilestones.length - 1 ? colors.pink : colors.charcoal}`,
+                    }}
+                  />
                   <Typography
                     variant="overline"
-                    sx={{
-                      flexShrink: 0,
-                      width: { sm: 88 },
-                      fontWeight: 700,
-                      color: i % 2 === 0 ? colors.darkPink : 'primary.dark',
-                      letterSpacing: '0.08em',
-                    }}
+                    component="p"
+                    sx={{ color: colors.darkPink, fontWeight: 700, letterSpacing: '0.1em', lineHeight: 1.6 }}
                   >
                     {milestone.year}
                   </Typography>
-                  <Box>
-                    <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 0.5 }}>
-                      {milestone.title}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {milestone.body}
-                    </Typography>
-                  </Box>
+                  <Typography variant="h5" component="h3" sx={{ mb: 0.75 }}>
+                    {milestone.title}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary" sx={{ maxWidth: 560 }}>
+                    {milestone.body}
+                  </Typography>
                 </Box>
               ))}
-            </Stack>
+            </Box>
           </Grid>
 
           <Grid item xs={12} md={5}>
@@ -197,7 +363,7 @@ const About = () => {
                 overflow: 'hidden',
                 bgcolor: 'background.paper',
                 position: { md: 'sticky' },
-                top: { md: 76 },
+                top: { md: 96 },
               }}
             >
               <Box
@@ -214,7 +380,7 @@ const About = () => {
               <Box sx={{ px: { xs: 2, md: 2.5 }, py: 2 }}>
                 <Typography
                   variant="overline"
-                  sx={{ color: 'primary.dark', display: 'block', letterSpacing: '0.1em' }}
+                  sx={{ color: 'text.secondary', fontWeight: 700, display: 'block', letterSpacing: '0.1em' }}
                 >
                   Alumni Tailgate · 2026
                 </Typography>
@@ -230,7 +396,7 @@ const About = () => {
 
       <Box
         sx={{
-          py: { xs: 6, md: 8 },
+          py: { xs: 8, md: 10 },
           bgcolor: 'background.paper',
           borderTop: '1.5px solid',
           borderBottom: '1.5px solid',
@@ -238,27 +404,27 @@ const About = () => {
         }}
       >
         <Container>
-          <Typography variant="h4" gutterBottom>
-            What We Care About
-          </Typography>
+          <SectionHeading eyebrow="Values" title="What We Care About" />
           <Grid container spacing={3}>
-            {[
-              {
-                title: 'Community',
-                body: 'A lot of SASC is people looking out for each other, which shows up in bonding events, wellness check-ins, and alumni who stay in touch long after graduating.',
-              },
-              {
-                title: 'Culture',
-                body: 'Our languages, food, dance, and histories are knowledge worth taking seriously. A good part of what we do is putting them in front of the rest of campus.',
-              },
-              {
-                title: 'Advocacy',
-                body: 'Representation, funding, and campus resources don\'t arrive on their own, so a lot of this work is asking repeatedly, sitting in meetings, and following up when nothing happens.',
-              },
-            ].map((value) => (
+            {values.map((value, i) => (
               <Grid item xs={12} md={4} key={value.title}>
-                <Box sx={{ pr: { md: 2 } }}>
-                  <Typography variant="h5" gutterBottom>
+                <Box
+                  sx={{
+                    height: '100%',
+                    p: { xs: 3, md: 3.5 },
+                    bgcolor: 'background.default',
+                    border: '1px solid',
+                    borderColor: 'divider',
+                    borderTop: `4px solid ${value.accent}`,
+                    borderRadius: `${RADIUS}px`,
+                  }}
+                >
+                  <Typography
+                    sx={{ fontFamily: '"Fraunces", serif', fontSize: '0.95rem', color: 'text.secondary', mb: 1.5 }}
+                  >
+                    0{i + 1}
+                  </Typography>
+                  <Typography variant="h4" component="h3" sx={{ mb: 1.25 }}>
                     {value.title}
                   </Typography>
                   <Typography variant="body1" color="text.secondary">
@@ -271,52 +437,72 @@ const About = () => {
         </Container>
       </Box>
 
-      <Container sx={{ mt: 7, mb: 8 }}>
-        <Typography variant="h4" gutterBottom>
-          Our Team
-        </Typography>
-        <Typography variant="body1" color="text.secondary" sx={{ mb: 5, maxWidth: 700 }}>
-          SASComm is organized into four branches. Each is run by a director or two, with officers
-          helping plan and staff the work week to week. A couple of roles sit outside the branches.
-        </Typography>
+      <Container sx={{ pt: { xs: 8, md: 10 }, pb: { xs: 6, md: 8 } }}>
+        <SectionHeading
+          eyebrow="Leadership"
+          title="Our Team"
+          intro="SASComm is organized into four branches. Each is run by a director or two, with officers helping plan and staff the work week to week. A couple of roles sit outside the branches."
+        />
 
         {teamSections.map((section) => {
-          const members = [...directors, ...officers].filter(
-            (member) => member.committee === section.committee
-          );
-          if (members.length === 0) return null;
+          const sectionDirectors = directors.filter((member) => member.committee === section.committee);
+          const sectionOfficers = officers.filter((member) => member.committee === section.committee);
+          const count = sectionDirectors.length + sectionOfficers.length;
+          if (count === 0) return null;
           const accent = committeeAccent[section.committee];
 
           return (
-            <Box key={section.committee} sx={{ mb: { xs: 5, md: 6 } }}>
+            <Box component="section" key={section.committee} sx={{ mb: { xs: 7, md: 9 } }}>
               <Stack
                 direction="row"
-                alignItems="baseline"
-                spacing={1.25}
-                sx={{ mb: section.blurb ? 1 : 2.5, flexWrap: 'wrap' }}
+                alignItems="flex-end"
+                justifyContent="space-between"
+                spacing={2}
+                sx={{ pb: 1.5, mb: section.blurb ? 2 : 3, borderBottom: `2px solid ${accent}` }}
               >
-                <Box
-                  sx={{ width: 10, height: 10, borderRadius: '50%', bgcolor: accent, flexShrink: 0 }}
-                />
-                <Typography variant="h6" sx={{ fontWeight: 700 }}>
-                  {section.name}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {section.focus}
+                <Box>
+                  <Typography variant="h3" component="h3" sx={{ fontSize: { xs: '1.6rem', md: '2rem' } }}>
+                    {section.name}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary" sx={{ mt: 0.25 }}>
+                    {section.focus}
+                  </Typography>
+                </Box>
+                <Typography variant="body2" color="text.secondary" sx={{ whiteSpace: 'nowrap', pb: 0.25 }}>
+                  {count} {count === 1 ? 'person' : 'people'}
                 </Typography>
               </Stack>
               {section.blurb && (
-                <Typography variant="body2" color="text.secondary" sx={{ mb: 2.5, maxWidth: 700 }}>
+                <Typography variant="body2" color="text.secondary" sx={{ mb: 3, maxWidth: 700 }}>
                   {section.blurb}
                 </Typography>
               )}
-              <Grid container spacing={2.5}>
-                {members.map((member) => (
-                  <Grid item xs={6} sm={4} md={3} key={member.email}>
-                    <TeamCard member={member} accent={accent} />
+
+              {sectionDirectors.length > 0 && (
+                <Box sx={{ mb: sectionOfficers.length > 0 ? 3.5 : 0 }}>
+                  <TierLabel>{sectionDirectors.length === 1 ? 'Director' : 'Directors'}</TierLabel>
+                  <Grid container spacing={2}>
+                    {sectionDirectors.map((member) => (
+                      <Grid item xs={12} sm={6} md={4} key={member.email}>
+                        <DirectorCard member={member} accent={accent} />
+                      </Grid>
+                    ))}
                   </Grid>
-                ))}
-              </Grid>
+                </Box>
+              )}
+
+              {sectionOfficers.length > 0 && (
+                <>
+                  <TierLabel>Officers</TierLabel>
+                  <Grid container spacing={2}>
+                    {sectionOfficers.map((member) => (
+                      <Grid item xs={6} sm={4} md={2} key={member.email}>
+                        <OfficerCard member={member} accent={accent} />
+                      </Grid>
+                    ))}
+                  </Grid>
+                </>
+              )}
             </Box>
           );
         })}
