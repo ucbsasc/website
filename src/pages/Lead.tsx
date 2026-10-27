@@ -83,7 +83,7 @@ const Lead = () => {
             textShadow: '0 1px 10px rgba(0,0,0,0.45)',
           }}
         >
-          Fall 2026 applications for Internal, External, Ops, and PR closed on Friday, Oct. 2. Look
+          Fall 2026 applications for Internal, External, Ops, and Web and Media (PR) closed on Friday, Oct. 2. Look
           through the branches below, and follow @ucbsasc to hear when we recruit next.
         </Typography>
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mt: 4 }}>

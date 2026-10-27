@@ -80,10 +80,10 @@ export const leadBranches: LeadBranch[] = [
     ],
   },
   {
-    name: 'Public Relations',
+    name: 'Web and Media (PR)',
     focus: 'Design, media & communications',
     overview:
-      'PR does website design and development, merch, photography, graphics, and Instagram.',
+      'Web and Media does website design and development, merch, photography, graphics, and Instagram.',
     image: '/pr.webp',
     committee: 'PR',
     keyFocus: [
@@ -126,7 +126,7 @@ export const leadApplicationSteps: Array<{
 
 export const leadRecruitingFacts: Array<{ label: string; value: string }> = [
   { label: 'Applications', value: 'Closed Friday, Oct. 2' },
-  { label: 'Branches', value: 'Internal, External, Ops, and PR' },
+  { label: 'Branches', value: 'Internal, External, Ops, and Web and Media' },
   { label: 'Time', value: 'About 5 hours a week, more around big events' },
   { label: 'Next cycle', value: 'Follow @ucbsasc or join the mailing list to hear when applications reopen' },
 ];
