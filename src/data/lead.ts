@@ -1,41 +1,12 @@
 import { LeadershipCommittee } from './leadership';
 
-export type BenefitIconKey = 'workspace' | 'groups' | 'campaign';
-
-export const leadBenefits: Array<{
-  title: string;
-  description: string;
-  icon: BenefitIconKey;
-}> = [
-  {
-    title: 'Plan programs',
-    description:
-      'Officers help put on events, make calls with their branch, and bring newer members into how SASC works.',
-    icon: 'workspace',
-  },
-  {
-    title: 'Work with other SEA students',
-    description:
-      'You spend a lot of time with other Southeast Asian students. A lot of people stay close after they leave Berkeley.',
-    icon: 'groups',
-  },
-  {
-    title: 'Put on real events',
-    description:
-      'Room bookings, reimbursements, Instagram posts, Night Market setup. The work shows up as things people can go to.',
-    icon: 'campaign',
-  },
-];
-
-export type BranchKeyFocus = string[];
-
 export type LeadBranch = {
   name: string;
   focus: string;
   overview: string;
   image: string;
   committee: LeadershipCommittee;
-  keyFocus: BranchKeyFocus;
+  keyFocus: string[];
 };
 
 export const leadBranches: LeadBranch[] = [
@@ -95,32 +66,18 @@ export const leadBranches: LeadBranch[] = [
   },
 ];
 
-export type ApplicationStepIconKey = 'lightbulb' | 'diversity' | 'event' | 'volunteer';
-
-export const leadApplicationSteps: Array<{
-  title: string;
-  detail: string;
-  icon: ApplicationStepIconKey;
-}> = [
+export const leadApplicationSteps: Array<{ title: string; detail: string }> = [
   {
     title: 'Pick a branch',
-    detail: 'Read the position descriptions and figure out which branch fits what you want to do.',
-    icon: 'lightbulb',
+    detail: 'Read the position descriptions and pick the one that sounds like the work you want to do.',
   },
   {
     title: 'Fill out the form',
-    detail: 'Some background info and a few short-answer questions about the role you picked.',
-    icon: 'diversity',
+    detail: 'Some background info and a few short answers about the role you want.',
   },
   {
     title: 'Interview',
-    detail: 'We read applications as they come in and reach out to schedule interviews.',
-    icon: 'event',
-  },
-  {
-    title: 'Applications closed Oct. 2',
-    detail: 'The Fall 2026 form closed Friday, Oct. 2. Email a director if you want to know more about hours or workload before next cycle.',
-    icon: 'volunteer',
+    detail: 'We read applications as they come in and email you to set up an interview.',
   },
 ];
 

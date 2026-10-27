@@ -1,133 +1,128 @@
-import {
-  Container,
-  Typography,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Box,
-  Button,
-  Stack,
-} from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Box, Button, Container, Stack, Typography } from '@mui/material';
 import { useState } from 'react';
 import Footer from '../components/Footer';
 import PageHeader from '../components/PageHeader';
 import MailingListModal from '../components/MailingListModal';
 import { usePageTitle } from '../hooks/usePageTitle';
-import GeneralMeeting from '../components/events/GeneralMeeting';
-import NightMarket from '../components/events/NightMarket';
-import SEAGrad from '../components/events/SEAGrad';
-import SEAPicnic from '../components/events/SEAPicnic';
-import SEAGrad26 from '../components/events/SEAGrad26';
-import ProfessionalHeadshots from '../components/events/ProfessionalHeadshots';
-import HalloweenMovieNight from '../components/events/HalloweenMovieNight';
-import ProfessionalHeadshotsOct1Past from '../components/events/ProfessionalHeadshotsOct1Past';
-import SEAHistoryWorkshop from '../components/events/SEAHistoryWorkshop';
-import AnniversaryRecap from '../components/events/AnniversaryRecap';
-import UpcomingGeneralMeeting from '../components/events/UpcomingGeneralMeeting';
-import BondingEventPreview from '../components/events/BondingEventPreview';
-import ProfessionalHeadshotsFeb2026 from '../components/events/ProfessionalHeadshotsFeb2026';
-import GameNight from '../components/events/GameNight';
-import TasteOfSeaNightMarket from '../components/events/TasteOfSeaNightMarket';
-import ResumeWorkshop from '../components/events/ResumeWorkshop';
-import SEASO from '../components/events/SEASO';
-import GeneralMeetingSep2026 from '../components/events/GeneralMeetingSep2026';
+import { pastEvents, PastEvent } from '../data/pastEvents';
+import { RADIUS } from '../theme/colors';
+
+const ArchiveRow = ({ event }: { event: PastEvent }) => (
+  <Box
+    component="li"
+    sx={{
+      display: 'flex',
+      gap: { xs: 2, sm: 3 },
+      py: { xs: 2.5, md: 3 },
+      borderTop: '1px solid',
+      borderColor: 'divider',
+    }}
+  >
+    <Box sx={{ width: { xs: 72, sm: 104 }, flexShrink: 0 }}>
+      {event.image && (
+        <Box
+          component="img"
+          src={event.image.src}
+          alt={event.image.alt}
+          loading="lazy"
+          sx={{
+            display: 'block',
+            width: '100%',
+            aspectRatio: '4 / 5',
+            objectFit: 'cover',
+            borderRadius: `${RADIUS / 2}px`,
+            border: '1px solid',
+            borderColor: 'divider',
+          }}
+        />
+      )}
+    </Box>
+    <Box sx={{ minWidth: 0 }}>
+      <Typography variant="body2" color="text.secondary">
+        {event.date}
+        {event.location ? ` · ${event.location}` : ''}
+      </Typography>
+      <Typography variant="h5" component="h4" sx={{ mt: 0.5, mb: 0.75 }}>
+        {event.title}
+      </Typography>
+      <Typography variant="body1" color="text.secondary" sx={{ maxWidth: 640 }}>
+        {event.summary}
+      </Typography>
+    </Box>
+  </Box>
+);
 
 const Events = () => {
   usePageTitle('Events');
   const [mailingListOpen, setMailingListOpen] = useState(false);
 
-  const upcomingEvents: { date: Date; key: string; render: () => JSX.Element }[] = [
-    { date: new Date('2026-09-17T20:00:00-07:00'), key: 'gm-2026-fall', render: () => <GeneralMeetingSep2026 /> },
-  ];
-
-  const pastEvents: { date: Date; key: string; render: () => JSX.Element }[] = [
-    { date: new Date('2026-09-03T16:00:00-07:00'), key: 'seaso-2026', render: () => <SEASO /> },
-    { date: new Date('2026-05-09T18:00:00-07:00'), key: 'seagrad-2026', render: () => <SEAGrad26 /> },
-    { date: new Date('2026-04-29T17:00:00-07:00'), key: 'seapicnic-2026', render: () => <SEAPicnic /> },
-    { date: new Date('2026-04-06T18:00:00-07:00'), key: 'nightmarket-2026', render: () => <TasteOfSeaNightMarket /> },
-    { date: new Date('2026-04-01T18:00:00-07:00'), key: 'resume-workshop-2026-04-01', render: () => <ResumeWorkshop /> },
-    { date: new Date('2026-03-11T19:00:00-08:00'), key: 'game-night-2026', render: () => <GameNight /> },
-    { date: new Date('2026-02-21T18:30:00-08:00'), key: 'bonding-2026', render: () => <BondingEventPreview /> },
-    { date: new Date('2026-02-10T19:00:00-08:00'), key: 'gm-2026-spring', render: () => <UpcomingGeneralMeeting /> },
-    { date: new Date('2026-02-06T14:00:00-08:00'), key: 'headshots-feb-2026', render: () => <ProfessionalHeadshotsFeb2026 /> },
-    { date: new Date('2025-11-12T19:00:00-08:00'), key: 'anniv-2025', render: () => <AnniversaryRecap /> },
-    { date: new Date('2025-10-28T19:00:00-07:00'), key: 'sea-history-2025', render: () => <SEAHistoryWorkshop /> },
-    { date: new Date('2025-10-24T19:00:00-07:00'), key: 'halloween-2025', render: () => <HalloweenMovieNight /> },
-    { date: new Date('2025-10-01T15:00:00-07:00'), key: 'headshots-2025-10-01', render: () => <ProfessionalHeadshotsOct1Past /> },
-    { date: new Date('2024-09-17T20:00:00-07:00'), key: 'gm-2024', render: () => <GeneralMeeting /> },
-    { date: new Date('2025-05-07T00:00:00-07:00'), key: 'headshots-may-2025', render: () => <ProfessionalHeadshots /> },
-    { date: new Date('2025-05-15T00:00:00-07:00'), key: 'seagrad-2025', render: () => <SEAGrad /> },
-    { date: new Date('2025-04-20T00:00:00-07:00'), key: 'nightmarket-2025', render: () => <NightMarket /> },
-  ];
-
-  upcomingEvents.sort((a, b) => a.date.getTime() - b.date.getTime());
-  pastEvents.sort((a, b) => b.date.getTime() - a.date.getTime());
+  // Upcoming events get their own card component in components/events (see EventCard).
+  // Once one is over, delete it from here and add a short entry to data/pastEvents.ts.
+  const upcomingEvents: { key: string; render: () => JSX.Element }[] = [];
 
   return (
     <>
       <PageHeader
         title="Events"
-        subtitle="What's coming up this semester. Past events are in the archive at the bottom."
+        subtitle="New events go up here once rooms are booked. Everything we’ve run since spring 2025 is further down."
         image="/nightmarket-14.jpg"
         compact
       />
-
-      <Container sx={{ pb: 8 }}>
+      <Container sx={{ pb: { xs: 8, md: 10 } }}>
         {upcomingEvents.length > 0 ? (
-          <Box sx={{ display: 'contents' }}>
-            {upcomingEvents.map((ev) => (
-              <Box key={ev.key}>{ev.render()}</Box>
-            ))}
-          </Box>
+          upcomingEvents.map((ev) => <Box key={ev.key}>{ev.render()}</Box>)
         ) : (
           <Box
             sx={{
-              mb: 4,
+              mb: { xs: 7, md: 9 },
               p: { xs: 2.5, md: 3.5 },
-              borderRadius: 2,
+              borderRadius: `${RADIUS}px`,
               border: '1px solid',
               borderColor: 'divider',
               bgcolor: 'background.paper',
             }}
           >
-            <Typography variant="h5" component="h2" sx={{ mb: 1, fontWeight: 700, fontSize: '1.35rem' }}>
-              Between school years
+            <Typography variant="h4" component="h2" sx={{ mb: 1 }}>
+              Nothing on the calendar right now
             </Typography>
-            <Typography variant="body1" color="text.secondary" sx={{ mb: 2, maxWidth: 680 }}>
-              Our 2025–26 public programming has wrapped. Fall dates for general meetings, cultural programs, and
-              involvement opportunities will be posted here once rooms and partners are confirmed. Until then, Instagram
-              and the mailing list are the best places to watch.
-            </Typography>
-            <Typography variant="body2" color="text.secondary" sx={{ mb: 3, maxWidth: 680 }}>
-              Looking for what we ran last year? Open the archive below for SEAGrad, Night Market, workshops, and more.
+            <Typography variant="body1" color="text.secondary" sx={{ mb: 3, maxWidth: 640 }}>
+              We post GMs and events on Instagram first. The mailing list gets GM dates and application
+              deadlines.
             </Typography>
             <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5}>
               <Button variant="contained" href="https://www.instagram.com/ucbsasc" target="_blank" rel="noopener">
                 Follow @ucbsasc
               </Button>
               <Button variant="outlined" onClick={() => setMailingListOpen(true)}>
-                Become a General Member
-              </Button>
-              <Button variant="text" href="/lead">
-                Lead with SASC
+                Join the mailing list
               </Button>
             </Stack>
           </Box>
         )}
 
-        <Accordion defaultExpanded={false} disableGutters elevation={0} sx={{ border: '1px solid', borderColor: 'divider' }}>
-          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography variant="h6" sx={{ fontWeight: 600 }}>
-              Recent event archive
+        <Typography variant="h2" sx={{ fontSize: { xs: '2rem', md: '2.5rem' }, mb: 1 }}>
+          Past events
+        </Typography>
+        <Typography variant="body1" color="text.secondary" sx={{ mb: { xs: 4, md: 5 } }}>
+          Flyers and recaps from what we’ve run, newest first.
+        </Typography>
+
+        {pastEvents.map((year) => (
+          <Box component="section" key={year.label} sx={{ mb: { xs: 5, md: 6 } }}>
+            <Typography
+              variant="overline"
+              component="h3"
+              sx={{ color: 'text.secondary', fontWeight: 700, letterSpacing: '0.12em', mb: 0.5 }}
+            >
+              {year.label}
             </Typography>
-          </AccordionSummary>
-          <AccordionDetails sx={{ pt: 0 }}>
-            {pastEvents.map((ev) => (
-              <Box key={ev.key}>{ev.render()}</Box>
-            ))}
-          </AccordionDetails>
-        </Accordion>
+            <Box component="ul" sx={{ listStyle: 'none', m: 0, p: 0 }}>
+              {year.events.map((event) => (
+                <ArchiveRow key={`${event.title}-${event.date}`} event={event} />
+              ))}
+            </Box>
+          </Box>
+        ))}
       </Container>
       <Footer />
       <MailingListModal open={mailingListOpen} onClose={() => setMailingListOpen(false)} />

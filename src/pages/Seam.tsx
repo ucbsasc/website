@@ -159,8 +159,8 @@ const Seam = () => {
               <Typography variant="body1" color="text.secondary">
                 SEAM pairs UC Berkeley students with Southeast Asian high school students. When it started, SEAM
                 worked mainly with students from Richmond and the surrounding Bay Area, holding workshops and
-                activities that supported high school youth academically and politically. We&apos;re continuing
-                that work today.
+                activities that supported high school youth academically and politically. Mentees now join from
+                all over California.
               </Typography>
               <Typography variant="body1" color="text.secondary">
                 Mentors help their mentees with college applications and with planning for after high school.

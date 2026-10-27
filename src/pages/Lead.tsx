@@ -9,59 +9,15 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import {
-  Campaign,
-  Diversity3,
-  EventAvailable,
-  Groups,
-  Lightbulb,
-  VolunteerActivism,
-  WorkspacePremium,
-} from '@mui/icons-material';
 import Footer from '../components/Footer';
 import PageHeader from '../components/PageHeader';
 import { Fragment } from 'react';
-import {
-  leadBenefits,
-  leadBranches,
-  leadApplicationSteps,
-  leadRecruitingFacts,
-  BenefitIconKey,
-  ApplicationStepIconKey,
-} from '../data/lead';
+import { leadBranches, leadApplicationSteps, leadRecruitingFacts } from '../data/lead';
 import { directors as leadershipDirectors } from '../data/leadership';
 import { usePageTitle } from '../hooks/usePageTitle';
 
 const positionsUrl =
   'https://docs.google.com/document/d/1A-lNUm6g9DHF4C2DvHATFUrNFskGwxCy-GiSm9pe7YI/edit?usp=sharing';
-
-const getBenefitIcon = (icon: BenefitIconKey) => {
-  switch (icon) {
-    case 'workspace':
-      return <WorkspacePremium fontSize="large" color="inherit" />;
-    case 'groups':
-      return <Groups fontSize="large" color="inherit" />;
-    case 'campaign':
-      return <Campaign fontSize="large" color="inherit" />;
-    default:
-      return null;
-  }
-};
-
-const getStepIcon = (icon: ApplicationStepIconKey) => {
-  switch (icon) {
-    case 'lightbulb':
-      return <Lightbulb color="primary" />;
-    case 'diversity':
-      return <Diversity3 color="primary" />;
-    case 'event':
-      return <EventAvailable color="primary" />;
-    case 'volunteer':
-      return <VolunteerActivism color="primary" />;
-    default:
-      return null;
-  }
-};
 
 const Lead = () => {
   usePageTitle('Lead');
@@ -69,7 +25,7 @@ const Lead = () => {
     <Box>
       <PageHeader
         title="Lead with SASC"
-        subtitle="SASC doesn't run itself. SASComm is the student leadership group that plans the programs, books the rooms, and keeps the day-to-day moving."
+        subtitle="SASComm is the student board behind SASC. Officers plan the programs, book rooms, and chase down reimbursements."
         image="/sascatnightmarket.webp"
         imagePosition="center 20%"
         lightOverlay
@@ -83,8 +39,7 @@ const Lead = () => {
             textShadow: '0 1px 10px rgba(0,0,0,0.45)',
           }}
         >
-          Fall 2026 applications for Internal, External, Ops, and Web and Media (PR) closed on Friday, Oct. 2. Look
-          through the branches below, and follow @ucbsasc to hear when we recruit next.
+          Fall 2026 applications closed Friday, Oct. 2. We post on @ucbsasc when the next round opens.
         </Typography>
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mt: 4 }}>
           <Button
@@ -132,8 +87,8 @@ const Lead = () => {
               Fall 2026 recruiting
             </Typography>
             <Typography variant="body1" color="text.secondary" sx={{ mb: 3, maxWidth: 560 }}>
-              Applications for every branch have closed, and we&apos;re reaching out to schedule interviews.
-              Interested in leading later? Email a director or DM us and ask anything.
+              Applications are closed and interviews are being scheduled. If you want to apply next time, a
+              director can tell you what their branch is like.
             </Typography>
             <Box
               component="dl"
@@ -176,7 +131,7 @@ const Lead = () => {
             <Box
               component="img"
               src="/sascomm.webp"
-              alt="SASC community members gathered together"
+              alt="SASC members posing together as a big group indoors"
               sx={{
                 width: '100%',
                 borderRadius: 3,
@@ -191,23 +146,24 @@ const Lead = () => {
                 What it&apos;s like
               </Typography>
               <Typography variant="body1" color="text.secondary">
-                SASC feels like home because people show up, especially when it’s messy. We have wellness nights when people are burnt
-                out, pull together teach-ins when something happens, and check in off the agenda to make sure folks are doing okay.
+                People here show up for each other. We run wellness nights when everyone&apos;s burnt out and put
+                teach-ins together when something happens on campus, and a lot of the checking in happens outside
+                meetings.
               </Typography>
               <Typography variant="body1" color="text.secondary">
-                Most officers didn&apos;t have experience running an org before this. Our alumni include educators, organizers, policy
-                advocates, and creatives who still stay involved and mentor us, and we try to offer that same care to new members.
+                Most officers had never run an org before joining. Alumni still come back to help the board out, and
+                we try to do the same for whoever joins after us.
               </Typography>
               <Typography variant="body1" color="text.secondary">
-                As a coalition, we host SEAsgiving with alumni, run history workshops, meet with other orgs for shared planning, and
-                put on cultural events like Night Market and SEACF. For a clearer picture of what a year looks like,{' '}
+                A normal year has SEAsgiving with alumni, a history workshop or two, Night Market, SEACF, and a lot of
+                planning meetings with other SEA orgs. For the full list,{' '}
                 <Button
                   variant="text"
                   color="primary"
                   href="/events"
                   sx={{ p: 0, minWidth: 0, textTransform: 'none', fontWeight: 600 }}
                 >
-                  browse our event archive
+                  see the event archive
                 </Button>
                 .
               </Typography>
@@ -218,56 +174,25 @@ const Lead = () => {
 
       <Container sx={{ mb: 8 }}>
         <Typography variant="h4" gutterBottom>
-          Why Lead with SASC
+          What the work looks like
         </Typography>
-        <Typography variant="body1" color="text.secondary" sx={{ maxWidth: 760, mb: 3 }}>
+        <Typography variant="body1" color="text.secondary" sx={{ maxWidth: 760, mb: 2 }}>
           Some weeks you&apos;re printing flyers or lining up volunteers. Other weeks you&apos;re cooking for
           SEAsgiving or dealing with whatever just hit campus.
         </Typography>
-        <Grid container spacing={3}>
-          {leadBenefits.map((benefit) => (
-            <Grid item xs={12} md={4} key={benefit.title}>
-              <Card
-                sx={{
-                  height: '100%',
-                  p: 2,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 2,
-                }}
-              >
-                <Box
-                  sx={{
-                    color: 'primary.main',
-                    display: 'inline-flex',
-                    p: 1.5,
-                    borderRadius: 2,
-                    bgcolor: 'primary.light',
-                    width: 'fit-content',
-                    opacity: 0.8,
-                  }}
-                >
-                  {getBenefitIcon(benefit.icon)}
-                </Box>
-                <Typography variant="h5" component="h3">
-                  {benefit.title}
-                </Typography>
-                <Typography variant="body1" color="text.secondary">
-                  {benefit.description}
-                </Typography>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
+        <Typography variant="body1" color="text.secondary" sx={{ maxWidth: 760 }}>
+          You plan with your branch and sit in on SASComm, where the board decides what we&apos;re doing and who&apos;s
+          paying for it. Plenty of people stay close with their board after they graduate.
+        </Typography>
       </Container>
 
       <Container id="branches" sx={{ mb: 8, scrollMarginTop: 96 }}>
         <Typography variant="h4" gutterBottom>
-          Ways to Lead
+          The branches
         </Typography>
         <Typography variant="body1" color="text.secondary" sx={{ mb: 4, maxWidth: 760 }}>
-          All four branches recruited for Fall 2026. Most weeks are about 5 hours: branch meeting, SASComm,
-          and prep. Big events take more. Email a director if you want details on a specific branch.
+          Most weeks are about 5 hours between your branch meeting, SASComm, and prep. Big events like Night Market
+          take more. Email a director if you want specifics.
         </Typography>
         <Grid container spacing={4}>
           {leadBranches.map((branch) => {
@@ -375,39 +300,30 @@ const Lead = () => {
           >
             position descriptions
           </Button>{' '}
-          to see what each role does. Applications are closed for now; this is how the process worked
-          for Fall 2026.
+          first. This is how it went for Fall 2026, and it&apos;s usually about the same.
         </Typography>
-        <Grid container spacing={3}>
+        <Box component="ol" sx={{ m: 0, pl: 3, maxWidth: 760 }}>
           {leadApplicationSteps.map((step) => (
-            <Grid item xs={12} md={6} key={step.title}>
-              <Card sx={{ height: '100%' }}>
-                <CardContent sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                  <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1 }}>
-                    {getStepIcon(step.icon)}
-                    <Typography variant="h6" sx={{ fontWeight: 600 }}>
-                      {step.title}
-                    </Typography>
-                  </Box>
-                  <Typography variant="body2" color="text.secondary">
-                    {step.detail}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
+            <Box component="li" key={step.title} sx={{ mb: 2, pl: 0.5 }}>
+              <Typography variant="subtitle1" component="h3" sx={{ fontWeight: 700 }}>
+                {step.title}
+              </Typography>
+              <Typography variant="body1" color="text.secondary">
+                {step.detail}
+              </Typography>
+            </Box>
           ))}
-        </Grid>
+        </Box>
       </Container>
 
       <Container sx={{ mb: 8 }}>
-        <Card sx={{ p: { xs: 3, md: 5 }, backgroundColor: 'rgba(33, 150, 243, 0.08)' }}>
+        <Card sx={{ p: { xs: 3, md: 5 } }}>
           <Stack spacing={2}>
             <Typography variant="h5" sx={{ fontWeight: 600 }}>
               Questions
             </Typography>
             <Typography variant="body1" color="text.secondary">
-              Curious about leading next time, or how much time it takes? DM @ucbsasc or email one of the
-              directors listed above.
+              DM @ucbsasc or email one of the directors above. They&apos;ll tell you honestly how much time it takes.
             </Typography>
             <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ pt: 1 }}>
               <Button

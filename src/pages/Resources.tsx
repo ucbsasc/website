@@ -38,7 +38,7 @@ const Resources = () => {
 
         <Paper elevation={2} sx={{ p: 3, mb: 4 }}>
           <Typography variant="h5" component="h2" gutterBottom>
-            Immigration Resources
+            Immigration resources
           </Typography>
           <Typography variant="body1" paragraph>
             Immigration help and know-your-rights pamphlets in Arabic, Bengali, Burmese, Chinese, English, Gujarati, Hindi, Karen, Khmer, Korean, Nepali, Punjabi, Urdu, Vietnamese, Tagalog, Thai, and Spanish:
@@ -55,7 +55,7 @@ const Resources = () => {
           <Divider sx={{ my: 3 }} />
           
           <Typography variant="h5" component="h2" gutterBottom>
-            Know Your Rights
+            Know your rights
           </Typography>
           <Typography variant="body1" paragraph>
             What to do if you encounter ICE, plus other know-your-rights guides:
@@ -72,7 +72,7 @@ const Resources = () => {
           <Divider sx={{ my: 3 }} />
           
           <Typography variant="h5" component="h2" gutterBottom>
-            Legal Aid
+            Legal aid
           </Typography>
           <Typography variant="body1" paragraph>
             If you need legal help and don&apos;t know where to start:
@@ -89,7 +89,7 @@ const Resources = () => {
           <Divider sx={{ my: 3 }} />
           
           <Typography variant="h5" component="h2" gutterBottom>
-            California Wildfire Resources
+            California wildfire resources
           </Typography>
           <Typography variant="body1" paragraph>
             Help for people affected by California wildfires:
@@ -107,7 +107,7 @@ const Resources = () => {
         <Divider sx={{ my: 6 }} />
 
         <Typography variant="h3" component="h2" gutterBottom>
-          Media Kit
+          Media kit
         </Typography>
         <Typography variant="body1" sx={{ mb: 3 }}>
           Our logo and colors, for anyone making a flyer or a collab post with us.
@@ -169,7 +169,7 @@ const Resources = () => {
         </Grid>
 
         <Paper elevation={2} sx={{ p: 3 }}>
-          <Typography variant="h5" gutterBottom>Usage Guidelines</Typography>
+          <Typography variant="h5" gutterBottom>Usage guidelines</Typography>
           <Box component="ul" sx={{ pl: 3, m: 0 }}>
             <li><Typography variant="body2">Stick to our colors, and make sure any text on top of them is easy to read.</Typography></li>
             <li><Typography variant="body2">Give the logo some room. Don&apos;t stretch it or change its colors.</Typography></li>

@@ -1,6 +1,6 @@
 import { Box, Container, Typography } from '@mui/material';
 import { ReactNode } from 'react';
-import { colors, RADIUS } from '../theme/colors';
+import { colors } from '../theme/colors';
 
 type PageHeaderProps = {
   title: string;
@@ -57,21 +57,6 @@ const PageHeader = ({
       }}
     >
       <Container sx={{ position: 'relative', zIndex: 2 }}>
-        <Typography
-          variant="overline"
-          sx={{
-            color: colors.gold,
-            display: 'inline-block',
-            border: `1.5px solid ${colors.gold}`,
-            borderRadius: `${RADIUS}px`,
-            px: 1.1,
-            py: 0.4,
-            mb: 2,
-            bgcolor: 'rgba(0,0,0,0.25)',
-          }}
-        >
-          SASC · Berkeley
-        </Typography>
         <Typography
           variant="h1"
           component="h1"

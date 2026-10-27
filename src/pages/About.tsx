@@ -37,7 +37,7 @@ const teamSections: TeamSection[] = [
     focus: 'Policy, rights & advocacy',
     committee: 'Advocacy',
     blurb:
-      'A standing role rather than a branch. It tracks the policy that reaches Southeast Asian students — immigration and deportation, disaggregated data, financial aid — and works with the branches when something needs a response.',
+      'This one sits outside the branches. It keeps track of policy that affects Southeast Asian students, like immigration enforcement, data disaggregation, and financial aid, and brings in the branches when we need to respond to something.',
   },
 ];
 
@@ -64,7 +64,7 @@ const storyMilestones: StoryMilestone[] = [
     year: '2005',
     title: 'SASComm',
     body:
-      'By 2005, members wanted something sturdier than an officer board that got rebuilt from scratch every couple of years. SASComm is a round table where programs, outreach, and advocacy are split across everyone, so the org doesn’t fall apart when the two or three people running it graduate.',
+      'By 2005, members were tired of rebuilding the officer board from scratch every couple of years. SASComm splits the work across a whole table of people, so the org survives when the two or three people running it graduate.',
   },
   {
     year: 'Today',
@@ -74,32 +74,8 @@ const storyMilestones: StoryMilestone[] = [
   },
 ];
 
-const values = [
-  {
-    title: 'Community',
-    body: 'A lot of SASC is people looking out for each other, which shows up in bonding events, wellness check-ins, and alumni who stay in touch long after graduating.',
-    accent: colors.gold,
-  },
-  {
-    title: 'Culture',
-    body: 'Our languages, food, dance, and histories are knowledge worth taking seriously. A good part of what we do is putting them in front of the rest of campus.',
-    accent: colors.pink,
-  },
-  {
-    title: 'Advocacy',
-    body: 'Representation, funding, and campus resources don\'t arrive on their own, so a lot of this work is asking repeatedly, sitting in meetings, and following up when nothing happens.',
-    accent: colors.calBlue,
-  },
-];
-
-const SectionHeading = ({ eyebrow, title, intro }: { eyebrow: string; title: string; intro?: string }) => (
+const SectionHeading = ({ title, intro }: { title: string; intro?: string }) => (
   <Box sx={{ mb: { xs: 4, md: 5 }, maxWidth: 760 }}>
-    <Stack direction="row" alignItems="center" spacing={1.25} sx={{ mb: 1.25 }}>
-      <Box sx={{ width: 28, height: 2, bgcolor: colors.pink }} />
-      <Typography variant="overline" sx={{ color: 'text.secondary', fontWeight: 700, letterSpacing: '0.14em' }}>
-        {eyebrow}
-      </Typography>
-    </Stack>
     <Typography variant="h2" component="h2" sx={{ fontSize: { xs: '2rem', md: '2.5rem' }, mb: intro ? 1.5 : 0 }}>
       {title}
     </Typography>
@@ -292,9 +268,8 @@ const About = () => {
 
       <Container sx={{ pt: 2, pb: { xs: 8, md: 10 } }}>
         <SectionHeading
-          eyebrow="Since 2000"
-          title="Our Story"
-          intro="The board turns over every year and the events change with it. What stays the same is Southeast Asian students at Berkeley finding each other, learning our hxstories, and pushing the university for resources it wouldn’t hand over on its own."
+          title="Our story"
+          intro="The board changes every year, and so do the events. Since 2000 it’s been Southeast Asian students at Berkeley finding each other, learning our hxstories, and pushing the university for things it wasn’t going to offer on its own."
         />
 
         <Grid container spacing={{ xs: 5, md: 8 }}>
@@ -396,117 +371,83 @@ const About = () => {
 
       <Box
         sx={{
-          py: { xs: 8, md: 10 },
+          pt: { xs: 8, md: 10 },
+          pb: { xs: 6, md: 8 },
           bgcolor: 'background.paper',
           borderTop: '1.5px solid',
-          borderBottom: '1.5px solid',
           borderColor: 'divider',
         }}
       >
         <Container>
-          <SectionHeading eyebrow="Values" title="What We Care About" />
-          <Grid container spacing={3}>
-            {values.map((value, i) => (
-              <Grid item xs={12} md={4} key={value.title}>
-                <Box
-                  sx={{
-                    height: '100%',
-                    p: { xs: 3, md: 3.5 },
-                    bgcolor: 'background.default',
-                    border: '1px solid',
-                    borderColor: 'divider',
-                    borderTop: `4px solid ${value.accent}`,
-                    borderRadius: `${RADIUS}px`,
-                  }}
+          <SectionHeading
+            title="Our team"
+            intro="SASComm has four branches. Each one has a director or two, plus officers who help plan and staff things week to week. Legal & Policy Advocacy sits outside the branches."
+          />
+
+          {teamSections.map((section) => {
+            const sectionDirectors = directors.filter((member) => member.committee === section.committee);
+            const sectionOfficers = officers.filter((member) => member.committee === section.committee);
+            const count = sectionDirectors.length + sectionOfficers.length;
+            if (count === 0) return null;
+            const accent = committeeAccent[section.committee];
+
+            return (
+              <Box component="section" key={section.committee} sx={{ mb: { xs: 7, md: 9 } }}>
+                <Stack
+                  direction="row"
+                  alignItems="flex-end"
+                  justifyContent="space-between"
+                  spacing={2}
+                  sx={{ pb: 1.5, mb: section.blurb ? 2 : 3, borderBottom: `2px solid ${accent}` }}
                 >
-                  <Typography
-                    sx={{ fontFamily: '"Fraunces", serif', fontSize: '0.95rem', color: 'text.secondary', mb: 1.5 }}
-                  >
-                    0{i + 1}
+                  <Box>
+                    <Typography variant="h3" component="h3" sx={{ fontSize: { xs: '1.6rem', md: '2rem' } }}>
+                      {section.name}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary" sx={{ mt: 0.25 }}>
+                      {section.focus}
+                    </Typography>
+                  </Box>
+                  <Typography variant="body2" color="text.secondary" sx={{ whiteSpace: 'nowrap', pb: 0.25 }}>
+                    {count} {count === 1 ? 'person' : 'people'}
                   </Typography>
-                  <Typography variant="h4" component="h3" sx={{ mb: 1.25 }}>
-                    {value.title}
+                </Stack>
+                {section.blurb && (
+                  <Typography variant="body2" color="text.secondary" sx={{ mb: 3, maxWidth: 700 }}>
+                    {section.blurb}
                   </Typography>
-                  <Typography variant="body1" color="text.secondary">
-                    {value.body}
-                  </Typography>
-                </Box>
-              </Grid>
-            ))}
-          </Grid>
+                )}
+
+                {sectionDirectors.length > 0 && (
+                  <Box sx={{ mb: sectionOfficers.length > 0 ? 3.5 : 0 }}>
+                    <TierLabel>{sectionDirectors.length === 1 ? 'Director' : 'Directors'}</TierLabel>
+                    <Grid container spacing={2}>
+                      {sectionDirectors.map((member) => (
+                        <Grid item xs={12} sm={6} md={4} key={member.email}>
+                          <DirectorCard member={member} accent={accent} />
+                        </Grid>
+                      ))}
+                    </Grid>
+                  </Box>
+                )}
+
+                {sectionOfficers.length > 0 && (
+                  <>
+                    <TierLabel>Officers</TierLabel>
+                    <Grid container spacing={2}>
+                      {sectionOfficers.map((member) => (
+                        <Grid item xs={6} sm={4} md={2} key={member.email}>
+                          <OfficerCard member={member} accent={accent} />
+                        </Grid>
+                      ))}
+                    </Grid>
+                  </>
+                )}
+              </Box>
+            );
+          })}
         </Container>
       </Box>
-
-      <Container sx={{ pt: { xs: 8, md: 10 }, pb: { xs: 6, md: 8 } }}>
-        <SectionHeading
-          eyebrow="Leadership"
-          title="Our Team"
-          intro="SASComm is organized into four branches. Each is run by a director or two, with officers helping plan and staff the work week to week. A couple of roles sit outside the branches."
-        />
-
-        {teamSections.map((section) => {
-          const sectionDirectors = directors.filter((member) => member.committee === section.committee);
-          const sectionOfficers = officers.filter((member) => member.committee === section.committee);
-          const count = sectionDirectors.length + sectionOfficers.length;
-          if (count === 0) return null;
-          const accent = committeeAccent[section.committee];
-
-          return (
-            <Box component="section" key={section.committee} sx={{ mb: { xs: 7, md: 9 } }}>
-              <Stack
-                direction="row"
-                alignItems="flex-end"
-                justifyContent="space-between"
-                spacing={2}
-                sx={{ pb: 1.5, mb: section.blurb ? 2 : 3, borderBottom: `2px solid ${accent}` }}
-              >
-                <Box>
-                  <Typography variant="h3" component="h3" sx={{ fontSize: { xs: '1.6rem', md: '2rem' } }}>
-                    {section.name}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary" sx={{ mt: 0.25 }}>
-                    {section.focus}
-                  </Typography>
-                </Box>
-                <Typography variant="body2" color="text.secondary" sx={{ whiteSpace: 'nowrap', pb: 0.25 }}>
-                  {count} {count === 1 ? 'person' : 'people'}
-                </Typography>
-              </Stack>
-              {section.blurb && (
-                <Typography variant="body2" color="text.secondary" sx={{ mb: 3, maxWidth: 700 }}>
-                  {section.blurb}
-                </Typography>
-              )}
-
-              {sectionDirectors.length > 0 && (
-                <Box sx={{ mb: sectionOfficers.length > 0 ? 3.5 : 0 }}>
-                  <TierLabel>{sectionDirectors.length === 1 ? 'Director' : 'Directors'}</TierLabel>
-                  <Grid container spacing={2}>
-                    {sectionDirectors.map((member) => (
-                      <Grid item xs={12} sm={6} md={4} key={member.email}>
-                        <DirectorCard member={member} accent={accent} />
-                      </Grid>
-                    ))}
-                  </Grid>
-                </Box>
-              )}
-
-              {sectionOfficers.length > 0 && (
-                <>
-                  <TierLabel>Officers</TierLabel>
-                  <Grid container spacing={2}>
-                    {sectionOfficers.map((member) => (
-                      <Grid item xs={6} sm={4} md={2} key={member.email}>
-                        <OfficerCard member={member} accent={accent} />
-                      </Grid>
-                    ))}
-                  </Grid>
-                </>
-              )}
-            </Box>
-          );
-        })}
-      </Container>
 
       <Box
         sx={{
@@ -518,14 +459,14 @@ const About = () => {
       >
         <Container sx={{ textAlign: { xs: 'left', md: 'center' } }}>
           <Typography variant="h3" sx={{ mb: 1.5, color: 'white', fontFamily: '"Fraunces", serif' }}>
-            Get Involved
+            Get involved
           </Typography>
           <Typography
             variant="body1"
             sx={{ mb: 4, color: 'rgba(255,255,255,0.75)', maxWidth: 560, mx: { md: 'auto' } }}
           >
-            Fall 2026 lead applications have closed. Read through the Lead page to see what the branches do, or
-            email{' '}
+            Lead applications for Fall 2026 are closed. The Lead page explains what each branch does, and you can
+            always email{' '}
             <Box component="strong" sx={{ color: 'white' }}>
               UCB.SASC@gmail.com
             </Box>

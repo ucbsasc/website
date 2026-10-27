@@ -20,7 +20,7 @@ const Partners = () => {
     <Box>
       <PageHeader
         title="Community & Partners"
-        subtitle="We don't do this alone. SASC runs alongside other Southeast Asian and Asian American student orgs, campus resources built for our communities, and our own subprograms."
+        subtitle="The Southeast Asian and Asian American orgs we work with most, the campus centers we lean on, and our own subprograms."
         image="/sascomm.webp"
         compact
       />

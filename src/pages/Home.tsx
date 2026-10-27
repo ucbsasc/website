@@ -107,9 +107,9 @@ const mobilePairs = [
 
 const sections = [
   {
-    title: 'Community Building',
+    title: 'How it started',
     paragraphs: [
-      'SASC began in 2000 after a Southeast Asian conference at Berkeley organized with Professor Khatharya Um. Students from Lao, Hmong, Cambodian, and Vietnamese groups helped run the youth program, then kept meeting and built a coalition around getting SEA students into Berkeley and helping them stay. The longer version, including A Dream Denied and how SASComm came together, is on our About page.',
+      'In 2000, Professor Khatharya Um organized a Southeast Asian conference at Berkeley. Lao, Hmong, Cambodian, and Vietnamese students ran the youth program, kept meeting after it ended, and turned into a coalition focused on getting SEA students into Berkeley and helping them stay.',
     ],
     aboutLink: true,
     instagramPost: 'https://www.instagram.com/p/8mkvEjw-66',
@@ -118,8 +118,8 @@ const sections = [
   {
     title: 'SEAGrad',
     paragraphs: [
-      'SEAGrad is our yearly ceremony for graduating Southeast Asian seniors and the families who got them here. There are speeches, performances, and cultural sashes, and it’s smaller than commencement on purpose, so every senior gets called up by people who actually know them.',
-      'For a lot of first-gen students, graduating is something the whole family did. Alumni come back for it, and current members run the night.',
+      'SEAGrad is our graduation for Southeast Asian seniors and the families who got them here. There are speeches, performances, and cultural sashes. It’s a lot smaller than commencement, and the people calling your name usually know you.',
+      'For a lot of first-gen students, graduating is something the whole family did. Alumni come back for it and current members run the night.',
     ],
     instagramPost: 'https://www.instagram.com/p/DZBGmcWElwT',
     align: 'right' as const,
@@ -127,8 +127,8 @@ const sections = [
   {
     title: 'SEAMentorship',
     paragraphs: [
-      'SEAM pairs Berkeley students with SEA high schoolers for a semester of applications, academics, and questions that are hard to ask if nobody in your family has done this before.',
-      'Mentors and mentees work through essays, deadlines, financial aid forms, and what campus life is actually like. Mentees come from all over California, and some get to visit Berkeley through the program.',
+      'SEAM pairs Berkeley students with Southeast Asian high schoolers. Mentors help with essays, deadlines, and financial aid forms, and answer the questions that are hard to ask when nobody in your family has applied to college.',
+      'Mentees come from all over California. The program ends with a few days at Berkeley, and SEAM covers food and housing.',
     ],
     instagramPost: 'https://www.instagram.com/p/DKpgpl5pGhL',
     align: 'left' as const,
@@ -288,13 +288,8 @@ const Home = () => {
               variant="overline"
               sx={{
                 color: colors.gold,
-                display: 'inline-block',
-                border: `1.5px solid ${colors.gold}`,
-                borderRadius: `${RADIUS}px`,
-                px: 1.25,
-                py: 0.5,
-                mb: 2.5,
-                bgcolor: 'rgba(0,0,0,0.35)',
+                display: 'block',
+                mb: 1.5,
                 letterSpacing: '0.14em',
               }}
             >
@@ -341,8 +336,8 @@ const Home = () => {
                 lineHeight: 1.6,
               }}
             >
-              We mentor SEA high schoolers, run Night Market and SEAGrad, and hold a lot of general meetings with free
-              food. Started by students in 2000 and still run by them.
+              Southeast Asian students at Berkeley since 2000. We run SEAM for high schoolers, SEAGrad in May,
+              Night Market in the spring, and general meetings that usually have free food.
             </Typography>
 
             {nextEvent && (
@@ -437,12 +432,6 @@ const Home = () => {
               direction={section.align === 'right' ? 'row' : 'row-reverse'}
             >
               <Grid item xs={12} md={6}>
-                <Typography
-                  variant="overline"
-                  sx={{ color: 'primary.dark', display: 'block', mb: 1 }}
-                >
-                  {String(index + 1).padStart(2, '0')}
-                </Typography>
                 <Typography variant="h2" sx={{ mb: 2.5 }}>
                   {section.title}
                 </Typography>
@@ -511,14 +500,11 @@ const Home = () => {
 
       <Box id="programs" sx={{ py: { xs: 8, md: 11 }, scrollMarginTop: '64px' }}>
         <Container>
-          <Typography variant="overline" sx={{ color: 'primary.dark', display: 'block', mb: 1 }}>
-            What we run
-          </Typography>
           <Typography variant="h2" sx={{ mb: 1.5 }}>
-            Programs
+            Every year
           </Typography>
           <Typography variant="body1" color="text.secondary" sx={{ mb: 5, maxWidth: 540 }}>
-            The big ones we run every year. Dates go up on the Events page once we have rooms.
+            The programs we run annually. Dates go on the Events page once rooms are booked.
           </Typography>
           <Grid container spacing={2.5}>
             {programs.map((program, i) => (
@@ -561,13 +547,13 @@ const Home = () => {
               fontFamily: '"Fraunces", serif',
             }}
           >
-            Stay in the loop
+            Join the mailing list
           </Typography>
           <Typography
             variant="body1"
             sx={{ mb: 4, color: 'rgba(255,255,255,0.75)', maxWidth: 480, mx: { md: 'auto' } }}
           >
-            GM dates, event flyers, and applications go out on the mailing list and Instagram first.
+            We email GM dates, flyers, and applications when they open. Instagram usually posts the same day.
           </Typography>
           <Stack
             direction={{ xs: 'column', sm: 'row' }}
