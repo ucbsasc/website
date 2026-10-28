@@ -5,6 +5,7 @@ import PageHeader from '../components/PageHeader';
 import MailingListModal from '../components/MailingListModal';
 import { usePageTitle } from '../hooks/usePageTitle';
 import { pastEvents, PastEvent } from '../data/pastEvents';
+import CraftsHomeLanguageSocial from '../components/events/CraftsHomeLanguageSocial';
 import { RADIUS } from '../theme/colors';
 
 const ArchiveRow = ({ event }: { event: PastEvent }) => (
@@ -58,7 +59,9 @@ const Events = () => {
 
   // Upcoming events get their own card component in components/events (see EventCard).
   // Once one is over, delete it from here and add a short entry to data/pastEvents.ts.
-  const upcomingEvents: { key: string; render: () => JSX.Element }[] = [];
+  const upcomingEvents: { key: string; render: () => JSX.Element }[] = [
+    { key: 'crafts-home-language-2026', render: () => <CraftsHomeLanguageSocial /> },
+  ];
 
   return (
     <>

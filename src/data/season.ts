@@ -19,6 +19,11 @@ export const siteSeason: {
   /** Set when the next GM / public event is confirmed */
   nextEvent: NextEvent | null;
 } = {
-  mode: 'quiet',
-  nextEvent: null,
+  mode: 'active',
+  nextEvent: {
+    title: 'Crafts + Home Language Social',
+    dateLabel: 'Tue, Nov. 3 · 6–8 PM',
+    location: 'Dwinelle 88',
+    href: '/events',
+  },
 };
