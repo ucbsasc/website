@@ -71,6 +71,19 @@ to = "/events"
 status = 302
   force = true
 
+# SEAM has its own repo (ucbsasc/seam) and Netlify site, served here at /seam/
+[[redirects]]
+  from = "/seam"
+  to = "https://ucbsasc-seam.netlify.app/seam/"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/seam/*"
+  to = "https://ucbsasc-seam.netlify.app/seam/:splat"
+  status = 200
+  force = true
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
