@@ -125,8 +125,8 @@ export const leadership: LeadershipMember[] = [
     },
     {
         name: 'Mason Layug',
-        role: 'SEAM Officer',
-        committee: 'SEAM',
+        role: 'External Officer · SEAM',
+        committee: 'External',
         email: 'masonlayug@berkeley.edu',
         image: '/officers/mason.webp',
         type: 'officer',
