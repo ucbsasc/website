@@ -1,4 +1,4 @@
-export type LeadershipCommittee = 'Internal' | 'External' | 'Operations' | 'PR' | 'Advocacy';
+export type LeadershipCommittee = 'Internal' | 'External' | 'Operations' | 'PR' | 'Advocacy' | 'SEAM';
 
 export type LeadershipMember = {
     name: string;
@@ -38,7 +38,7 @@ export const leadership: LeadershipMember[] = [
     {
         name: 'Lan Vy Nguyen',
         role: 'SEAM Director',
-        committee: 'External',
+        committee: 'SEAM',
         email: 'nguyen_nvl@berkeley.edu',
         image: '/officers/lanvy.webp',
         type: 'director',
@@ -125,8 +125,8 @@ export const leadership: LeadershipMember[] = [
     },
     {
         name: 'Mason Layug',
-        role: 'Internal Officer · SEAM',
-        committee: 'Internal',
+        role: 'SEAM Officer',
+        committee: 'SEAM',
         email: 'masonlayug@berkeley.edu',
         image: '/officers/mason.webp',
         type: 'officer',

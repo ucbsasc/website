@@ -20,6 +20,7 @@ const committeeAccent: Record<LeadershipCommittee, string> = {
   Operations: colors.bayNavy,
   PR: colors.pink,
   Advocacy: colors.calBlue,
+  SEAM: colors.charcoal,
 };
 
 type TeamSection = {
@@ -27,11 +28,19 @@ type TeamSection = {
   focus: string;
   committee: LeadershipCommittee;
   blurb?: string;
+  /** Also list members from other branches whose role carries this tag. */
+  tag?: string;
 };
 
 /** The four recruiting branches, plus the roles that sit outside them. */
 const teamSections: TeamSection[] = [
   ...leadBranches.map(({ name, focus, committee }) => ({ name, focus, committee })),
+  {
+    name: 'SEAM',
+    focus: 'Southeast Asian Mentorship',
+    committee: 'SEAM',
+    tag: 'SEAM',
+  },
   {
     name: 'Legal & Policy Advocacy',
     focus: 'Policy, rights & advocacy',
@@ -381,12 +390,15 @@ const About = () => {
         <Container>
           <SectionHeading
             title="Our team"
-            intro="SASComm has four branches. Each one has a director or two, plus officers who help plan and staff things week to week. Legal & Policy Advocacy sits outside the branches."
+            intro="SASComm has four branches. Each one has a director or two, plus officers who help plan and staff things week to week. SEAM has its own team, and a few officers work on it alongside their branch. Legal & Policy Advocacy sits outside the branches."
           />
 
           {teamSections.map((section) => {
-            const sectionDirectors = directors.filter((member) => member.committee === section.committee);
-            const sectionOfficers = officers.filter((member) => member.committee === section.committee);
+            const inSection = (member: LeadershipMember) =>
+              member.committee === section.committee ||
+              (!!section.tag && splitRole(member.role).tags.includes(section.tag));
+            const sectionDirectors = directors.filter(inSection);
+            const sectionOfficers = officers.filter(inSection);
             const count = sectionDirectors.length + sectionOfficers.length;
             if (count === 0) return null;
             const accent = committeeAccent[section.committee];
