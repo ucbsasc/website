@@ -53,7 +53,8 @@ const Navbar = () => {
     { text: 'Lead', path: '/lead' },
     { text: 'Resources', path: '/resources' },
     { text: 'Contact', path: '/contact' },
-    { text: 'Store', path: 'https://sasc.bigcartel.com', external: true },
+    // /seam is proxied by Netlify to its own site, so it needs a full page load, not a router Link
+    { text: 'SEAM', path: '/seam', external: true },
   ];
 
   const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
@@ -147,8 +148,6 @@ const Navbar = () => {
                     <Button
                       key={item.text}
                       href={item.path}
-                      target="_blank"
-                      rel="noopener"
                       sx={linkSx(false)}
                     >
                       {item.text}
@@ -219,8 +218,6 @@ const Navbar = () => {
               {item.external ? (
                 <Button
                   href={item.path}
-                  target="_blank"
-                  rel="noopener"
                   onClick={handleDrawerToggle}
                   sx={{ width: '100%', justifyContent: 'flex-start', px: 3, py: 1.25, fontWeight: 700, color: 'text.primary' }}
                 >
