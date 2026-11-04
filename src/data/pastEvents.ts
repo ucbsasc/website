@@ -20,6 +20,17 @@ export const pastEvents: SchoolYear[] = [
     label: 'Fall 2026',
     events: [
       {
+        title: 'Crafts + Home Language Social',
+        date: 'Tue, Nov. 3, 2026 · 6–8 PM',
+        location: 'Dwinelle 88',
+        summary:
+          'Co-hosted with VSA. People decorated tote bags and made slime over Asian snacks, and there was a short talk on relearning the language your family speaks.',
+        image: {
+          src: '/crafts-home-language-social.webp',
+          alt: 'Crafts + Home Language Social flyer, SASC × VSA, Tuesday, November 3rd, Dwinelle 88',
+        },
+      },
+      {
         title: 'Fall General Meeting',
         date: 'Thu, Sept. 17, 2026 · 8–9 PM',
         location: 'Wheeler 130',
