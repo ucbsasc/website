@@ -19,7 +19,9 @@ import Footer from '../components/Footer';
 import { programs } from '../data/programs';
 import { siteSeason } from '../data/season';
 import { usePageTitle } from '../hooks/usePageTitle';
-import { colors, RADIUS } from '../theme/colors';
+import { colors } from '../theme/colors';
+import { pinkPaper } from '../theme/textures';
+import { LabelTape, MaskingTape, RansomWord, TintedPhoto } from '../components/brand';
 
 const kenBurns = keyframes`
   from { transform: scale(1.04); }
@@ -31,18 +33,17 @@ const HeroSection = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   overflow: 'hidden',
-  backgroundColor: colors.charcoal,
+  backgroundColor: colors.black,
+  borderBottom: `2px solid ${colors.ink}`,
   '&::after': {
     content: '""',
     position: 'absolute',
     inset: 0,
-    background:
-      'linear-gradient(105deg, rgba(20,18,16,0.82) 0%, rgba(20,18,16,0.55) 45%, rgba(20,18,16,0.35) 100%)',
+    backgroundColor: 'rgba(20,16,18,0.38)',
     zIndex: 1,
     pointerEvents: 'none',
     [theme.breakpoints.down('md')]: {
-      background:
-        'linear-gradient(180deg, rgba(20,18,16,0.5) 0%, rgba(20,18,16,0.38) 40%, rgba(20,18,16,0.86) 74%, rgba(20,18,16,0.95) 100%)',
+      backgroundColor: 'rgba(20,16,18,0.42)',
     },
   },
 }));
@@ -53,30 +54,13 @@ const MasonryGrid = styled(Box)(({ theme }) => ({
   display: 'none',
   gridTemplateColumns: 'repeat(3, 1fr)',
   gridTemplateRows: 'repeat(3, 1fr)',
-  gap: 6,
-  padding: 6,
-  opacity: 0.9,
+  gap: 4,
+  padding: 0,
   zIndex: 0,
   [theme.breakpoints.up('md')]: {
     display: 'grid',
   },
 }));
-
-const ImageCell = styled(Box)({
-  position: 'relative',
-  overflow: 'hidden',
-  borderRadius: RADIUS,
-  border: `1.5px solid rgba(255,255,255,0.2)`,
-  '& img': {
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',
-    objectPosition: 'center 20%',
-    display: 'block',
-    filter: 'saturate(0.92) contrast(1.05)',
-    borderRadius: RADIUS,
-  },
-});
 
 /** Mobile: rotating top/bottom pair. */
 const MobileStage = styled(Box)(({ theme }) => ({
@@ -84,7 +68,6 @@ const MobileStage = styled(Box)(({ theme }) => ({
   inset: 0,
   zIndex: 0,
   display: 'block',
-  padding: 3,
   [theme.breakpoints.up('md')]: {
     display: 'none',
   },
@@ -104,6 +87,15 @@ const mobilePairs = [
   [images[2], images[3]],
   [images[4], images[5]],
 ] as const;
+
+const onDarkOutline = {
+  borderColor: colors.textOnBlack,
+  color: colors.textOnBlack,
+  '&:hover': {
+    borderColor: colors.textOnBlack,
+    bgcolor: 'rgba(247,240,230,0.1)',
+  },
+};
 
 const sections = [
   {
@@ -196,20 +188,14 @@ const Home = () => {
       <HeroSection sx={{ minHeight: { xs: '100dvh', md: '100vh' } }}>
         <MasonryGrid>
           {images.map((img) => (
-            <ImageCell
+            <TintedPhoto
               key={img.src}
-              sx={{
-                gridColumn: `span ${img.span}`,
-              }}
-            >
-              <Box
-                component="img"
-                src={img.src}
-                alt={img.alt}
-                loading="eager"
-                sx={{ objectPosition: img.position }}
-              />
-            </ImageCell>
+              src={img.src}
+              alt={img.alt}
+              position={img.position}
+              loading="eager"
+              sx={{ gridColumn: `span ${img.span}` }}
+            />
           ))}
         </MasonryGrid>
 
@@ -221,10 +207,10 @@ const Home = () => {
                 key={pair[0].src}
                 sx={{
                   position: 'absolute',
-                  inset: 3,
+                  inset: 0,
                   display: 'grid',
                   gridTemplateRows: tallTop ? '1.15fr 0.85fr' : '0.85fr 1.15fr',
-                  gap: 2,
+                  gap: '4px',
                   opacity: i === pairIndex ? 1 : 0,
                   transition: 'opacity 1s ease',
                   pointerEvents: 'none',
@@ -234,39 +220,20 @@ const Home = () => {
                 }}
               >
                 {pair.map((img, row) => (
-                  <Box
+                  <TintedPhoto
                     key={img.src}
-                    sx={{
-                      position: 'relative',
-                      overflow: 'hidden',
-                      borderRadius: `${RADIUS}px`,
-                      border: '1.5px solid rgba(255,255,255,0.22)',
-                      minHeight: 0,
+                    src={img.src}
+                    position={img.position}
+                    loading={i === 0 ? 'eager' : 'lazy'}
+                    sx={{ minHeight: 0 }}
+                    imgSx={{
+                      animation: i === pairIndex ? `${kenBurns} 4.8s ease-out forwards` : 'none',
+                      animationDelay: row === 0 ? '0s' : '0.15s',
+                      '@media (prefers-reduced-motion: reduce)': {
+                        animation: 'none',
+                      },
                     }}
-                  >
-                    <Box
-                      component="img"
-                      src={img.src}
-                      alt=""
-                      loading={i === 0 ? 'eager' : 'lazy'}
-                      sx={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        objectPosition: img.position,
-                        filter: 'saturate(0.95) contrast(1.06)',
-                        display: 'block',
-                        animation:
-                          i === pairIndex
-                            ? `${kenBurns} 4.8s ease-out forwards`
-                            : 'none',
-                        animationDelay: row === 0 ? '0s' : '0.15s',
-                        '@media (prefers-reduced-motion: reduce)': {
-                          animation: 'none',
-                        },
-                      }}
-                    />
-                  </Box>
+                  />
                 ))}
               </Box>
             );
@@ -284,44 +251,27 @@ const Home = () => {
           }}
         >
           <Box sx={{ maxWidth: 640, width: '100%', mb: { xs: 2, md: 0 } }}>
-            <Typography
-              variant="overline"
-              sx={{
-                color: colors.gold,
-                display: 'block',
-                mb: 1.5,
-                letterSpacing: '0.14em',
-              }}
-            >
+            <LabelTape color="black" tilt={-2} sx={{ mb: { xs: 2.5, md: 3 } }}>
               Est. 2000 · UC Berkeley
-            </Typography>
+            </LabelTape>
+
+            <RansomWord
+              word="SASC"
+              component="h1"
+              size={{ xs: 76, sm: 104, md: 132 }}
+              sx={{ mb: { xs: 2.5, md: 3 }, ml: '-0.04em' }}
+            />
 
             <Typography
-              variant="h1"
+              component="p"
               sx={{
-                color: 'white',
-                fontFamily: '"Fraunces", serif',
+                color: colors.textOnBlack,
+                fontSize: { xs: '1.35rem', md: '1.7rem' },
                 fontWeight: 700,
-                fontSize: { xs: '4rem', sm: '5.5rem', md: '7rem' },
-                letterSpacing: '-0.04em',
-                lineHeight: 0.92,
-                mb: 2,
-                textShadow: '0 4px 28px rgba(0,0,0,0.45)',
-              }}
-            >
-              SASC
-            </Typography>
-
-            <Typography
-              sx={{
-                color: 'rgba(255,255,255,0.92)',
-                fontFamily: '"Fraunces", serif',
-                fontSize: { xs: '1.35rem', md: '1.65rem' },
-                fontWeight: 500,
-                fontStyle: 'italic',
-                maxWidth: 480,
+                letterSpacing: '-0.015em',
+                maxWidth: 520,
                 mb: 1.5,
-                lineHeight: 1.35,
+                lineHeight: 1.2,
               }}
             >
               Southeast Asian Student Coalition
@@ -330,10 +280,12 @@ const Home = () => {
             <Typography
               variant="body1"
               sx={{
-                color: 'rgba(255,255,255,0.78)',
+                color: colors.textOnBlack,
+                fontWeight: 500,
                 maxWidth: 460,
                 mb: 4,
-                lineHeight: 1.6,
+                lineHeight: 1.55,
+                textShadow: '0 1px 2px rgba(20,16,18,0.6)',
               }}
             >
               Southeast Asian students at Berkeley since 2000. We run SEAM for high schoolers, SEAGrad in May,
@@ -343,28 +295,41 @@ const Home = () => {
             {nextEvent && (
               <Box
                 sx={{
-                  mb: 3,
-                  p: 2,
+                  position: 'relative',
+                  mb: 4,
+                  px: 2.25,
+                  pt: 2.5,
+                  pb: 2,
                   maxWidth: 400,
-                  border: `1.5px solid ${colors.gold}`,
-                  borderRadius: `${RADIUS}px`,
-                  bgcolor: 'rgba(0,0,0,0.4)',
+                  bgcolor: colors.cream,
+                  color: colors.ink,
+                  border: `2px solid ${colors.ink}`,
+                  boxShadow: `4px 4px 0 ${colors.pink}`,
+                  transform: 'rotate(-0.8deg)',
                 }}
               >
-                <Typography variant="overline" sx={{ color: colors.gold }}>
+                <MaskingTape corner="top" width={84} />
+                <LabelTape color="black" size="sm" tilt={-1.5} sx={{ mb: 1.25 }}>
                   Next up
-                </Typography>
-                <Typography sx={{ color: 'white', fontFamily: '"Fraunces", serif', fontWeight: 600, fontSize: '1.2rem' }}>
+                </LabelTape>
+                <Typography sx={{ fontWeight: 700, fontSize: '1.2rem', lineHeight: 1.25, mb: 0.5 }}>
                   {nextEvent.title}
                 </Typography>
-                <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.85)' }}>
+                <Typography variant="body2" sx={{ fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                   {nextEvent.dateLabel}
                   {nextEvent.location ? ` · ${nextEvent.location}` : ''}
                 </Typography>
               </Box>
             )}
 
-            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1.5} alignItems={{ sm: 'center' }}>
+            <Stack
+              direction={{ xs: 'column', sm: 'row' }}
+              spacing={1.5}
+              useFlexGap
+              flexWrap="wrap"
+              alignItems={{ sm: 'center' }}
+              sx={{ '& .MuiButton-root': { whiteSpace: 'nowrap' } }}
+            >
               <Button variant="contained" size="large" onClick={() => setMailingListOpen(true)}>
                 Become a General Member
               </Button>
@@ -377,15 +342,7 @@ const Home = () => {
                   to={primaryCta.external ? undefined : primaryCta.href}
                   target={primaryCta.external ? '_blank' : undefined}
                   rel={primaryCta.external ? 'noopener' : undefined}
-                  sx={{
-                    borderColor: 'rgba(255,255,255,0.75)',
-                    color: 'white',
-                    '&:hover': {
-                      borderColor: 'white',
-                      bgcolor: 'rgba(255,255,255,0.08)',
-                      borderWidth: 1.5,
-                    },
-                  }}
+                  sx={onDarkOutline}
                 >
                   {primaryCta.label}
                 </Button>
@@ -397,15 +354,7 @@ const Home = () => {
                 target="_blank"
                 rel="noopener"
                 startIcon={<Instagram />}
-                sx={{
-                  borderColor: 'rgba(255,255,255,0.75)',
-                  color: 'white',
-                  '&:hover': {
-                    borderColor: 'white',
-                    bgcolor: 'rgba(255,255,255,0.08)',
-                    borderWidth: 1.5,
-                  },
-                }}
+                sx={onDarkOutline}
               >
                 @ucbsasc
               </Button>
@@ -418,29 +367,33 @@ const Home = () => {
         <Box
           key={section.title}
           sx={{
-            py: { xs: 8, md: 11 },
-            bgcolor: index % 2 ? 'background.paper' : 'transparent',
-            borderBottom: '1.5px solid',
-            borderColor: 'divider',
+            py: { xs: 7, md: 9 },
+            bgcolor: index === 1 ? colors.blush : 'transparent',
+            borderBottom: `2px solid ${colors.ink}`,
           }}
         >
           <Container>
             <Grid
               container
-              spacing={{ xs: 4, md: 7 }}
+              spacing={{ xs: 4, md: 8 }}
               alignItems="center"
               direction={section.align === 'right' ? 'row' : 'row-reverse'}
             >
               <Grid item xs={12} md={6}>
-                <Typography variant="h2" sx={{ mb: 2.5 }}>
+                <Typography variant="h2" sx={{ mb: 2.5, fontSize: { xs: '2.3rem', md: '3.25rem' }, letterSpacing: '-0.03em' }}>
                   {section.title}
                 </Typography>
                 {section.paragraphs.map((paragraph) => (
                   <Typography
                     key={paragraph.slice(0, 40)}
                     variant="body1"
-                    color="text.secondary"
-                    sx={{ mb: 2, '&:last-of-type': { mb: section.aboutLink ? 2.5 : 0 } }}
+                    sx={{
+                      color: colors.ink,
+                      fontSize: { xs: '1.08rem', md: '1.2rem' },
+                      lineHeight: 1.6,
+                      mb: 2,
+                      '&:last-of-type': { mb: section.aboutLink ? 2.5 : 0 },
+                    }}
                   >
                     {paragraph}
                   </Typography>
@@ -450,7 +403,7 @@ const Home = () => {
                     component={RouterLink}
                     to="/about"
                     underline="always"
-                    sx={{ color: 'info.main', fontWeight: 700, textUnderlineOffset: 3 }}
+                    sx={{ color: colors.ink, fontWeight: 700 }}
                   >
                     Read the full hxstory
                   </MuiLink>
@@ -466,14 +419,8 @@ const Home = () => {
                     mx: { xs: 'auto', md: undefined },
                     pt: '108%',
                     overflow: 'hidden',
-                    border: `2px solid ${colors.charcoal}`,
-                    borderRadius: `${RADIUS}px`,
-                    boxShadow: `6px 6px 0 ${colors.pink}`,
-                    bgcolor: 'background.paper',
-                    transform: {
-                      xs: 'none',
-                      md: section.align === 'right' ? 'rotate(0.6deg)' : 'rotate(-0.6deg)',
-                    },
+                    border: `2px solid ${colors.ink}`,
+                    bgcolor: colors.paper,
                   }}
                 >
                   <iframe
@@ -507,14 +454,9 @@ const Home = () => {
             The programs we run annually. Dates go on the Events page once rooms are booked.
           </Typography>
           <Grid container spacing={2.5}>
-            {programs.map((program, i) => (
+            {programs.map((program) => (
               <Grid item xs={12} md={6} key={program.title}>
-                <Card
-                  sx={{
-                    height: '100%',
-                    boxShadow: i % 2 === 0 ? `5px 5px 0 ${colors.gold}` : `5px 5px 0 ${colors.pink}`,
-                  }}
-                >
+                <Card sx={{ height: '100%' }}>
                   <CardContent sx={{ p: { xs: 2.5, md: 3 } }}>
                     <Typography variant="h5" gutterBottom>
                       {program.title}
@@ -532,10 +474,10 @@ const Home = () => {
 
       <Box
         sx={{
-          bgcolor: colors.charcoal,
-          color: 'white',
+          ...pinkPaper,
+          color: colors.ink,
           py: { xs: 8, md: 10 },
-          borderTop: `4px solid ${colors.pink}`,
+          borderTop: `2px solid ${colors.ink}`,
         }}
       >
         <Container sx={{ textAlign: { xs: 'left', md: 'center' } }}>
@@ -543,15 +485,14 @@ const Home = () => {
             variant="h3"
             sx={{
               mb: 1.5,
-              color: 'white',
-              fontFamily: '"Fraunces", serif',
+              color: colors.ink,
             }}
           >
             Join the mailing list
           </Typography>
           <Typography
             variant="body1"
-            sx={{ mb: 4, color: 'rgba(255,255,255,0.75)', maxWidth: 480, mx: { md: 'auto' } }}
+            sx={{ mb: 4, color: colors.ink, maxWidth: 480, mx: { md: 'auto' } }}
           >
             We email GM dates, flyers, and applications when they open. Instagram usually posts the same day.
           </Typography>
@@ -560,7 +501,7 @@ const Home = () => {
             spacing={1.5}
             justifyContent={{ md: 'center' }}
           >
-            <Button variant="contained" size="large" onClick={() => setMailingListOpen(true)}>
+            <Button variant="contained" color="secondary" size="large" onClick={() => setMailingListOpen(true)}>
               Become a General Member
             </Button>
             <Button
@@ -569,15 +510,7 @@ const Home = () => {
               href="https://www.instagram.com/ucbsasc"
               target="_blank"
               rel="noopener"
-              sx={{
-                borderColor: 'rgba(255,255,255,0.65)',
-                color: 'white',
-                '&:hover': {
-                  borderColor: 'white',
-                  borderWidth: 1.5,
-                  bgcolor: 'rgba(255,255,255,0.06)',
-                },
-              }}
+              sx={{ bgcolor: 'transparent' }}
             >
               Follow @ucbsasc
             </Button>

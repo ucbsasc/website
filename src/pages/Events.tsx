@@ -5,7 +5,8 @@ import PageHeader from '../components/PageHeader';
 import MailingListModal from '../components/MailingListModal';
 import { usePageTitle } from '../hooks/usePageTitle';
 import { pastEvents, PastEvent } from '../data/pastEvents';
-import { RADIUS } from '../theme/colors';
+import { colors } from '../theme/colors';
+import { LabelTape } from '../components/brand';
 
 const ArchiveRow = ({ event }: { event: PastEvent }) => (
   <Box
@@ -14,8 +15,7 @@ const ArchiveRow = ({ event }: { event: PastEvent }) => (
       display: 'flex',
       gap: { xs: 2, sm: 3 },
       py: { xs: 2.5, md: 3 },
-      borderTop: '1px solid',
-      borderColor: 'divider',
+      borderTop: `1.5px solid ${colors.ink}`,
     }}
   >
     <Box sx={{ width: { xs: 72, sm: 104 }, flexShrink: 0 }}>
@@ -30,15 +30,17 @@ const ArchiveRow = ({ event }: { event: PastEvent }) => (
             width: '100%',
             aspectRatio: '4 / 5',
             objectFit: 'cover',
-            borderRadius: `${RADIUS / 2}px`,
-            border: '1px solid',
-            borderColor: 'divider',
+            border: `1.5px solid ${colors.ink}`,
+            bgcolor: colors.paper,
           }}
         />
       )}
     </Box>
     <Box sx={{ minWidth: 0 }}>
-      <Typography variant="body2" color="text.secondary">
+      <Typography
+        variant="body2"
+        sx={{ color: colors.ink, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em', fontSize: '0.8rem' }}
+      >
         {event.date}
         {event.location ? ` · ${event.location}` : ''}
       </Typography>
@@ -76,10 +78,9 @@ const Events = () => {
             sx={{
               mb: { xs: 7, md: 9 },
               p: { xs: 2.5, md: 3.5 },
-              borderRadius: `${RADIUS}px`,
-              border: '1px solid',
-              borderColor: 'divider',
-              bgcolor: 'background.paper',
+              border: `2px solid ${colors.ink}`,
+              boxShadow: `4px 4px 0 ${colors.ink}`,
+              bgcolor: colors.paper,
             }}
           >
             <Typography variant="h4" component="h2" sx={{ mb: 1 }}>
@@ -109,13 +110,9 @@ const Events = () => {
 
         {pastEvents.map((year) => (
           <Box component="section" key={year.label} sx={{ mb: { xs: 5, md: 6 } }}>
-            <Typography
-              variant="overline"
-              component="h3"
-              sx={{ color: 'text.secondary', fontWeight: 700, letterSpacing: '0.12em', mb: 0.5 }}
-            >
+            <LabelTape component="h3" color="black" tilt={year.label.length % 2 ? -1.5 : 1.5} sx={{ m: 0, mb: 2 }}>
               {year.label}
-            </Typography>
+            </LabelTape>
             <Box component="ul" sx={{ listStyle: 'none', m: 0, p: 0 }}>
               {year.events.map((event) => (
                 <ArchiveRow key={`${event.title}-${event.date}`} event={event} />

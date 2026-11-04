@@ -3,7 +3,6 @@ import {
   Button,
   Card,
   CardContent,
-  Chip,
   Container,
   Grid,
   Stack,
@@ -15,6 +14,29 @@ import { Fragment } from 'react';
 import { leadBranches, leadApplicationSteps, leadRecruitingFacts } from '../data/lead';
 import { directors as leadershipDirectors } from '../data/leadership';
 import { usePageTitle } from '../hooks/usePageTitle';
+import { colors } from '../theme/colors';
+import { MaskingTape } from '../components/brand';
+
+/** Inline text link: ink with a pink underline (pink text is too faint on the light page). */
+const inlineLinkSx = {
+  p: 0,
+  minWidth: 0,
+  verticalAlign: 'baseline',
+  font: 'inherit',
+  fontWeight: 700,
+  color: colors.ink,
+  textDecoration: 'underline',
+  textDecorationColor: colors.pink,
+  textDecorationThickness: 2,
+  textUnderlineOffset: 3,
+  boxShadow: 'none',
+  '&:hover': { bgcolor: 'transparent', textDecorationThickness: 3 },
+};
+
+const framedImageSx = {
+  display: 'block',
+  border: `2px solid ${colors.ink}`,
+};
 
 const positionsUrl =
   'https://docs.google.com/document/d/1A-lNUm6g9DHF4C2DvHATFUrNFskGwxCy-GiSm9pe7YI/edit?usp=sharing';
@@ -33,10 +55,11 @@ const Lead = () => {
         <Typography
           variant="body1"
           sx={{
-            opacity: 0.9,
+            color: colors.textOnBlack,
+            fontWeight: 500,
             maxWidth: 720,
             mt: 2,
-            textShadow: '0 1px 10px rgba(0,0,0,0.45)',
+            textShadow: '0 1px 2px rgba(20,16,18,0.6)',
           }}
         >
           Fall 2026 applications closed Friday, Oct. 2. We post on @ucbsasc when the next round opens.
@@ -48,13 +71,9 @@ const Lead = () => {
             size="large"
             href="#branches"
             sx={{
-              borderColor: 'rgba(255,255,255,0.75)',
-              color: 'white',
-              '&:hover': {
-                borderColor: 'white',
-                bgcolor: 'rgba(255,255,255,0.08)',
-                borderWidth: 1.5,
-              },
+              borderColor: colors.textOnBlack,
+              color: colors.textOnBlack,
+              '&:hover': { borderColor: colors.textOnBlack, bgcolor: 'rgba(247,240,230,0.1)' },
             }}
           >
             See the branches
@@ -65,6 +84,8 @@ const Lead = () => {
       <Container sx={{ mb: 8 }}>
         <Grid container spacing={{ xs: 4, md: 6 }} alignItems="center">
           <Grid item xs={12} md={5}>
+            <Box sx={{ position: 'relative', maxWidth: 440, mx: 'auto' }}>
+            <MaskingTape corner="top" width={96} />
             <Box
               component="img"
               src="/updatedleadershipflyer.jpeg"
@@ -72,15 +93,12 @@ const Lead = () => {
               width={1000}
               height={1250}
               sx={{
-                display: 'block',
+                ...framedImageSx,
                 width: '100%',
-                maxWidth: 440,
                 height: 'auto',
-                mx: 'auto',
-                borderRadius: 3,
-                boxShadow: (theme) => theme.shadows[6],
               }}
             />
+            </Box>
           </Grid>
           <Grid item xs={12} md={7}>
             <Typography variant="h4" gutterBottom>
@@ -133,9 +151,8 @@ const Lead = () => {
               src="/sascomm.webp"
               alt="SASC members posing together as a big group indoors"
               sx={{
+                ...framedImageSx,
                 width: '100%',
-                borderRadius: 3,
-                boxShadow: (theme) => theme.shadows[6],
                 objectFit: 'cover',
               }}
             />
@@ -157,12 +174,7 @@ const Lead = () => {
               <Typography variant="body1" color="text.secondary">
                 A normal year has SEAsgiving with alumni, a history workshop or two, Night Market, SEACF, and a lot of
                 planning meetings with other SEA orgs. For the full list,{' '}
-                <Button
-                  variant="text"
-                  color="primary"
-                  href="/events"
-                  sx={{ p: 0, minWidth: 0, textTransform: 'none', fontWeight: 600 }}
-                >
+                <Button variant="text" href="/events" disableRipple sx={inlineLinkSx}>
                   see the event archive
                 </Button>
                 .
@@ -206,15 +218,12 @@ const Lead = () => {
                 <CardContent sx={{ flexGrow: 1 }}>
                   <Stack spacing={2}>
                     <Box>
-                      <Typography variant="h5" component="h3" sx={{ fontWeight: 600 }}>
+                      <Typography variant="h5" component="h3" sx={{ mb: 0.5 }}>
                         {branch.name}
                       </Typography>
-                      <Chip
-                        label={branch.focus}
-                        color="primary"
-                        variant="outlined"
-                        sx={{ mt: 1, fontWeight: 500 }}
-                      />
+                      <Typography variant="body2" color="text.secondary" sx={{ fontWeight: 500 }}>
+                        {branch.focus}
+                      </Typography>
                     </Box>
                     <Typography variant="body1" color="text.secondary">
                       {branch.overview}
@@ -224,17 +233,17 @@ const Lead = () => {
                         src={branch.image}
                         alt={`${branch.name} moments`}
                         sx={{
+                          display: 'block',
                           width: '100%',
-                          borderRadius: 2,
                           objectFit: 'cover',
                           height: { xs: 180, sm: 210 },
-                          boxShadow: (theme) => theme.shadows[3],
+                          border: `1.5px solid ${colors.ink}`,
                           objectPosition: 'center 40%',
                         }}
                       />
                       {branchDirectors.length > 0 && (
                         <Box>
-                          <Typography variant="subtitle2" color="primary.main" sx={{ fontWeight: 600, mb: 0.5 }}>
+                          <Typography variant="overline" component="p" sx={{ color: colors.ink, mb: 0.5 }}>
                             Directors
                           </Typography>
                           <Stack spacing={0.5}>
@@ -248,7 +257,7 @@ const Lead = () => {
                       )}
                       {branch.keyFocus.length > 0 && (
                         <Box>
-                        <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 1 }}>
+                        <Typography variant="overline" component="p" sx={{ color: colors.ink, mb: 0.5 }}>
                             Includes
                         </Typography>
                         <Box
@@ -290,14 +299,7 @@ const Lead = () => {
         </Typography>
         <Typography variant="body1" color="text.secondary" sx={{ mb: 3, maxWidth: 760 }}>
           Read the{' '}
-          <Button
-            variant="text"
-            color="primary"
-            href={positionsUrl}
-            target="_blank"
-            rel="noopener"
-            sx={{ p: 0, minWidth: 0, textTransform: 'none', fontWeight: 600 }}
-          >
+          <Button variant="text" href={positionsUrl} target="_blank" rel="noopener" disableRipple sx={inlineLinkSx}>
             position descriptions
           </Button>{' '}
           first. This is how it went for Fall 2026, and it&apos;s usually about the same.
@@ -319,7 +321,7 @@ const Lead = () => {
       <Container sx={{ mb: 8 }}>
         <Card sx={{ p: { xs: 3, md: 5 } }}>
           <Stack spacing={2}>
-            <Typography variant="h5" sx={{ fontWeight: 600 }}>
+            <Typography variant="h5">
               Questions
             </Typography>
             <Typography variant="body1" color="text.secondary">
@@ -335,7 +337,7 @@ const Lead = () => {
               >
                 DM @ucbsasc
               </Button>
-              <Button variant="outlined" color="primary" href="/contact">
+              <Button variant="outlined" href="/contact">
                 Contact a director
               </Button>
             </Stack>

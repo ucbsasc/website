@@ -17,6 +17,30 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Link, useLocation } from 'react-router-dom';
 import { colors } from '../theme/colors';
 
+/** Active page sits on a strip of pink label tape; hover gets a pink underline. */
+const linkSx = (active: boolean) => ({
+  color: colors.ink,
+  fontWeight: 700,
+  px: 1.35,
+  py: 0.5,
+  minWidth: 0,
+  bgcolor: active ? colors.pink : 'transparent',
+  transform: active ? 'rotate(-1.5deg)' : 'none',
+  textDecoration: 'none',
+  '&:hover': {
+    bgcolor: active ? colors.pink : 'transparent',
+    textDecoration: active ? 'none' : 'underline',
+    textDecorationColor: colors.pink,
+    textDecorationThickness: 3,
+    textUnderlineOffset: 5,
+  },
+});
+
+const drawerActiveSx = (active: boolean) => ({
+  bgcolor: active ? colors.pink : 'transparent',
+  '&:hover': { bgcolor: active ? colors.pink : 'rgba(30,26,28,0.06)' },
+});
+
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const theme = useTheme();
@@ -42,8 +66,8 @@ const Navbar = () => {
         color="default"
         elevation={0}
         sx={{
-          backgroundColor: 'rgba(247, 240, 230, 0.96)',
-          borderBottom: `2px solid ${colors.charcoal}`,
+          backgroundColor: colors.page,
+          borderBottom: `2px solid ${colors.ink}`,
         }}
       >
         <Container maxWidth="lg">
@@ -85,11 +109,10 @@ const Navbar = () => {
                 <Box
                   component="span"
                   sx={{
-                    fontFamily: '"Fraunces", Georgia, serif',
                     fontWeight: 700,
-                    fontSize: '26px',
-                    letterSpacing: '-0.03em',
-                    color: colors.charcoal,
+                    fontSize: '24px',
+                    letterSpacing: '-0.02em',
+                    color: colors.ink,
                     lineHeight: 1,
                     display: 'block',
                   }}
@@ -100,11 +123,10 @@ const Navbar = () => {
                   component="span"
                   sx={{
                     display: { xs: 'none', sm: 'block' },
-                    fontFamily: '"DM Sans", sans-serif',
-                    fontSize: '10px',
-                    color: colors.calBlue,
+                    fontSize: '9.5px',
+                    color: colors.inkMuted,
                     fontWeight: 700,
-                    letterSpacing: '0.06em',
+                    letterSpacing: '0.16em',
                     textTransform: 'uppercase',
                     lineHeight: 1,
                   }}
@@ -115,7 +137,7 @@ const Navbar = () => {
             </Box>
 
             {isMobile ? (
-              <IconButton sx={{ ml: 'auto' }} onClick={handleDrawerToggle} aria-label="Open menu">
+              <IconButton sx={{ ml: 'auto', color: colors.ink }} onClick={handleDrawerToggle} aria-label="Open menu">
                 <MenuIcon />
               </IconButton>
             ) : (
@@ -127,13 +149,7 @@ const Navbar = () => {
                       href={item.path}
                       target="_blank"
                       rel="noopener"
-                      sx={{
-                        color: 'text.secondary',
-                        fontWeight: 600,
-                        px: 1.35,
-                        minWidth: 0,
-                        '&:hover': { color: 'text.primary', bgcolor: 'transparent' },
-                      }}
+                      sx={linkSx(false)}
                     >
                       {item.text}
                     </Button>
@@ -142,18 +158,8 @@ const Navbar = () => {
                       key={item.text}
                       component={Link}
                       to={item.path}
-                      sx={{
-                        color: isActive(item.path) ? 'text.primary' : 'text.secondary',
-                        fontWeight: 600,
-                        px: 1.35,
-                        minWidth: 0,
-                        bgcolor: isActive(item.path) ? colors.lightPink : 'transparent',
-                        borderRadius: 1,
-                        '&:hover': {
-                          color: 'text.primary',
-                          bgcolor: colors.lightPink,
-                        },
-                      }}
+                      aria-current={isActive(item.path) ? 'page' : undefined}
+                      sx={linkSx(isActive(item.path))}
                     >
                       {item.text}
                     </Button>
@@ -173,16 +179,19 @@ const Navbar = () => {
         PaperProps={{
           sx: {
             width: 280,
-            bgcolor: colors.cream,
-            borderLeft: `2px solid ${colors.charcoal}`,
+            bgcolor: colors.page,
+            borderLeft: `2px solid ${colors.ink}`,
           },
         }}
       >
-        <Box sx={{ px: 2.5, py: 2.5, borderBottom: `2px solid ${colors.charcoal}` }}>
-          <Typography sx={{ fontFamily: '"Fraunces", serif', fontWeight: 700, fontSize: '1.5rem' }}>
+        <Box sx={{ px: 2.5, py: 2.5, borderBottom: `2px solid ${colors.ink}` }}>
+          <Typography sx={{ fontWeight: 700, fontSize: '1.5rem', letterSpacing: '-0.02em', lineHeight: 1.1 }}>
             SASC
           </Typography>
-          <Typography variant="body2" sx={{ color: colors.calBlue, fontWeight: 700, letterSpacing: '0.06em' }}>
+          <Typography
+            variant="body2"
+            sx={{ color: colors.inkMuted, fontWeight: 700, letterSpacing: '0.16em', fontSize: '0.7rem' }}
+          >
             UC BERKELEY
           </Typography>
         </Box>
@@ -197,8 +206,9 @@ const Navbar = () => {
                 justifyContent: 'flex-start',
                 px: 3,
                 py: 1.25,
-                fontWeight: 600,
-                bgcolor: location.pathname === '/' ? colors.lightPink : 'transparent',
+                fontWeight: 700,
+                color: 'text.primary',
+                ...drawerActiveSx(location.pathname === '/'),
               }}
             >
               Home
@@ -212,7 +222,7 @@ const Navbar = () => {
                   target="_blank"
                   rel="noopener"
                   onClick={handleDrawerToggle}
-                  sx={{ width: '100%', justifyContent: 'flex-start', px: 3, py: 1.25, fontWeight: 600 }}
+                  sx={{ width: '100%', justifyContent: 'flex-start', px: 3, py: 1.25, fontWeight: 700, color: 'text.primary' }}
                 >
                   {item.text}
                 </Button>
@@ -226,8 +236,9 @@ const Navbar = () => {
                     justifyContent: 'flex-start',
                     px: 3,
                     py: 1.25,
-                    fontWeight: 600,
-                    bgcolor: isActive(item.path) ? colors.lightPink : 'transparent',
+                    fontWeight: 700,
+                color: 'text.primary',
+                    ...drawerActiveSx(isActive(item.path)),
                   }}
                 >
                   {item.text}

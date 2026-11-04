@@ -1,5 +1,7 @@
 import { Card, CardContent, CardMedia, Grid, Box, SxProps, Theme } from '@mui/material';
 import { ReactNode } from 'react';
+import { colors } from '../../theme/colors';
+import { LabelTape, MaskingTape } from '../brand';
 
 interface EventCardImage {
   src: string;
@@ -10,7 +12,11 @@ interface EventCardImage {
 
 interface EventCardProps {
   statusLabel?: string;
+  /** Label tape color for the status strip */
+  statusTape?: 'black' | 'pink' | 'cream';
+  /** @deprecated status labels are label tape now; use statusTape */
   statusBgColor?: string;
+  /** @deprecated status labels are label tape now; use statusTape */
   statusColor?: string;
   borderColor?: string;
   minMediaHeight?: number;
@@ -23,11 +29,14 @@ interface EventCardProps {
   contentSx?: SxProps<Theme>;
 }
 
+/**
+ * Upcoming-event card: square paper with an ink outline and a hard shadow.
+ * Flyers stay in full color here; the duotone is for photos only.
+ */
 const EventCard = ({
   statusLabel,
-  statusBgColor = 'text.disabled',
-  statusColor = 'white',
-  borderColor = 'divider',
+  statusTape = 'pink',
+  borderColor = colors.ink,
   minMediaHeight = 300,
   maxMediaHeight = 360,
   image,
@@ -40,34 +49,24 @@ const EventCard = ({
   return (
     <Card
       sx={{
-        mb: 4,
+        mb: { xs: 5, md: 6 },
         position: 'relative',
-        border: '2px solid',
         borderColor,
-        overflow: 'hidden',
+        borderWidth: 2,
+        boxShadow: `5px 5px 0 ${colors.ink}`,
+        overflow: 'visible',
         ...cardSx,
       }}
     >
+      <MaskingTape corner="tl" />
       {statusLabel && (
-        <Box
-          sx={{
-            position: 'absolute',
-            top: 16,
-            right: 16,
-            backgroundColor: statusBgColor,
-            color: statusColor,
-            px: 1.5,
-            py: 0.5,
-            borderRadius: 1,
-            zIndex: 2,
-            fontWeight: 700,
-            fontSize: '0.75rem',
-            letterSpacing: 0.5,
-            textTransform: 'uppercase',
-          }}
+        <LabelTape
+          color={statusTape}
+          tilt={2}
+          sx={{ position: 'absolute', top: { xs: -12, md: -14 }, right: { xs: 12, md: 20 }, zIndex: 4 }}
         >
           {statusLabel}
-        </Box>
+        </LabelTape>
       )}
 
       <Grid container alignItems="stretch">
@@ -81,6 +80,9 @@ const EventCard = ({
               maxHeight: maxMediaHeight,
               overflow: 'hidden',
               lineHeight: 0,
+              bgcolor: colors.black,
+              borderBottom: { xs: `2px solid ${colors.ink}`, md: 'none' },
+              borderRight: { md: `2px solid ${colors.ink}` },
               ...mediaContainerSx,
             }}
           >
@@ -102,7 +104,7 @@ const EventCard = ({
           </Box>
         </Grid>
         <Grid item xs={12} md={7}>
-          <CardContent sx={{ height: '100%', ...contentSx }}>{children}</CardContent>
+          <CardContent sx={{ height: '100%', p: { xs: 2.5, md: 3.5 }, ...contentSx }}>{children}</CardContent>
         </Grid>
       </Grid>
     </Card>

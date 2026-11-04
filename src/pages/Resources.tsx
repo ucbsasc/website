@@ -1,12 +1,20 @@
-import { Container, Typography, Link, Divider, Paper, Box, Grid, Card, CardContent, CardMedia, Button, Stack } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
+import { Container, Typography, Link, Divider, Paper, Box, Grid, Card, CardMedia, Button, Stack } from '@mui/material';
 import Footer from '../components/Footer';
 import PageHeader from '../components/PageHeader';
 import { usePageTitle } from '../hooks/usePageTitle';
+import { colors } from '../theme/colors';
+
+/** The print palette from docs/brand/style.md, for anyone making a flyer with us. */
+const palette = [
+  { label: 'Flyer pink', value: colors.pink },
+  { label: 'Duotone pink', value: colors.duotonePink },
+  { label: 'Ink', value: colors.ink },
+  { label: 'Black', value: colors.black },
+  { label: 'Cream', value: colors.cream },
+];
 
 const Resources = () => {
   usePageTitle('Resources');
-  const theme = useTheme();
   return (
     <>
       <PageHeader
@@ -21,10 +29,8 @@ const Resources = () => {
           sx={{
             mb: 3,
             p: 2,
-            borderRadius: 2,
-            bgcolor: 'rgba(30, 43, 54, 0.04)',
-            border: '1px solid',
-            borderColor: 'divider',
+            border: `2px solid ${colors.ink}`,
+            bgcolor: colors.paper,
           }}
         >
           <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 0.5 }}>
@@ -116,26 +122,13 @@ const Resources = () => {
         <Grid container spacing={3} sx={{ mb: 4 }}>
           <Grid item xs={12} md={6}>
             <Paper elevation={2} sx={{ p: 3, height: '100%' }}>
-              <Typography variant="h5" gutterBottom>Color Palette</Typography>
+              <Typography variant="h5" gutterBottom>Colors</Typography>
               <Grid container spacing={2}>
-                {[ 
-                  { label: 'Primary', value: theme.palette.primary.main },
-                  { label: 'Primary Light', value: theme.palette.primary.light },
-                  { label: 'Primary Dark', value: theme.palette.primary.dark },
-                  { label: 'Secondary', value: theme.palette.secondary.main },
-                  { label: 'Secondary Light', value: theme.palette.secondary.light },
-                  { label: 'Secondary Dark', value: theme.palette.secondary.dark },
-                  { label: 'Background', value: theme.palette.background.default },
-                  { label: 'Text', value: theme.palette.text.primary },
-                ].map((swatch) => (
+                {palette.map((swatch) => (
                   <Grid item xs={6} sm={4} key={swatch.label}>
-                    <Card>
-                      <Box sx={{ height: 72, bgcolor: swatch.value, borderBottom: '1px solid rgba(0,0,0,0.08)' }} />
-                      <CardContent sx={{ py: 1.5 }}>
-                        <Typography variant="body2" sx={{ fontWeight: 600 }}>{swatch.label}</Typography>
-                        <Typography variant="caption" color="text.secondary">{swatch.value}</Typography>
-                      </CardContent>
-                    </Card>
+                    <Box sx={{ height: 64, bgcolor: swatch.value, border: `1.5px solid ${colors.ink}`, mb: 1 }} />
+                    <Typography variant="body2" sx={{ fontWeight: 700 }}>{swatch.label}</Typography>
+                    <Typography variant="caption" color="text.secondary">{swatch.value}</Typography>
                   </Grid>
                 ))}
               </Grid>

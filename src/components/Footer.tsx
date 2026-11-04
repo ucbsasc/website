@@ -2,6 +2,8 @@ import { Box, Container, Grid, Typography, IconButton, Stack, Link as MuiLink } 
 import { Instagram, Facebook } from '@mui/icons-material';
 import { Link as RouterLink } from 'react-router-dom';
 import { colors } from '../theme/colors';
+import { blackPaper } from '../theme/textures';
+import { LabelTape } from './brand';
 
 const Footer = () => {
   const links = [
@@ -17,11 +19,10 @@ const Footer = () => {
     <Box
       component="footer"
       sx={{
-        bgcolor: colors.charcoal,
-        color: 'white',
+        ...blackPaper,
+        color: colors.textOnBlack,
         py: { xs: 5, md: 7 },
         mt: 'auto',
-        borderTop: `4px solid ${colors.gold}`,
       }}
     >
       <Container maxWidth="lg">
@@ -29,28 +30,25 @@ const Footer = () => {
           <Grid item xs={12} md={5}>
             <Typography
               sx={{
-                fontFamily: '"Fraunces", serif',
                 fontWeight: 700,
                 fontSize: '1.75rem',
                 letterSpacing: '-0.02em',
-                mb: 1,
+                lineHeight: 1.1,
+                mb: 1.25,
               }}
             >
               SASC
             </Typography>
-            <Typography
-              variant="overline"
-              sx={{ color: colors.gold, display: 'block', mb: 1.5, letterSpacing: '0.1em' }}
-            >
+            <LabelTape color="pink" size="sm" tilt={-1.5} sx={{ mb: 2 }}>
               UC Berkeley · Est. 2000
-            </Typography>
-            <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.72)', maxWidth: 320, lineHeight: 1.65 }}>
+            </LabelTape>
+            <Typography variant="body2" sx={{ color: colors.mutedOnBlack, maxWidth: 320, lineHeight: 1.65 }}>
               Southeast Asian Student Coalition at UC Berkeley. Come say hi at a GM.
             </Typography>
           </Grid>
 
-          <Grid item xs={6} md={3}>
-            <Typography variant="overline" sx={{ color: 'rgba(255,255,255,0.45)', display: 'block', mb: 1.5 }}>
+          <Grid item xs={5} md={3}>
+            <Typography variant="overline" sx={{ color: colors.mutedOnBlack, display: 'block', mb: 1.5 }}>
               Explore
             </Typography>
             <Stack spacing={1}>
@@ -60,7 +58,7 @@ const Footer = () => {
                   component={RouterLink}
                   to={link.to}
                   underline="hover"
-                  sx={{ color: 'rgba(255,255,255,0.88)', fontSize: '0.95rem', fontWeight: 600 }}
+                  sx={{ color: colors.textOnBlack, fontSize: '0.95rem', fontWeight: 700, width: 'fit-content' }}
                 >
                   {link.label}
                 </MuiLink>
@@ -68,20 +66,20 @@ const Footer = () => {
             </Stack>
           </Grid>
 
-          <Grid item xs={6} md={4}>
-            <Typography variant="overline" sx={{ color: 'rgba(255,255,255,0.45)', display: 'block', mb: 1.5 }}>
+          <Grid item xs={7} md={4}>
+            <Typography variant="overline" sx={{ color: colors.mutedOnBlack, display: 'block', mb: 1.5 }}>
               Contact
             </Typography>
-            <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.88)', mb: 0.5 }}>
+            <Typography variant="body2" sx={{ color: colors.textOnBlack, mb: 0.5 }}>
               506 Barrows Hall
             </Typography>
-            <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.88)', mb: 0.5 }}>
+            <Typography variant="body2" sx={{ color: colors.textOnBlack, mb: 0.5 }}>
               Berkeley, CA 94720
             </Typography>
             <MuiLink
               href="mailto:UCB.SASC@gmail.com"
               underline="hover"
-              sx={{ color: colors.pink, fontSize: '0.95rem', fontWeight: 600 }}
+              sx={{ color: colors.pink, fontSize: '0.95rem', fontWeight: 700, whiteSpace: 'nowrap' }}
             >
               UCB.SASC@gmail.com
             </MuiLink>
@@ -92,7 +90,7 @@ const Footer = () => {
                 rel="noopener"
                 aria-label="Instagram"
                 size="small"
-                sx={{ color: 'white' }}
+                sx={{ color: colors.textOnBlack, ml: -1, '&:hover': { color: colors.pink, bgcolor: 'transparent' } }}
               >
                 <Instagram fontSize="small" />
               </IconButton>
@@ -102,7 +100,7 @@ const Footer = () => {
                 rel="noopener"
                 aria-label="Facebook"
                 size="small"
-                sx={{ color: 'white' }}
+                sx={{ color: colors.textOnBlack, '&:hover': { color: colors.pink, bgcolor: 'transparent' } }}
               >
                 <Facebook fontSize="small" />
               </IconButton>
@@ -114,17 +112,17 @@ const Footer = () => {
           sx={{
             mt: { xs: 4, md: 5 },
             pt: 3,
-            borderTop: '1px solid rgba(255,255,255,0.12)',
+            borderTop: '1px solid rgba(247,240,230,0.16)',
             display: 'flex',
             flexDirection: { xs: 'column', sm: 'row' },
             justifyContent: 'space-between',
             gap: 1,
           }}
         >
-          <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.45)' }}>
+          <Typography variant="caption" sx={{ color: colors.mutedOnBlack }}>
             © {new Date().getFullYear()} Southeast Asian Student Coalition
           </Typography>
-          <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.45)' }}>
+          <Typography variant="caption" sx={{ color: colors.mutedOnBlack }}>
             Built at Cal
           </Typography>
         </Box>

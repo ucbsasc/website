@@ -1,15 +1,19 @@
 import { Box, Container, Typography } from '@mui/material';
 import { ReactNode } from 'react';
 import { colors } from '../theme/colors';
+import { TintedPhoto } from './brand';
+import { graffitiSx } from '../theme/textures';
 
 type PageHeaderProps = {
   title: string;
   subtitle?: string;
   image: string;
-  /** CSS background-position for the image, e.g. 'center 25%' to keep faces in frame */
+  /** CSS object-position for the image, e.g. 'center 25%' to keep faces in frame */
   imagePosition?: string;
-  /** Lighter, neutral overlay for photos that should read clearly behind the text */
+  /** Darken the duotone less, for photos that are already dark */
   lightOverlay?: boolean;
+  /** Set the title in plain bold Helvetica instead of the graffiti accent */
+  plainTitle?: boolean;
   children?: ReactNode;
   compact?: boolean;
 };
@@ -20,54 +24,51 @@ const PageHeader = ({
   image,
   imagePosition = 'center',
   lightOverlay = false,
+  plainTitle = false,
   children,
   compact = false,
 }: PageHeaderProps) => {
+  // Sedgwick's lowercase l reads as a bar, so titles with an l go in caps.
+  const graffitiCase = /l/.test(title) ? 'uppercase' : 'none';
+
   return (
     <Box
       sx={{
         position: 'relative',
-        color: 'white',
+        color: colors.textOnBlack,
         py: compact ? { xs: 7, md: 9 } : { xs: 8, md: 11 },
         mb: { xs: 5, md: 7 },
         overflow: 'hidden',
-        borderBottom: `4px solid ${colors.pink}`,
-        '&::before': {
-          content: '""',
-          position: 'absolute',
-          inset: 0,
-          backgroundImage: `url(${image})`,
-          backgroundSize: 'cover',
-          backgroundPosition: imagePosition,
-          filter: lightOverlay ? 'none' : 'saturate(0.9) contrast(1.05)',
-          zIndex: 0,
-        },
-        '&::after': {
-          content: '""',
-          position: 'absolute',
-          inset: 0,
-          background: lightOverlay
-            ? {
-                xs: 'rgba(20,18,16,0.6)',
-                md: 'linear-gradient(100deg, rgba(20,18,16,0.8) 0%, rgba(20,18,16,0.5) 45%, rgba(20,18,16,0.1) 100%)',
-              }
-            : `linear-gradient(115deg, rgba(20,18,16,0.88) 0%, rgba(30,43,54,0.72) 55%, rgba(0,50,98,0.45) 100%)`,
-          zIndex: 1,
-        },
+        bgcolor: colors.black,
+        borderBottom: `2px solid ${colors.ink}`,
       }}
     >
+      <TintedPhoto
+        src={image}
+        position={imagePosition}
+        darken={lightOverlay ? 0.38 : 0.45}
+        loading="eager"
+        sx={{ position: 'absolute', inset: 0, zIndex: 0 }}
+      />
       <Container sx={{ position: 'relative', zIndex: 2 }}>
         <Typography
           variant="h1"
           component="h1"
           sx={{
-            color: 'white',
-            fontFamily: '"Fraunces", serif',
-            fontWeight: 700,
-            mb: subtitle || children ? 1.75 : 0,
-            fontSize: { xs: '2.6rem', md: compact ? '3.1rem' : '3.6rem' },
-            maxWidth: 720,
-            letterSpacing: '-0.03em',
+            mb: subtitle || children ? { xs: 2, md: 2.5 } : 0,
+            maxWidth: 820,
+            ...(plainTitle
+              ? {
+                  color: colors.textOnBlack,
+                  fontWeight: 700,
+                  fontSize: { xs: '2.6rem', md: compact ? '3.1rem' : '3.6rem' },
+                  letterSpacing: '-0.025em',
+                }
+              : {
+                  ...graffitiSx,
+                  textTransform: graffitiCase,
+                  fontSize: { xs: '3.4rem', sm: '4.4rem', md: compact ? '5.2rem' : '5.8rem' },
+                }),
           }}
         >
           {title}
@@ -76,10 +77,12 @@ const PageHeader = ({
           <Typography
             variant="body1"
             sx={{
-              color: 'rgba(255,255,255,0.88)',
+              color: colors.textOnBlack,
               maxWidth: 560,
-              lineHeight: 1.65,
+              lineHeight: 1.55,
               fontSize: { xs: '1.05rem', md: '1.125rem' },
+              fontWeight: 500,
+              textShadow: '0 1px 2px rgba(20,16,18,0.6)',
             }}
           >
             {subtitle}

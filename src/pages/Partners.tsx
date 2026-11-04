@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 import PageHeader from '../components/PageHeader';
 import { partners, partnerCategories, PartnerCategory } from '../data/partners';
 import { usePageTitle } from '../hooks/usePageTitle';
-import { RADIUS } from '../theme/colors';
+import { colors } from '../theme/colors';
 
 const categoryLabel: Record<PartnerCategory, string> = {
   'Student Orgs': 'Southeast Asian & Asian American Student Orgs',
@@ -31,7 +31,11 @@ const Partners = () => {
           if (categoryPartners.length === 0) return null;
           return (
             <Box key={category} sx={{ mb: 5, '&:last-of-type': { mb: 0 } }}>
-              <Typography variant="subtitle1" sx={{ mb: 2, color: 'text.secondary' }}>
+              <Typography
+                variant="h5"
+                component="h2"
+                sx={{ mb: 2, pb: 1, borderBottom: `2px solid ${colors.ink}` }}
+              >
                 {categoryLabel[category]}
               </Typography>
               <Grid container spacing={1.5}>
@@ -44,10 +48,8 @@ const Partners = () => {
                         alignItems: 'center',
                         gap: 1.5,
                         p: 1.5,
-                        border: '1.5px solid',
-                        borderColor: 'divider',
-                        borderRadius: `${RADIUS}px`,
-                        bgcolor: 'background.paper',
+                        border: `1.5px solid ${colors.ink}`,
+                        bgcolor: colors.paper,
                       }}
                     >
                       {partner.logo && (
@@ -65,7 +67,7 @@ const Partners = () => {
                         />
                       )}
                       <Box sx={{ flexGrow: 1, minWidth: 0 }}>
-                        <Typography variant="body2" sx={{ fontWeight: 600, lineHeight: 1.3 }}>
+                        <Typography variant="body2" sx={{ fontWeight: 700, lineHeight: 1.3 }}>
                           {partner.name}
                         </Typography>
                         {(partner.instagram || partner.emails) && (

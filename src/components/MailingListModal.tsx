@@ -14,8 +14,10 @@ const StyledModal = styled(Modal)(({ theme }) => ({
 
 const ModalContent = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
-  borderRadius: theme.shape.borderRadius,
-  boxShadow: theme.shadows[24],
+  borderRadius: 0,
+  border: `2px solid ${theme.palette.text.primary}`,
+  boxShadow: `6px 6px 0 ${theme.palette.text.primary}`,
+  outline: 'none',
   padding: theme.spacing(4),
   maxWidth: 500,
   width: '90%',

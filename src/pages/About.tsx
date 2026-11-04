@@ -12,16 +12,9 @@ import {
 } from '../data/leadership';
 import { leadBranches } from '../data/lead';
 import { usePageTitle } from '../hooks/usePageTitle';
-import { colors, RADIUS } from '../theme/colors';
-
-const committeeAccent: Record<LeadershipCommittee, string> = {
-  Internal: colors.gold,
-  External: colors.darkPink,
-  Operations: colors.bayNavy,
-  PR: colors.pink,
-  Advocacy: colors.calBlue,
-  SEAM: colors.charcoal,
-};
+import { colors } from '../theme/colors';
+import { pinkPaper } from '../theme/textures';
+import { LabelTape, MaskingTape } from '../components/brand';
 
 type TeamSection = {
   name: string;
@@ -107,7 +100,7 @@ const initials = (name: string) => {
   return `${parts[0][0]}${parts.length > 1 ? parts[parts.length - 1][0] : ''}`;
 };
 
-const Portrait = ({ member, accent }: { member: LeadershipMember; accent: string }) =>
+const Portrait = ({ member }: { member: LeadershipMember }) =>
   member.image ? (
     <Box
       component="img"
@@ -132,9 +125,10 @@ const Portrait = ({ member, accent }: { member: LeadershipMember; accent: string
         aspectRatio: '4 / 5',
         display: 'grid',
         placeItems: 'center',
-        bgcolor: `${accent}26`,
-        color: 'text.primary',
-        fontFamily: '"Fraunces", serif',
+        bgcolor: colors.scrapGrey,
+        color: colors.ink,
+        fontWeight: 700,
+        letterSpacing: '-0.02em',
         fontSize: '2.25rem',
       }}
     >
@@ -144,30 +138,16 @@ const Portrait = ({ member, accent }: { member: LeadershipMember; accent: string
 
 const RoleTags = ({ tags }: { tags: string[] }) =>
   tags.length > 0 ? (
-    <Stack direction="row" spacing={0.5} sx={{ mt: 0.75 }}>
-      {tags.map((tag) => (
-        <Box
-          key={tag}
-          component="span"
-          sx={{
-            px: 0.75,
-            py: 0.125,
-            fontSize: '0.7rem',
-            fontWeight: 700,
-            letterSpacing: '0.06em',
-            border: '1px solid',
-            borderColor: 'divider',
-            borderRadius: `${RADIUS / 2}px`,
-            color: 'text.secondary',
-          }}
-        >
+    <Stack direction="row" spacing={0.75} sx={{ mt: 1 }}>
+      {tags.map((tag, i) => (
+        <LabelTape key={tag} color="pink" size="sm" tilt={i % 2 ? 1.5 : -1.5} sx={{ fontSize: '0.62rem', py: 0.35 }}>
           {tag}
-        </Box>
+        </LabelTape>
       ))}
     </Stack>
   ) : null;
 
-const DirectorCard = ({ member, accent }: { member: LeadershipMember; accent: string }) => {
+const DirectorCard = ({ member }: { member: LeadershipMember }) => {
   const { title, tags } = splitRole(member.role);
   return (
     <Box
@@ -175,21 +155,18 @@ const DirectorCard = ({ member, accent }: { member: LeadershipMember; accent: st
         display: 'flex',
         height: '100%',
         overflow: 'hidden',
-        bgcolor: 'background.paper',
-        border: '1px solid',
-        borderColor: 'divider',
-        borderLeft: `4px solid ${accent}`,
-        borderRadius: `${RADIUS}px`,
+        bgcolor: colors.paper,
+        border: `1.5px solid ${colors.ink}`,
       }}
     >
-      <Box sx={{ width: { xs: 112, sm: 136 }, flexShrink: 0 }}>
-        <Portrait member={member} accent={accent} />
+      <Box sx={{ width: { xs: 112, sm: 136 }, flexShrink: 0, borderRight: `1.5px solid ${colors.ink}` }}>
+        <Portrait member={member} />
       </Box>
       <Box sx={{ p: { xs: 2, sm: 2.5 }, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
         <Typography variant="h5" component="h4" sx={{ lineHeight: 1.2, mb: 0.5 }}>
           {member.name}
         </Typography>
-        <Typography variant="body2" sx={{ color: 'text.secondary', fontWeight: 600 }}>
+        <Typography variant="body2" sx={{ color: 'text.secondary', fontWeight: 500 }}>
           {title}
         </Typography>
         <RoleTags tags={tags} />
@@ -202,8 +179,14 @@ const DirectorCard = ({ member, accent }: { member: LeadershipMember; accent: st
             pt: 1.5,
             pl: 0,
             alignSelf: 'flex-start',
-            color: 'text.secondary',
-            '&:hover': { color: 'text.primary', bgcolor: 'transparent' },
+            color: colors.ink,
+            '&:hover': {
+              bgcolor: 'transparent',
+              textDecoration: 'underline',
+              textDecorationColor: colors.pink,
+              textDecorationThickness: 2,
+              textUnderlineOffset: 4,
+            },
           }}
         >
           Email
@@ -213,20 +196,20 @@ const DirectorCard = ({ member, accent }: { member: LeadershipMember; accent: st
   );
 };
 
-const OfficerCard = ({ member, accent }: { member: LeadershipMember; accent: string }) => {
+const OfficerCard = ({ member }: { member: LeadershipMember }) => {
   const { title, tags } = splitRole(member.role);
   return (
     <Box
       sx={{
         height: '100%',
         overflow: 'hidden',
-        bgcolor: 'background.paper',
-        border: '1px solid',
-        borderColor: 'divider',
-        borderRadius: `${RADIUS}px`,
+        bgcolor: colors.paper,
+        border: `1.5px solid ${colors.ink}`,
       }}
     >
-      <Portrait member={member} accent={accent} />
+      <Box sx={{ borderBottom: `1.5px solid ${colors.ink}` }}>
+        <Portrait member={member} />
+      </Box>
       <Box sx={{ p: 1.5 }}>
         <Stack direction="row" alignItems="flex-start" justifyContent="space-between" spacing={0.5}>
           <Typography variant="subtitle2" component="h4" sx={{ fontWeight: 700, lineHeight: 1.3 }}>
@@ -237,7 +220,7 @@ const OfficerCard = ({ member, accent }: { member: LeadershipMember; accent: str
               size="small"
               href={`mailto:${member.email}`}
               aria-label={`Email ${member.name}`}
-              sx={{ mt: -0.5, mr: -0.75, color: 'text.secondary', '&:hover': { color: 'text.primary' } }}
+              sx={{ mt: -0.5, mr: -0.75, color: colors.inkMuted, '&:hover': { color: colors.ink, bgcolor: colors.pink } }}
             >
               <EmailIcon sx={{ fontSize: 18 }} />
             </IconButton>
@@ -256,7 +239,7 @@ const TierLabel = ({ children }: { children: string }) => (
   <Typography
     variant="overline"
     component="p"
-    sx={{ color: 'text.secondary', fontWeight: 700, letterSpacing: '0.12em', mb: 1.5 }}
+    sx={{ color: colors.ink, fontWeight: 700, letterSpacing: '0.18em', mb: 1.5 }}
   >
     {children}
   </Typography>
@@ -298,7 +281,7 @@ const About = () => {
                   top: 10,
                   bottom: 10,
                   width: 2,
-                  bgcolor: 'divider',
+                  bgcolor: colors.ink,
                 },
               }}
             >
@@ -312,21 +295,22 @@ const About = () => {
                     sx={{
                       position: 'absolute',
                       left: { xs: -28, sm: -36 },
-                      top: 5,
+                      top: 6,
                       width: 14,
                       height: 14,
-                      borderRadius: '50%',
-                      bgcolor: 'background.default',
-                      border: `3px solid ${i === storyMilestones.length - 1 ? colors.pink : colors.charcoal}`,
+                      bgcolor: i === storyMilestones.length - 1 ? colors.pink : colors.cream,
+                      border: `2px solid ${colors.ink}`,
                     }}
                   />
-                  <Typography
-                    variant="overline"
+                  <LabelTape
                     component="p"
-                    sx={{ color: colors.darkPink, fontWeight: 700, letterSpacing: '0.1em', lineHeight: 1.6 }}
+                    color={i === storyMilestones.length - 1 ? 'pink' : 'black'}
+                    size="sm"
+                    tilt={i % 2 ? 1.5 : -1.5}
+                    sx={{ m: 0, mb: 1.25 }}
                   >
                     {milestone.year}
-                  </Typography>
+                  </LabelTape>
                   <Typography variant="h5" component="h3" sx={{ mb: 0.75 }}>
                     {milestone.title}
                   </Typography>
@@ -341,15 +325,13 @@ const About = () => {
           <Grid item xs={12} md={5}>
             <Box
               sx={{
-                border: `2px solid ${colors.charcoal}`,
-                borderRadius: `${RADIUS}px`,
-                boxShadow: `5px 5px 0 ${colors.pink}`,
-                overflow: 'hidden',
-                bgcolor: 'background.paper',
-                position: { md: 'sticky' },
+                border: `2px solid ${colors.ink}`,
+                bgcolor: colors.paper,
+                position: { xs: 'relative', md: 'sticky' },
                 top: { md: 96 },
               }}
             >
+              <MaskingTape corner="tr" />
               <Box
                 component="img"
                 src="/alumni-tailgate.jpg"
@@ -358,13 +340,13 @@ const About = () => {
                   display: 'block',
                   width: '100%',
                   height: 'auto',
-                  borderRadius: 0,
+                  borderBottom: `2px solid ${colors.ink}`,
                 }}
               />
               <Box sx={{ px: { xs: 2, md: 2.5 }, py: 2 }}>
                 <Typography
                   variant="overline"
-                  sx={{ color: 'text.secondary', fontWeight: 700, display: 'block', letterSpacing: '0.1em' }}
+                  sx={{ color: colors.ink, fontWeight: 700, display: 'block' }}
                 >
                   Alumni Tailgate · 2026
                 </Typography>
@@ -382,9 +364,8 @@ const About = () => {
         sx={{
           pt: { xs: 8, md: 10 },
           pb: { xs: 6, md: 8 },
-          bgcolor: 'background.paper',
-          borderTop: '1.5px solid',
-          borderColor: 'divider',
+          bgcolor: colors.paper,
+          borderTop: `2px solid ${colors.ink}`,
         }}
       >
         <Container>
@@ -401,8 +382,7 @@ const About = () => {
             const sectionOfficers = officers.filter(inSection);
             const count = sectionDirectors.length + sectionOfficers.length;
             if (count === 0) return null;
-            const accent = committeeAccent[section.committee];
-
+            
             return (
               <Box component="section" key={section.committee} sx={{ mb: { xs: 7, md: 9 } }}>
                 <Stack
@@ -410,7 +390,7 @@ const About = () => {
                   alignItems="flex-end"
                   justifyContent="space-between"
                   spacing={2}
-                  sx={{ pb: 1.5, mb: section.blurb ? 2 : 3, borderBottom: `2px solid ${accent}` }}
+                  sx={{ pb: 1.5, mb: section.blurb ? 2 : 3, borderBottom: `2px solid ${colors.ink}` }}
                 >
                   <Box>
                     <Typography variant="h3" component="h3" sx={{ fontSize: { xs: '1.6rem', md: '2rem' } }}>
@@ -436,7 +416,7 @@ const About = () => {
                     <Grid container spacing={2}>
                       {sectionDirectors.map((member) => (
                         <Grid item xs={12} sm={6} md={4} key={member.email}>
-                          <DirectorCard member={member} accent={accent} />
+                          <DirectorCard member={member} />
                         </Grid>
                       ))}
                     </Grid>
@@ -449,7 +429,7 @@ const About = () => {
                     <Grid container spacing={2}>
                       {sectionOfficers.map((member) => (
                         <Grid item xs={6} sm={4} md={2} key={member.email}>
-                          <OfficerCard member={member} accent={accent} />
+                          <OfficerCard member={member} />
                         </Grid>
                       ))}
                     </Grid>
@@ -463,23 +443,23 @@ const About = () => {
 
       <Box
         sx={{
-          bgcolor: colors.charcoal,
-          color: 'white',
+          ...pinkPaper,
+          color: colors.ink,
           py: { xs: 7, md: 9 },
-          borderTop: `4px solid ${colors.pink}`,
+          borderTop: `2px solid ${colors.ink}`,
         }}
       >
         <Container sx={{ textAlign: { xs: 'left', md: 'center' } }}>
-          <Typography variant="h3" sx={{ mb: 1.5, color: 'white', fontFamily: '"Fraunces", serif' }}>
+          <Typography variant="h3" sx={{ mb: 1.5, color: colors.ink }}>
             Get involved
           </Typography>
           <Typography
             variant="body1"
-            sx={{ mb: 4, color: 'rgba(255,255,255,0.75)', maxWidth: 560, mx: { md: 'auto' } }}
+            sx={{ mb: 4, color: colors.ink, maxWidth: 560, mx: { md: 'auto' } }}
           >
             Lead applications for Fall 2026 are closed. The Lead page explains what each branch does, and you can
             always email{' '}
-            <Box component="strong" sx={{ color: 'white' }}>
+            <Box component="strong" sx={{ color: colors.ink }}>
               UCB.SASC@gmail.com
             </Box>
             .
@@ -490,18 +470,13 @@ const About = () => {
             justifyContent={{ md: 'center' }}
             sx={{ mb: 3 }}
           >
-            <Button variant="contained" size="large" href="/lead">
+            <Button variant="contained" color="secondary" size="large" href="/lead">
               Lead with SASC
             </Button>
             <Button
               variant="outlined"
               size="large"
               href="mailto:UCB.SASC@gmail.com?subject=Hello%20SASC"
-              sx={{
-                borderColor: 'rgba(255,255,255,0.65)',
-                color: 'white',
-                '&:hover': { borderColor: 'white', borderWidth: 1.5, bgcolor: 'rgba(255,255,255,0.06)' },
-              }}
             >
               Email Us
             </Button>
@@ -511,10 +486,10 @@ const About = () => {
             spacing={{ xs: 0.5, sm: 3 }}
             justifyContent={{ md: 'center' }}
           >
-            <Button component={RouterLink} to="/partners" sx={{ color: 'rgba(255,255,255,0.75)' }}>
+            <Button component={RouterLink} to="/partners" sx={{ color: colors.ink }}>
               Community & Partners →
             </Button>
-            <Button component={RouterLink} to="/#programs" sx={{ color: 'rgba(255,255,255,0.75)' }}>
+            <Button component={RouterLink} to="/#programs" sx={{ color: colors.ink }}>
               Our Programs →
             </Button>
           </Stack>

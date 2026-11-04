@@ -1,9 +1,16 @@
-import { Box, Container, Typography, Grid, Stack, Button, IconButton, Divider } from '@mui/material';
-import { EmailOutlined, LocationOnOutlined, Instagram, Facebook } from '@mui/icons-material';
+import { Box, Container, Typography, Grid, Stack, IconButton, Divider, Link } from '@mui/material';
+import { Instagram, Facebook } from '@mui/icons-material';
 import Footer from '../components/Footer';
 import PageHeader from '../components/PageHeader';
 import { directors, LeadershipMember } from '../data/leadership';
 import { usePageTitle } from '../hooks/usePageTitle';
+import { colors } from '../theme/colors';
+
+const socialSx = {
+  color: colors.ink,
+  border: `1.5px solid ${colors.ink}`,
+  '&:hover': { bgcolor: colors.pink },
+};
 
 const generalEmail = 'UCB.SASC@gmail.com';
 
@@ -58,7 +65,7 @@ const Contact = () => {
             <Stack spacing={3} divider={<Divider flexItem />}>
               {contactRoutes.map((route) => (
                 <Box key={route.title}>
-                  <Typography variant="h6" sx={{ fontWeight: 600, mb: 0.5, fontSize: '1.1rem' }}>
+                  <Typography variant="h6" sx={{ mb: 0.5, fontSize: '1.1rem' }}>
                     {route.title}
                   </Typography>
                   <Typography variant="body2" color="text.secondary" sx={{ mb: 1.5 }}>
@@ -70,14 +77,12 @@ const Contact = () => {
                         <Typography variant="body2" color="text.secondary" sx={{ mb: 0.5 }}>
                           {person.name}
                         </Typography>
-                        <Button
-                          variant="outlined"
-                          size="small"
-                          startIcon={<EmailOutlined />}
+                        <Link
                           href={`mailto:${person.email}?subject=${encodeURIComponent(`SASC: ${route.title}`)}`}
+                          sx={{ fontWeight: 700, wordBreak: 'break-all' }}
                         >
                           {person.email}
-                        </Button>
+                        </Link>
                       </Box>
                     ))}
                   </Stack>
@@ -89,12 +94,9 @@ const Contact = () => {
           <Grid item xs={12} md={5}>
             <Stack spacing={4}>
               <Box>
-                <Stack direction="row" spacing={1.5} alignItems="center" sx={{ mb: 1.5 }}>
-                  <LocationOnOutlined color="primary" />
-                  <Typography variant="h5" sx={{ fontSize: '1.25rem' }}>
-                    Visit
-                  </Typography>
-                </Stack>
+                <Typography variant="h5" sx={{ fontSize: '1.25rem', mb: 1.5 }}>
+                  Visit
+                </Typography>
                 <Typography variant="body1" color="text.secondary">
                   506 Barrows Hall
                   <br />
@@ -116,7 +118,7 @@ const Contact = () => {
                     target="_blank"
                     rel="noopener"
                     aria-label="Instagram"
-                    sx={{ color: 'primary.dark', border: '1px solid', borderColor: 'divider' }}
+                    sx={socialSx}
                   >
                     <Instagram />
                   </IconButton>
@@ -125,7 +127,7 @@ const Contact = () => {
                     target="_blank"
                     rel="noopener"
                     aria-label="Facebook"
-                    sx={{ color: 'primary.dark', border: '1px solid', borderColor: 'divider' }}
+                    sx={socialSx}
                   >
                     <Facebook />
                   </IconButton>
