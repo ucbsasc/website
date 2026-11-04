@@ -50,11 +50,11 @@ const Navbar = () => {
   const menuItems = [
     { text: 'About', path: '/about' },
     { text: 'Events', path: '/events' },
+    // /seam is proxied by Netlify to its own site, so it needs a full page load, not a router Link
+    { text: 'SEAM', path: '/seam', external: true },
     { text: 'Lead', path: '/lead' },
     { text: 'Resources', path: '/resources' },
     { text: 'Contact', path: '/contact' },
-    // /seam is proxied by Netlify to its own site, so it needs a full page load, not a router Link
-    { text: 'SEAM', path: '/seam', external: true },
   ];
 
   const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
