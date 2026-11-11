@@ -42,6 +42,18 @@
   force = true
 
 [[redirects]]
+  from = "/seasgiving"
+  to = "https://docs.google.com/forms/d/e/1FAIpQLSfs97PmbcPaFUzp3gZmlVgqUkgPq6LGWsKxNuQLdzZEvDw10w/viewform"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/seasgiving/"
+  to = "https://docs.google.com/forms/d/e/1FAIpQLSfs97PmbcPaFUzp3gZmlVgqUkgPq6LGWsKxNuQLdzZEvDw10w/viewform"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/store"
   to = "https://sasc.bigcartel.com"
   status = 301
