@@ -19,6 +19,11 @@ export const siteSeason: {
   /** Set when the next GM / public event is confirmed */
   nextEvent: NextEvent | null;
 } = {
-  mode: 'quiet',
-  nextEvent: null,
+  mode: 'active',
+  nextEvent: {
+    title: 'SEAsgiving',
+    dateLabel: 'Wed, Nov. 18 · 6–9 PM',
+    location: 'CKC Warring, Wilkinson Room',
+    href: '/events',
+  },
 };

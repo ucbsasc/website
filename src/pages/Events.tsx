@@ -7,6 +7,7 @@ import { usePageTitle } from '../hooks/usePageTitle';
 import { pastEvents, PastEvent } from '../data/pastEvents';
 import { colors } from '../theme/colors';
 import { LabelTape } from '../components/brand';
+import SeasgivingNov2026 from '../components/events/SeasgivingNov2026';
 
 const ArchiveRow = ({ event }: { event: PastEvent }) => (
   <Box
@@ -60,7 +61,9 @@ const Events = () => {
 
   // Upcoming events get their own card component in components/events (see EventCard).
   // Once one is over, delete it from here and add a short entry to data/pastEvents.ts.
-  const upcomingEvents: { key: string; render: () => JSX.Element }[] = [];
+  const upcomingEvents: { key: string; render: () => JSX.Element }[] = [
+    { key: 'seasgiving-2026', render: () => <SeasgivingNov2026 /> },
+  ];
 
   return (
     <>
